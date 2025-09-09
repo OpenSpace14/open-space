@@ -1,20 +1,3 @@
-# SPDX-FileCopyrightText: 2022 Andreas Kämper <andreas.kaemper@5minds.de>
-# SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 ArkiveDev <95712736+ArkiveDev@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 august-sun <45527070+august-sun@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 august-sun <45527070+august.sun@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 keronshb <54602815+keronshb@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   id: ImmovableRod
   name: immovable rod
@@ -28,8 +11,6 @@
     state: icon
     noRot: false
   - type: ImmovableRod
-    minSpeed: 15 # Goobstation
-    maxSpeed: 15 # Goobstation
   - type: Physics
     bodyType: Dynamic
     linearDamping: 0
@@ -43,51 +24,19 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb # Goob edit
-          bounds: "-0.2,-0.5,0.2,0.5"
-        density: 2.5 # Goob edit
-        hard: false
-        mask: # Goob edit
-        - Impassable
-        - Opaque
-        layer: # Goobstation
-        - MidImpassable
-  - type: WarpPoint
-    follow: true
-    location: immovable rod
-
-# goob edit
-- type: entity
-  id: ImmovableVoidRod
-  name: immovable void rod
-  description: You can sense that it's hungry. That's usually a bad sign.
-  components:
-  - type: Clickable
-  - type: InteractionOutline
-  - type: MovementIgnoreGravity
-  - type: Sprite
-    sprite: _Goobstation/Heretic/abilities_heretic.rsi
-    state: immovable_rod
-    noRot: false
-  - type: ImmovableVoidRod
-  - type: Physics
-    bodyType: Dynamic
-    linearDamping: 0
-  - type: PointLight
-    radius: 3
-    color: blue
-    energy: 2.0
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb # Goob edit
-          bounds: "-0.1,-0.5,0.1,0.5"
-        density: 5
+          !type:PhysShapeCircle
+          radius: 0.5
+        density: 1
         hard: false
         layer:
         - Impassable
         - Opaque
+  - type: WarpPoint
+    follow: true
+    location: immovable rod
+    blacklist:
+      tags:
+      - GhostOnlyWarp
 
 - type: entity
   id: ImmovableRodDespawn
@@ -122,20 +71,16 @@
   suffix: Wizard
   components:
   - type: ImmovableRod
-    minSpeed: 6 # Goob edit
-    maxSpeed: 6 # Goob edit
-    hitSoundProbability: 1 # Goob edit
-    ignoreResistances: true # Goobstation
-    knockdownTime: 4 # Goobstation
+    maxSpeed: 25
     destroyTiles: false
     randomizeVelocity: false
     shouldGib: false
     damage:
       types:
-        Blunt: 70 # Goob edit
+        Blunt: 190
   - type: MovementIgnoreGravity
     gravityState: true
-  # - type: InputMover # Goob edit
+  - type: InputMover
   - type: MovementSpeedModifier
     baseWeightlessAcceleration: 5
     baseWeightlessModifier: 2
@@ -145,18 +90,6 @@
   - type: CanMoveInAir
   - type: MovementAlwaysTouching
   - type: NoSlip
-  - type: Trail # Goobstation
-    frequency: 0.1
-    lifetime: 1
-    lerpTime: 0.1
-    alphaLerpAmount: 0.4
-    sprite:
-      sprite: /Textures/Objects/Fun/immovable_rod.rsi
-      state: icon
-  - type: StatusIcon # Goobstation
-    bounds: -0.5,-0.5,0.5,0.5
-  - type: IsDeadIC # Goobstation
-    dead: false
 
 - type: entity
   parent: ImmovableRodKeepTiles
@@ -168,7 +101,7 @@
     maxSpeed: 0
 
 - type: entity
-  parent: ImmovableRodKeepTiles # Goob edit
+  parent: ImmovableRodKeepTilesStill
   id: ImmovableRodMop
   name: immovable mop
   description: Hurled like a javelin, with the power of a thousand furious janitors.
@@ -180,19 +113,19 @@
     noRot: false
 
 - type: entity
-  parent: ImmovableRodKeepTiles # Goob edit
+  parent: ImmovableRodKeepTilesStill
   id: ImmovableRodShark
   name: immovable shark
   description: SHARK TORNADO!
   components:
   - type: Sprite
-    sprite: Objects/Fun/sharkplush.rsi
+    sprite: Objects/Fun/Plushies/shark.rsi
     state: blue
     rotation: 90
     noRot: false
 
 - type: entity
-  parent: ImmovableRodKeepTiles # Goob edit
+  parent: ImmovableRodKeepTilesStill
   id: ImmovableRodClown
   name: immovable clown
   description: Ejected from the neighbouring station one solar system over. HONK!
@@ -204,7 +137,7 @@
     noRot: false
 
 - type: entity
-  parent: ImmovableRodKeepTiles # Goob edit
+  parent: ImmovableRodKeepTilesStill
   id: ImmovableRodBanana
   name: immovable banana
   description: At least you won't slip on it.
@@ -215,7 +148,7 @@
     noRot: false
 
 - type: entity
-  parent: ImmovableRodKeepTiles # Goob edit
+  parent: ImmovableRodKeepTilesStill
   id: ImmovableRodHammer
   name: immovable hammer
   description: Bwoink.
@@ -227,7 +160,7 @@
     noRot: false
 
 - type: entity
-  parent: ImmovableRodKeepTiles # Goob edit
+  parent: ImmovableRodKeepTilesStill
   id: ImmovableRodThrongler
   name: immovable throngler
   description: If you catch it, you can keep it.
@@ -239,7 +172,7 @@
     noRot: false
 
 - type: entity
-  parent: ImmovableRodKeepTiles # Goob edit
+  parent: ImmovableRodKeepTilesStill
   id: ImmovableRodGibstick
   name: immovable gibstick
   description: What did you expect?
@@ -251,12 +184,12 @@
     noRot: false
 
 - type: entity
-  parent: ImmovableRodKeepTiles # Goob edit
+  parent: ImmovableRodKeepTilesStill
   id: ImmovableRodWeh
   name: immovable weh
   description: WEH!
   components:
   - type: Sprite
-    sprite: Objects/Fun/toys.rsi
-    state: plushie_lizard
+    sprite: Objects/Fun/Plushies/lizard.rsi
+    state: icon
     noRot: false

@@ -1,17 +1,10 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Morb <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Server.Objectives.Components;
+﻿using Content.Server.Objectives.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Roles;
@@ -70,6 +63,7 @@ public sealed class HijackShuttleConditionSystem : EntitySystem
         var gridPlayers = Filter.BroadcastGrid(shuttleGridId).Recipients;
         var humanoids = GetEntityQuery<HumanoidAppearanceComponent>();
         var cuffable = GetEntityQuery<CuffableComponent>();
+        EntityQuery<MobStateComponent>();
 
         var agentOnShuttle = false;
         foreach (var player in gridPlayers)
@@ -88,7 +82,7 @@ public sealed class HijackShuttleConditionSystem : EntitySystem
             if (!isHumanoid) // Only humanoids count as enemies
                 continue;
 
-            var isAntagonist = _role.MindIsAntagonist(crewMindId); // Goobstation
+            var isAntagonist = _role.MindIsAntagonist(mindId);
             if (isAntagonist) // Allow antagonist
                 continue;
 

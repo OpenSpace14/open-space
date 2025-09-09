@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Actions.Components;
@@ -16,7 +11,6 @@ public sealed class ActionUpgradeSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly EntityManager _entityManager = default!;
 
     public override void Initialize()
     {
@@ -59,7 +53,7 @@ public sealed class ActionUpgradeSystem : EntitySystem
 
         // TODO: Preserve ordering of actions
 
-        _entityManager.DeleteEntity(uid);
+        Del(uid);
     }
 
     public bool TryUpgradeAction(EntityUid? actionId, out EntityUid? upgradeActionId, ActionUpgradeComponent? actionUpgradeComponent = null, int newLevel = 0)
@@ -190,7 +184,7 @@ public sealed class ActionUpgradeSystem : EntitySystem
 
         // TODO: Preserve ordering of actions
 
-        _entityManager.DeleteEntity(actionId);
+        Del(actionId);
 
         return upgradedActionId.Value;
     }

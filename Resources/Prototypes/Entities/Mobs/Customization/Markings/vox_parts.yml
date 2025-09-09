@@ -1,11 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Froffy025 <scotttaco025@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: marking
   id: VoxBeak
   bodyPart: Snout
@@ -24,7 +16,7 @@
 - type: marking
   id: VoxLArmScales
   bodyPart: LArm
-  markingCategory: LeftArm
+  markingCategory: Arms
   forcedColoring: true
   speciesRestriction: [Vox]
   sprites:
@@ -39,7 +31,7 @@
 - type: marking
   id: VoxLLegScales
   bodyPart: LLeg
-  markingCategory: LeftLeg
+  markingCategory: Legs
   forcedColoring: true
   speciesRestriction: [Vox]
   sprites:
@@ -54,7 +46,7 @@
 - type: marking
   id: VoxRArmScales
   bodyPart: RArm
-  markingCategory: RightArm
+  markingCategory: Arms
   forcedColoring: true
   speciesRestriction: [Vox]
   sprites:
@@ -69,7 +61,7 @@
 - type: marking
   id: VoxRLegScales
   bodyPart: RLeg
-  markingCategory: RightLeg
+  markingCategory: Legs
   forcedColoring: true
   speciesRestriction: [Vox]
   sprites:
@@ -84,7 +76,7 @@
 - type: marking
   id: VoxRHandScales
   bodyPart: RHand
-  markingCategory: RightHand
+  markingCategory: Arms
   forcedColoring: true
   speciesRestriction: [Vox]
   sprites:
@@ -99,7 +91,7 @@
 - type: marking
   id: VoxLHandScales
   bodyPart: LHand
-  markingCategory: LeftHand
+  markingCategory: Arms
   forcedColoring: true
   speciesRestriction: [Vox]
   sprites:
@@ -114,7 +106,7 @@
 - type: marking
   id: VoxLFootScales
   bodyPart: LFoot
-  markingCategory: LeftFoot
+  markingCategory: Legs
   forcedColoring: true
   speciesRestriction: [Vox]
   sprites:
@@ -129,7 +121,7 @@
 - type: marking
   id: VoxRFootScales
   bodyPart: RFoot
-  markingCategory: RightFoot
+  markingCategory: Legs
   forcedColoring: true
   speciesRestriction: [Vox]
   sprites:
@@ -149,5 +141,24 @@
   forcedColoring: true
   sprites:
   - sprite: Mobs/Customization/vox_parts.rsi
-    # Ideally this should use the normal tail sprite and apply an actual mask over it, not just use a butchered sprite
-    state: tail_stenciled
+    state: tail
+
+- type: marking
+  id: VoxTailShort
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vox]
+  forcedColoring: true
+  sprites:
+  - sprite: Mobs/Customization/vox_parts.rsi
+    state: tail_short
+
+- type: marking
+  id: VoxTailBig
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vox]
+  forcedColoring: true
+  sprites:
+  - sprite: Mobs/Customization/vox_parts.rsi
+    state: tail_big

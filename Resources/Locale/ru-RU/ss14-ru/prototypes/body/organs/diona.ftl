@@ -1,9 +1,7 @@
-ent-BaseDionaOrganUnGibbable = { ent-BaseItem }
-    .desc = { ent-BaseItem.desc }
 ent-BaseDionaOrgan = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
 ent-OrganDionaBrain = мозг
-    .desc = Центральный узел псевдонейрологической активности дионы, её корневидные усики ищут свое прежнее тело.
+    .desc = Центральный узел псевдонейрологической активности дионы, её корневидные усики ищут своё прежнее тело.
 ent-OrganDionaEyes = глаза
     .desc = Я тебя вижу!
 ent-OrganDionaStomach = желудок

@@ -1,30 +1,9 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 LankLTE <135308300+LankLTE@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 RatherUncreative <RatherUncreativeName@proton.me>
-// SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Whatstone <whatston3@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Content.Shared._NF.Silicons.Borgs; // Frontier
 
 namespace Content.Server.Silicons.Borgs;
 
@@ -73,7 +52,7 @@ public sealed partial class BorgSystem
 
     private void OnProvideItemStartup(EntityUid uid, ItemBorgModuleComponent component, ComponentStartup args)
     {
-        component.ProvidedContainer = Container.EnsureContainer<Container>(uid, component.ProvidedContainerId);
+        Container.EnsureContainer<Container>(uid, component.HoldingContainer);
     }
 
     private void OnSelectableInstalled(EntityUid uid, SelectableBorgModuleComponent component, ref BorgModuleInstalledEvent args)
@@ -208,43 +187,43 @@ public sealed partial class BorgSystem
         if (!TryComp<HandsComponent>(chassis, out var hands))
             return;
 
-        var xform = Transform(chassis);
-        foreach (var itemProto in component.Items)
-        {
-            EntityUid item;
+        if (!_container.TryGetContainer(uid, component.HoldingContainer, out var container))
+            return;
 
-            if (!component.ItemsCreated)
+        var xform = Transform(chassis);
+
+        for (var i = 0; i < component.Hands.Count; i++)
+        {
+            var hand = component.Hands[i];
+            var handId = $"{uid}-hand-{i}";
+
+            _hands.AddHand((chassis, hands), handId, hand.Hand);
+            EntityUid? item = null;
+
+            if (component.StoredItems is not null)
+            {
+                if (component.StoredItems.TryGetValue(handId, out var storedItem))
+                {
+                    item = storedItem;
+                    _container.Remove(storedItem, container, force: true);
+                }
+            }
+            else if (hand.Item is { } itemProto)
             {
                 item = Spawn(itemProto, xform.Coordinates);
             }
-            else
+
+            if (item is { } pickUp)
             {
-                item = component.ProvidedContainer.ContainedEntities
-                    .FirstOrDefault(ent => Prototype(ent)?.ID == itemProto);
-                if (!item.IsValid())
+                _hands.DoPickup(chassis, handId, pickUp, hands);
+                if (!hand.ForceRemovable && hand.Hand.Whitelist == null && hand.Hand.Blacklist == null)
                 {
-                    Log.Debug($"no items found: {component.ProvidedContainer.ContainedEntities.Count}");
-                    continue;
+                    EnsureComp<UnremoveableComponent>(pickUp);
                 }
-
-                _container.Remove(item, component.ProvidedContainer, force: true);
             }
-
-            if (!item.IsValid())
-            {
-                Log.Debug("no valid item");
-                continue;
-            }
-
-            var handId = $"{uid}-item{component.HandCounter}";
-            component.HandCounter++;
-            _hands.AddHand(chassis, handId, HandLocation.Middle, hands);
-            _hands.DoPickup(chassis, hands.Hands[handId], item, hands);
-            EnsureComp<UnremoveableComponent>(item);
-            component.ProvidedItems.Add(handId, item);
         }
 
-        component.ItemsCreated = true;
+        Dirty(uid, component);
     }
 
     private void RemoveProvidedItems(EntityUid chassis, EntityUid uid, BorgChassisComponent? chassisComponent = null, ItemBorgModuleComponent? component = null)
@@ -255,27 +234,33 @@ public sealed partial class BorgSystem
         if (!TryComp<HandsComponent>(chassis, out var hands))
             return;
 
-        if (TerminatingOrDeleted(uid))
-        {
-            foreach (var (hand, item) in component.ProvidedItems)
-            {
-                QueueDel(item);
-                _hands.RemoveHand(chassis, hand, hands);
-            }
-            component.ProvidedItems.Clear();
+        if (!_container.TryGetContainer(uid, component.HoldingContainer, out var container))
             return;
+
+        if (TerminatingOrDeleted(uid))
+            return;
+
+        component.StoredItems ??= new();
+
+        for (var i = 0; i < component.Hands.Count; i++)
+        {
+            var handId = $"{uid}-hand-{i}";
+
+            if (_hands.TryGetHeldItem(chassis, handId, out var held))
+            {
+                RemComp<UnremoveableComponent>(held.Value);
+                _container.Insert(held.Value, container);
+                component.StoredItems[handId] = held.Value;
+            }
+            else
+            {
+                component.StoredItems.Remove(handId);
+            }
+
+            _hands.RemoveHand(chassis, handId);
         }
 
-        foreach (var (handId, item) in component.ProvidedItems)
-        {
-            if (LifeStage(item) <= EntityLifeStage.MapInitialized)
-            {
-                RemComp<UnremoveableComponent>(item);
-                _container.Insert(item, component.ProvidedContainer);
-            }
-            _hands.RemoveHand(chassis, handId, hands);
-        }
-        component.ProvidedItems.Clear();
+        Dirty(uid, component);
     }
 
     /// <summary>
@@ -300,13 +285,6 @@ public sealed partial class BorgSystem
             return false;
         }
 
-        // Frontier - event for DroppableBorgModule to use
-        var ev = new BorgCanInsertModuleEvent((uid, component), user);
-        RaiseLocalEvent(module, ref ev);
-        if (ev.Cancelled)
-            return false;
-        // End Frontier
-
         if (TryComp<ItemBorgModuleComponent>(module, out var itemModuleComp))
         {
             foreach (var containedModuleUid in component.ModuleContainer.ContainedEntities)
@@ -314,9 +292,8 @@ public sealed partial class BorgSystem
                 if (!TryComp<ItemBorgModuleComponent>(containedModuleUid, out var containedItemModuleComp))
                     continue;
 
-                // if (containedItemModuleComp.Items.Count == itemModuleComp.Items.Count && // Frontier: no item check
-                //     containedItemModuleComp.Items.All(itemModuleComp.Items.Contains)) // Frontier
-                if (containedItemModuleComp.ModuleId == itemModuleComp.ModuleId) // Frontier: ID comparison
+                if (containedItemModuleComp.Hands.Count == itemModuleComp.Hands.Count &&
+                    containedItemModuleComp.Hands.All(itemModuleComp.Hands.Contains))
                 {
                     if (user != null)
                         Popup.PopupEntity(Loc.GetString("borg-module-duplicate"), uid, user.Value);

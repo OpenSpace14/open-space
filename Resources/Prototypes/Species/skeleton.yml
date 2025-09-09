@@ -1,12 +1,3 @@
-# SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Repo <47093363+Titian3@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
-
 - type: species
   id: Skeleton
   name: species-name-skeleton
@@ -24,8 +15,7 @@
   id: MobSkeletonSprites
   sprites:
     Head: MobSkeletonHead
-    Chest: MobSkeletonChest
-    Groin: MobSkeletonGroin
+    Chest: MobSkeletonTorso
     LArm: MobSkeletonLArm
     RArm: MobSkeletonRArm
     LHand: MobSkeletonLHand
@@ -54,40 +44,22 @@
     state: head_f
 
 - type: humanoidBaseSprite
-  id: MobSkeletonChest
+  id: MobSkeletonTorso
   baseSprite:
     sprite: Mobs/Species/Skeleton/parts.rsi
-    state: chest_m
+    state: torso_m
 
 - type: humanoidBaseSprite
-  id: MobSkeletonChestMale
+  id: MobSkeletonTorsoMale
   baseSprite:
     sprite: Mobs/Species/Skeleton/parts.rsi
-    state: chest_m
+    state: torso_m
 
 - type: humanoidBaseSprite
-  id: MobSkeletonChestFemale
+  id: MobSkeletonTorsoFemale
   baseSprite:
     sprite: Mobs/Species/Skeleton/parts.rsi
-    state: chest_f
-
-- type: humanoidBaseSprite
-  id: MobSkeletonGroin
-  baseSprite:
-    sprite: Mobs/Species/Skeleton/parts.rsi
-    state: groin_m
-
-- type: humanoidBaseSprite
-  id: MobSkeletonGroinMale
-  baseSprite:
-    sprite: Mobs/Species/Skeleton/parts.rsi
-    state: groin_m
-
-- type: humanoidBaseSprite
-  id: MobSkeletonGroinFemale
-  baseSprite:
-    sprite: Mobs/Species/Skeleton/parts.rsi
-    state: groin_f
+    state: torso_f
 
 - type: humanoidBaseSprite
   id: MobSkeletonLLeg

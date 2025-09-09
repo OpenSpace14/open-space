@@ -1,10 +1,7 @@
 ent-BaseMeleeWeaponEnergy = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
-# Corvax-HiddenDesc-Start
-ent-EnergySword = игрушечный меч
+ent-EnergySword = энергетический меч
     .desc = Очень громкий и опасный меч с лучом чистой, концентрированной плазмы. Разрезает небронированные объекты как масло.
-    .suffix = энергетический меч
-# Corvax-HiddenDesc-End
 ent-EnergyDaggerLoud = энергокинжал
     .desc = Не такой громкий и опасный кинжал с лучом из чистой, концентрированной плазмы. Совершенно лишён возможности маскироваться.
 ent-EnergyDagger = ручка
@@ -15,18 +12,13 @@ ent-EnergyDaggerBox = футляр энергокинжала
     .suffix = Энергокинжал
 ent-EnergyCutlass = абордажная энергосабля
     .desc = Экзотическое энергетическое оружие.
-ent-EnergySwordDoubleBase = double-bladed energy sword
-    .desc = Syndicate Command Interns thought that having one blade on the energy sword was not enough. This can be stored in pockets.
-# Corvax-HiddenDesc-Start
-ent-EnergySwordDouble = игрушечный двухклинковый меч
-    .desc = Новый двойной пластиковый меч от Sandy-Cat! В два раза больше эпика и громких звуков!
-    .suffix = двухклинковый энергетический меч
-# Corvax-HiddenDesc-End
+ent-EnergySwordDouble = двухклинковый энергетический меч
+    .desc = Стажёры из командования Синдиката решили, что одного клинка на энергетическом мече недостаточно. Его можно хранить в кармане.
 ent-HyperEutacticBlade = гиперэвтектический клинок
     .desc = Сверхмассивное оружие, способное разорвать на части саму ткань пространства и времени, гиперэвтектический клинок динамически выковывает гиперэвтектическую кристаллическую наноструктуру, способную проходить сквозь большинство известных форм материи, как горячий нож сквозь масло.
 ent-CyborgEnergySwordDouble = { ent-EnergySwordDouble }
-    .desc = Стажеры из командования Синдиката решили, что одного клинка на энергетическом мече недостаточно. Специальная разработка для боргов Синдиката.
+    .desc = Стажёры из командования Синдиката решили, что одного клинка на энергетическом мече недостаточно. Специальная разработка для киборгов Синдиката.
     .suffix = Одноручное, Для боргов
 ent-EnergyDaggerLoudBlue = { ent-EnergyDaggerLoud }
-    .suffix = Синий
+    .suffix = синий
     .desc = { ent-EnergyDaggerLoud.desc }

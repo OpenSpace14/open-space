@@ -1,2 +1,2 @@
 ent-OperatingTable = operating table
-    .desc = Used for advanced medical procedures.
+    .desc = Special medical table for surgery. This one just seems to be a useless prop, though.

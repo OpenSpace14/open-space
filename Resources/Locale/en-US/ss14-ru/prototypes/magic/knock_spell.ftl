@@ -1,2 +1,2 @@
 ent-ActionKnock = Knock
-    .desc = Opens nearby doors and lockers.
+    .desc = This spell opens nearby doors.

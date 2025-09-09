@@ -1,17 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Jeff <velcroboy333@hotmail.com>
-# SPDX-FileCopyrightText: 2024 Krunklehorn <42424291+Krunklehorn@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Southbridge <7013162+southbridge-fur@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Velcroboy <107660393+IamVelcroboy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Velcroboy <velcroboy333@hotmail.com>
-# SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-# SPDX-FileCopyrightText: 2024 joshepvodka <86210200+joshepvodka@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 station-beacon-general = General
 
 station-beacon-command = Command
@@ -61,6 +47,14 @@ station-beacon-engineering = Engineering
 station-beacon-ce = CE
 station-beacon-ame = AME
 station-beacon-solars = Solars
+station-beacon-solars-N = Solars N
+station-beacon-solars-NE = Solars NE
+station-beacon-solars-E = Solars E
+station-beacon-solars-SE = Solars SE
+station-beacon-solars-S = Solars S
+station-beacon-solars-SW = Solars SW
+station-beacon-solars-W = Solars W
+station-beacon-solars-NW = Solars NW
 station-beacon-gravgen = Grav
 station-beacon-pa = PA Control
 station-beacon-smes = SMES
@@ -95,4 +89,12 @@ station-beacon-tools = Tools
 station-beacon-disposals = Disposals
 station-beacon-cryosleep = Cryosleep
 station-beacon-escape-pod = Escape Pod
+station-beacon-escape-pod-N = Escape Pod N
+station-beacon-escape-pod-NE = Escape Pod NE
+station-beacon-escape-pod-E = Escape Pod E
+station-beacon-escape-pod-SE = Escape Pod SE
+station-beacon-escape-pod-S = Escape Pod S
+station-beacon-escape-pod-SW = Escape Pod SW
+station-beacon-escape-pod-W = Escape Pod W
+station-beacon-escape-pod-NW = Escape Pod NW
 station-beacon-vox = Vox Break Room

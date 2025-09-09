@@ -1,12 +1,4 @@
-// SPDX-FileCopyrightText: 2022 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 OnsenCapy <101037138+OnsenCapy@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
-using Robust.Shared.GameStates;
+﻿using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
@@ -26,10 +18,10 @@ public sealed partial class RevenantOverloadedLightsComponent : Component
     public float Accumulator = 0;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public float ZapDelay = 2f;
+    public float ZapDelay = 3f;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public float ZapRange = 7f;
+    public float ZapRange = 4f;
 
     [DataField("zapBeamEntityId",customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     public string ZapBeamEntityId = "LightningRevenant";

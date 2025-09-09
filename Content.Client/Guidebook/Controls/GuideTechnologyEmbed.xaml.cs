@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Diagnostics.CodeAnalysis;
 using Content.Client.Guidebook.Richtext;
 using Content.Client.Message;
@@ -27,10 +22,12 @@ namespace Content.Client.Guidebook.Controls;
 public sealed partial class GuideTechnologyEmbed : BoxContainer, IDocumentTag, ISearchableControl
 {
     [Dependency] private readonly IEntitySystemManager _systemManager = default!;
+    [Dependency] private readonly ILogManager _logManager = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly ResearchSystem _research;
     private readonly SpriteSystem _sprite;
+    private readonly ISawmill _sawmill;
 
     public GuideTechnologyEmbed()
     {
@@ -38,6 +35,7 @@ public sealed partial class GuideTechnologyEmbed : BoxContainer, IDocumentTag, I
         IoCManager.InjectDependencies(this);
         _research = _systemManager.GetEntitySystem<ResearchSystem>();
         _sprite = _systemManager.GetEntitySystem<SpriteSystem>();
+        _sawmill = _logManager.GetSawmill("guidebook.technology");
         MouseFilter = MouseFilterMode.Stop;
     }
 
@@ -66,13 +64,13 @@ public sealed partial class GuideTechnologyEmbed : BoxContainer, IDocumentTag, I
         control = null;
         if (!args.TryGetValue("Technology", out var id))
         {
-            Logger.Error("Technology embed tag is missing technology prototype argument");
+            _sawmill.Error("Technology embed tag is missing technology prototype argument");
             return false;
         }
 
         if (!_prototype.TryIndex<TechnologyPrototype>(id, out var technology))
         {
-            Logger.Error($"Specified technology prototype \"{id}\" is not a valid technology prototype");
+            _sawmill.Error($"Specified technology prototype \"{id}\" is not a valid technology prototype");
             return false;
         }
 

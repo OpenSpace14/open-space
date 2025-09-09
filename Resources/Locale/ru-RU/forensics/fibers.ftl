@@ -11,7 +11,6 @@ fibers-nanomachines = изолирующие наномашинные
 fibers-chameleon = голографические хамелеонные
 fibers-rubber = резиновые
 fibers-purple = фиолетовые
-fibers-kinetic = kinetic
 fibers-red = красные
 fibers-black = чёрные
 fibers-blue = синие

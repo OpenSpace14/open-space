@@ -1,0 +1,39 @@
+[game]
+hostname = "[RU]Ванилла Space Axolotl [LRP][MRP][WL]"
+desc = "Сервер с действительно ванильной сборкой на русском языке.\nОтсутствие целей станции, СРП, АВД, душных правил и законов.\nИменно так, как задумывали разработчики.\nДля входа вам нужно пройти верификацию через дискорд."
+maxplayers = 150
+soft_max_players = 50
+map_rotation = true
+
+[infolinks]
+bug_report = "https://github.com/space-wizards/space-station-14/issues/new/choose"
+discord    = "https://discord.gg/KtHkxwrFnU"
+github     = "https://github.com/lzk228/space-axolotl-14"
+appeal     = "https://discord.gg/KtHkxwrFnU"
+
+[server]
+rules_file = "AxolotlRuleset"
+
+[rules]
+time = 60.0
+
+[hub]
+advertise = true
+tags = "lang:ru,rp:low,rp:med,region:eu_e"
+
+[vote]
+restart_required_ratio = 0.7
+
+[admin]
+see_own_notes = true
+new_player_threshold = 600
+alert.min_players_sharing_connection = 2
+
+[atmos]
+max_explosion_range = 5
+
+[shuttle]
+emergency_early_launch_allowed = true
+
+[ic]
+flavor_text = true

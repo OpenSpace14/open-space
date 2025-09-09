@@ -1,16 +1,3 @@
-# SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GMWQ <garethquaile@gmail.com>
-# SPDX-FileCopyrightText: 2025 Gareth Quaile <garethquaile@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 MilenVolf <63782763+MilenVolf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Tayrtahn <tayrtahn@gmail.com>
-# SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 TurboTracker <130304754+TurboTrackerss14@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 YoungThug <ramialanbagy@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
 ## See also ../roles.yml and ../spawners.yml
 
 ### Visitors with Visitor ID
@@ -39,10 +26,6 @@
     - type: Loadout
       prototypes: [ VisitorCaptain, VisitorCaptainAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
-      - Shooting
 
 - type: randomHumanoidSettings
   id: VisitorCE
@@ -54,10 +37,6 @@
     - type: Loadout
       prototypes: [ VisitorCE, VisitorCEAlt ]
       roleLoadout: [ RoleSurvivalExtended ]
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
-      - AdvancedBuilding
 
 - type: randomHumanoidSettings
   id: VisitorCMO
@@ -69,11 +48,6 @@
     - type: Loadout
       prototypes: [ VisitorCMO, VisitorCMOAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
-      - Surgery
-      - MedicalEquipment
 
 - type: randomHumanoidSettings
   id: VisitorHOP
@@ -85,9 +59,6 @@
     - type: Loadout
       prototypes: [ VisitorHOP, VisitorHOPAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
 
 - type: randomHumanoidSettings
   id: VisitorHOS
@@ -99,10 +70,6 @@
     - type: Loadout
       prototypes: [ VisitorHOS, VisitorHOSAlt ]
       roleLoadout: [ RoleSurvivalSecurity ]
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
-      - Shooting
 
 - type: randomHumanoidSettings
   id: VisitorResearchDirector
@@ -114,10 +81,6 @@
     - type: Loadout
       prototypes: [ VisitorRD, VisitorRDAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
-      - AdvancedBuilding
 
 - type: randomHumanoidSettings
   id: VisitorQM
@@ -129,9 +92,6 @@
     - type: Loadout
       prototypes: [ VisitorQM, VisitorQMAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
 
 # Security
 # Following use EventHumanoidMindShielded since they are heads and probably should have mindshields
@@ -146,10 +106,6 @@
       rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: default
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
-      - Shooting
 
 - type: randomHumanoidSettings
   id: VisitorSecurityCadet
@@ -203,9 +159,6 @@
       rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
 
 - type: randomHumanoidSettings
   id: VisitorCargoTechnician
@@ -226,11 +179,6 @@
     - type: Loadout
       prototypes: [ VisitorSalvageSpecialist, VisitorSalvageSpecialistAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
-      - Shooting
-      - Butchering
 
 # Engineering
 
@@ -244,10 +192,6 @@
       rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
-      - AdvancedBuilding
 
 - type: randomHumanoidSettings
   id: VisitorAtmosTech
@@ -291,11 +235,6 @@
       rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
-      - Surgery
-      - MedicalEquipment
 
 - type: randomHumanoidSettings
   id: VisitorMedicalIntern
@@ -389,10 +328,6 @@
       rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
-      - AdvancedBuilding
 
 - type: randomHumanoidSettings
   id: VisitorResearchAssistant
@@ -426,9 +361,6 @@
       rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
 
 - type: randomHumanoidSettings
   id: VisitorBartender
@@ -465,7 +397,6 @@
   parent: VisitorCivilian
   components:
     - type: BibleUser
-    - type: CanEnchant
     - type: GhostRole
       name: job-name-chaplain
     - type: Loadout
@@ -481,10 +412,6 @@
     - type: Loadout
       prototypes: [ VisitorChef, VisitorChefAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
-      - Butchering
 
 - type: randomHumanoidSettings
   id: VisitorClown
@@ -672,10 +599,6 @@
       - NamesFirst
       - NamesLast
       nameFormat: name-format-standard
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-        - ShuttleControl
-        - AdvancedBuilding
 
 - type: randomHumanoidSettings
   id: ChallengeVictimCMO
@@ -697,10 +620,6 @@
       - NamesFirst
       - NamesLast
       nameFormat: name-format-standard
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-        - Surgery
-        - MedicalEquipment
 
 - type: randomHumanoidSettings
   id: ChallengeVictimHeadOfPersonnel
@@ -743,10 +662,6 @@
       - NamesFirst
       - NamesLast
       nameFormat: name-format-standard
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-        - ShuttleControl
-        - Shooting
 
 - type: randomHumanoidSettings
   id: ChallengeVictimResearchDirector
@@ -768,9 +683,6 @@
       - NamesFirst
       - NamesLast
       nameFormat: name-format-standard
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-        - AdvancedBuilding
 
 - type: randomHumanoidSettings
   id: ChallengeVictimQuartermaster
@@ -792,9 +704,6 @@
       - NamesFirst
       - NamesLast
       nameFormat: name-format-standard
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-        - ShuttleControl
 
 # Security
 # Following use EventHumanoidMindShielded since they are heads and probably should have mindshields
@@ -820,9 +729,6 @@
       - NamesFirst
       - NamesLast
       nameFormat: name-format-standard
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-        - ShuttleControl
 
 # Engineering
 
@@ -855,14 +761,6 @@
     - type: Loadout
       prototypes: [ SyndicateFootsoldierTeamLeaderGear ]
       roleLoadout: [ RoleSurvivalSyndicate ]
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-        - ShuttleControl
-        - Shooting
-        - AdvancedBuilding
-        - Surgery
-        - MedicalEquipment
-        - Butchering
 
 - type: randomHumanoidSettings
   id: SyndieSoldier
@@ -883,14 +781,6 @@
     - type: Loadout
       prototypes: [ SyndicateFootsoldierGear ]
       roleLoadout: [ RoleSurvivalSyndicate ]
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-        - ShuttleControl
-        - Shooting
-        - AdvancedBuilding
-        - Surgery
-        - MedicalEquipment
-        - Butchering
 
 - type: randomHumanoidSettings
   id: SyndieVisitor
@@ -902,16 +792,14 @@
     - type: GhostRole
       name: ghost-role-information-syndie-disaster-victim-name
       description: ghost-role-information-syndie-disaster-victim-description
-      rules: ghost-role-information-nonantagonist-rules
+      rules: ghost-role-information-freeagent-rules
+      mindRoles:
+      - MindRoleGhostRoleFreeAgent
       raffle:
         settings: short
     - type: Loadout
       prototypes: [ SyndicateOperativeGearCivilian ]
       roleLoadout: [ RoleSurvivalSyndicate ]
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-        - ShuttleControl
-        - Shooting
 
 - type: randomHumanoidSettings
   id: PirateScooner
@@ -931,10 +819,6 @@
     - type: Loadout
       prototypes: [ PirateScoonerAltA, PirateScoonerAltB, PirateScoonerAltC, PirateScoonerAltD ]
       roleLoadout: [ RoleSurvivalEVA ]
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-        - ShuttleControl
-        - Shooting
 
 - type: randomHumanoidSettings
   id: PirateCaptainScooner

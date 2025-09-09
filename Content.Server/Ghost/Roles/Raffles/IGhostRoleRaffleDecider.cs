@@ -1,9 +1,4 @@
-// SPDX-FileCopyrightText: 2024 no <165581243+pissdemon@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Robust.Shared.Player;
+﻿using Robust.Shared.Player;
 
 namespace Content.Server.Ghost.Roles.Raffles;
 
@@ -30,3 +25,4 @@ public partial interface IGhostRoleRaffleDecider
     /// </param>
     void PickWinner(IEnumerable<ICommonSession> candidates, Func<ICommonSession, bool> tryTakeover);
 }
+

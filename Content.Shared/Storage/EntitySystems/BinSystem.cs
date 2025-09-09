@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Tom Richardson <tgrkzus@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Krunklehorn <42424291+Krunklehorn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -79,12 +67,18 @@ public sealed class BinSystem : EntitySystem
 
     private void OnEntInserted(Entity<BinComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
+        if (args.Container.ID != ent.Comp.ContainerId)
+            return;
+
         ent.Comp.Items.Add(args.Entity);
     }
 
-    private void OnEntRemoved(EntityUid uid, BinComponent component, EntRemovedFromContainerMessage args)
+    private void OnEntRemoved(Entity<BinComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        component.Items.Remove(args.Entity);
+        if (args.Container.ID != ent.Comp.ContainerId)
+            return;
+
+        ent.Comp.Items.Remove(args.Entity);
     }
 
     private void OnInteractHand(EntityUid uid, BinComponent component, InteractHandEvent args)

@@ -4,7 +4,6 @@ ent-Truncheon = truncheon
     .desc = A rigid, steel-studded baton, meant to harm.
 ent-Flash = flash
     .desc = An ultrabright flashbulb with a trigger, which causes the victim to be dazed and lose their eyesight for a moment. Useless when burnt out.
-    .suffix = DO NOT MAP
 ent-SciFlash = flash
     .suffix = 2 charges
     .desc = { ent-Flash.desc }

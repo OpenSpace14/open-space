@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC0-1.0",
-  "copyright": "Created by rolfero (github) for Space Station 14",
+  "copyright": "Created by rolfero (github) for Space Station 14 and cyrillic 778b (github) for Corvax",
   "size": {
     "x": 4,
     "y": 6
@@ -136,7 +136,7 @@
     {
       "name": "blank"
     },
-	  {
+	{
       "name": "а"
     },
     {

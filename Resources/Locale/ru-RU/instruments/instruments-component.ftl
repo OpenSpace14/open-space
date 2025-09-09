@@ -20,8 +20,7 @@ instruments-component-channels-menu = Выбор MIDI-канала
 instrument-component-channel-name = MIDI-канал { $number }
 instruments-component-channels-all-button = Все
 instruments-component-channels-clear-button = Очистить
-# SwappableInstrumentComponent
-instruments-component-channels-track-names-toggle = Показать название трека
+instruments-component-channels-track-names-toggle = Отображать имена треков
 instruments-component-channels-single = { $channel } { $name }
 instruments-component-channels-multi = { $channel } { $name } ({ $other })
 # SwappableInstrumentComponent

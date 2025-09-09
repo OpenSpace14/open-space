@@ -1,16 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Nox <nebulousnox38@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 blobadoodle <me@bloba.dev>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: job
   id: DeathSquad
   name: job-name-deathsquad
@@ -25,53 +12,39 @@
   - AllAccess
   access:
   - CentralCommand
-  # Goobstation
-  - NanotrasenRepresentative
-  - BlueshieldOfficer
-  special: # Goobstation Start - I basically re-did all of deathsquads stuff so. - Sol
+  special:
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
-  - !type:AddComponentSpecial
-    components:
-    - type: DeathSquadMember # Goobstation
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
-      - Shooting
-      - AdvancedBuilding
-      - Surgery
-      - MedicalEquipment
-      - Butchering
+    implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
 
-  # Goobstation Start - I basically re-did all of deathsquads stuff so. - Sol
 - type: startingGear
   id: DeathSquadGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitDeathSquad
     back: ClothingBackpackDeathSquad
     mask: ClothingMaskGasDeathSquad
-    eyes: ClothingEyesGlassesDeathsquad # Goobstation
-    neck: ExecutiveIDCard # Executive Access!
-    ears: ClothingHeadsetDeathsquad # Goobstation
-    gloves: ClothingHandsGlovesDeathsquadUnremovable # Rip and TEAR
+    eyes: ClothingEyesHudSecurity
+    ears: ClothingHeadsetAltCentCom
+    gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitDeathsquad
-    shoes: ClothingShoesBootsMagDeathsquad # These boots are cooler.
-    id: DeathsquadPDA # New PDA!
-    pocket1: PhoronSabre # Goobstation
-    pocket2: WeaponRevolverMateba # Goobstation
-    belt: ClothingBeltDeathsquadWebbingFilled # Centcomm Doesn't use syndicate tech.
+    shoes: ClothingShoesBootsMagAdv
+    id: DeathsquadPDA
+    pocket1: EnergySword
+    pocket2: EnergyShield
+    belt: ClothingBeltMilitaryWebbingMedFilled
   storage:
     back:
-    - SpeedLoaderMatebaAP # Goobstation - 7 rounds
-    - SpeedLoaderMatebaAP # Goobstation - 7 rounds
-    # - BoxFlashbang - WAY too big
-    - ToolDebug # Spanish Army Knife - TODO Replace
+    - WeaponPulsePistol
+    - WeaponRevolverMatebaAP
+    - SpeedLoaderMagnumAP
+    - SpeedLoaderMagnumAP
+    - BoxFlashbang
+    - ToolDebug # spanish army knife
     - WelderExperimental
-    - BlueShieldShieldEvilFilled # Goobstation
-    - DeterrentCaseFilled
+    - Hypospray
+    - DeathAcidifierImplanter # crew will try to steal their amazing hardsuits
+    - FreedomImplanter
   inhand:
   - WeaponPulseRifle
-    # Goobstation End
 
 - type: chameleonOutfit
   id: DeathSquadChameleonOutfit

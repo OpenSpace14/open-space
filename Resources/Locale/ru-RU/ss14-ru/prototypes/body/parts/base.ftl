@@ -1,9 +1,7 @@
-ent-BasePartInorganic = часть тела
+ent-BasePart = часть тела
     .desc = { ent-BaseItem.desc }
-ent-BaseChestInorganic = грудь
-    .desc = { "" }
-ent-BaseGroinInorganic = пах
-    .desc = { "" }
+ent-BaseTorso = туловище
+    .desc = { ent-BasePart.desc }
 ent-BaseHead = голова
     .desc = { ent-BasePart.desc }
 ent-BaseLeftArm = левая рука

@@ -1,44 +1,25 @@
-# SPDX-FileCopyrightText: 2022 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Jezithyr <Jezithyr@gmail.com>
-# SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-# SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
-- type: body
+﻿- type: body
   id: Dwarf
   name: "dwarf"
-  root: chest
+  root: torso
   slots:
     head:
       part: HeadHuman
       connections:
-      - chest
+      - torso
       organs:
         brain: OrganHumanBrain
         eyes: OrganHumanEyes
-    chest:
-      part: ChestHuman
+    torso:
+      part: TorsoHuman
       connections:
       - right arm
       - left arm
-      - groin
-      - head # Shitmed
-      organs:
-        heart: OrganDwarfHeart
-        lungs: OrganHumanLungs
-    groin:
-      part: GroinHuman
-      connections:
       - right leg
       - left leg
       organs:
+        heart: OrganDwarfHeart
+        lungs: OrganHumanLungs
         stomach: OrganDwarfStomach
         liver: OrganDwarfLiver
         kidneys: OrganHumanKidneys
@@ -51,9 +32,9 @@
       connections:
       - left hand
     right hand:
-      part: RightHandDwarf # Goob edit
+      part: RightHandHuman
     left hand:
-      part: LeftHandDwarf # Goob edit
+      part: LeftHandHuman
     right leg:
       part: RightLegHuman
       connections:

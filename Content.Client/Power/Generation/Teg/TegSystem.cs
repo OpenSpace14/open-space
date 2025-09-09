@@ -1,10 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
-using Content.Client.Examine;
+﻿using Content.Client.Examine;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
@@ -21,8 +15,7 @@ namespace Content.Client.Power.Generation.Teg;
 /// <seealso cref="TegCirculatorComponent"/>
 public sealed class TegSystem : EntitySystem
 {
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string ArrowPrototype = "TegCirculatorArrow";
+    private static readonly EntProtoId ArrowPrototype = "TegCirculatorArrow";
 
     public override void Initialize()
     {

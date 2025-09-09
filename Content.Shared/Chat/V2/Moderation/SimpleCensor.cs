@@ -1,9 +1,4 @@
-// SPDX-FileCopyrightText: 2024 Hannah Giovanna Dawson <karakkaraz@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
-using System.Collections.Frozen;
+﻿using System.Collections.Frozen;
 using System.Linq;
 using System.Text;
 using System.Text.Unicode;

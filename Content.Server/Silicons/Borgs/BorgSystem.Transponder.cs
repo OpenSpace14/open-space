@@ -1,21 +1,9 @@
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 ImHoks <142083149+ImHoks@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 ImHoks <imhokzzzz@gmail.com>
-// SPDX-FileCopyrightText: 2025 KillanGenifer <killangenifer@gmail.com>
-// SPDX-FileCopyrightText: 2025 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DeviceNetwork;
+using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Popups;
 using Content.Shared.Robotics;
@@ -24,19 +12,16 @@ using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Emag.Systems;
 using Robust.Shared.Utility;
-using Content.Server._Imp.Drone; //Goobstation drone
-using Robust.Shared.Player; //Goobstation drone
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components; // Corvax-Next-AiRemoteControl
-using Content.Server.Silicons.Laws;
-using Content.Shared.Silicons.Laws.Components;
 
 namespace Content.Server.Silicons.Borgs;
 
 /// <inheritdoc/>
 public sealed partial class BorgSystem
 {
-    [Dependency] private readonly SiliconLawSystem _law = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
+    [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
 
     private void InitializeTransponder()
     {
@@ -51,7 +36,7 @@ public sealed partial class BorgSystem
         var query = EntityQueryEnumerator<BorgTransponderComponent, BorgChassisComponent, DeviceNetworkComponent, MetaDataComponent>();
         while (query.MoveNext(out var uid, out var comp, out var chassis, out var device, out var meta))
         {
-            if (comp.NextDisable is {} nextDisable && now >= nextDisable)
+            if (comp.NextDisable is { } nextDisable && now >= nextDisable)
                 DoDisable((uid, comp, chassis, meta));
 
             if (now < comp.NextBroadcast)
@@ -61,17 +46,20 @@ public sealed partial class BorgSystem
             if (_powerCell.TryGetBatteryFromSlot(uid, out var battery))
                 charge = battery.CurrentCharge / battery.MaxCharge;
 
-            var hasBrain = chassis.BrainEntity != null && !comp.FakeDisabled;
+            var hpPercent = CalcHP(uid);
+
+            // checks if it has a brain and if the brain is not a empty MMI (gives false anyway if the fake disable is true)
+            var hasBrain = CheckBrain(chassis.BrainEntity) && !comp.FakeDisabled;
             var canDisable = comp.NextDisable == null && !comp.FakeDisabling;
             var data = new CyborgControlData(
                 comp.Sprite,
                 comp.Name,
                 meta.EntityName,
                 charge,
+                hpPercent,
                 chassis.ModuleCount,
                 hasBrain,
-                canDisable,
-                HasComp<AiRemoteControllerComponent>(uid)); // Corvax-Next-AiRemoteControl
+                canDisable);
 
             var payload = new NetworkPayload()
             {
@@ -82,33 +70,6 @@ public sealed partial class BorgSystem
 
             comp.NextBroadcast = now + comp.BroadcastDelay;
         }
-        //Goobstation Drone transponder start
-        var query2 = EntityQueryEnumerator<BorgTransponderComponent, DroneComponent, DeviceNetworkComponent, MetaDataComponent>();
-        while (query2.MoveNext(out var uid, out  var comp, out var drone, out var device, out var  meta))
-        {
-            if (now < comp.NextBroadcast)
-                continue;
-            var hasBrain = HasComp<ActorComponent>(uid);
-            var data = new CyborgControlData(
-                comp.Sprite,
-                comp.Name,
-                meta.EntityName,
-                1f,
-                0,
-                hasBrain,
-                false, // Corvax-Next-AiRemoteControl
-                false);
-
-            var payload = new NetworkPayload()
-            {
-                [DeviceNetworkConstants.Command] = DeviceNetworkConstants.CmdUpdatedState,
-                [RoboticsConsoleConstants.NET_CYBORG_DATA] = data
-            };
-            _deviceNetwork.QueuePacket(uid, null, payload, device: device);
-
-            comp.NextBroadcast = now + comp.BroadcastDelay;
-        }
-        //Goobstation drone transponder end
     }
 
     private void DoDisable(Entity<BorgTransponderComponent, BorgChassisComponent, MetaDataComponent> ent)
@@ -121,7 +82,7 @@ public sealed partial class BorgSystem
             return;
         }
 
-        if (ent.Comp2.BrainEntity is not {} brain)
+        if (ent.Comp2.BrainEntity is not { } brain)
             return;
 
         var message = Loc.GetString(ent.Comp1.DisabledPopup, ("name", Name(ent, ent.Comp3)));
@@ -135,31 +96,11 @@ public sealed partial class BorgSystem
         if (!payload.TryGetValue(DeviceNetworkConstants.Command, out string? command))
             return;
 
-        // Corvax-Goob-MutableLaws-Start
-        if (command == RoboticsConsoleConstants.NET_CHANGE_LAWS_COMMAND)
-        {
-            if (payload.TryGetValue(RoboticsConsoleConstants.NET_CIRCUIT_BOARD, out EntityUid circuitBoard))
-                ChangeLaws(ent, circuitBoard);
-        }
-        // Corvax-Goob-MutableLaws-End
-        else if (command == RoboticsConsoleConstants.NET_DISABLE_COMMAND)
+        if (command == RoboticsConsoleConstants.NET_DISABLE_COMMAND)
             Disable(ent);
         else if (command == RoboticsConsoleConstants.NET_DESTROY_COMMAND)
             Destroy(ent);
     }
-
-    // Corvax-Goob-MutableLaws-Start
-    private void ChangeLaws(EntityUid ent, EntityUid circuitBoard)
-    {
-        if (CheckEmagged(ent, "destroyed"))
-            return;
-
-        if (!TryComp<SiliconLawProviderComponent>(circuitBoard, out var law))
-            return;
-
-        _law.SetLaws(_law.GetLawset(law.Laws).Laws, ent, law.LawUploadSound);
-    }
-    // Corvax-Goob-MutableLaws-End
 
     private void Disable(Entity<BorgTransponderComponent, BorgChassisComponent?> ent)
     {
@@ -190,7 +131,7 @@ public sealed partial class BorgSystem
 
         var message = Loc.GetString(ent.Comp.DestroyingPopup, ("name", Name(ent)));
         Popup.PopupEntity(message, ent);
-        _trigger.StartTimer(ent.Owner, user: null);
+        _trigger.ActivateTimerTrigger(ent.Owner);
 
         // prevent a shitter borg running into people
         RemComp<InputMoverComponent>(ent);
@@ -221,5 +162,41 @@ public sealed partial class BorgSystem
     public void SetTransponderName(Entity<BorgTransponderComponent> ent, string name)
     {
         ent.Comp.Name = name;
+    }
+
+    /// <summary>
+    /// Returns a ratio between 0 and 1, 1 when they have no damage and 0 whenever they are crit (or more damaged)
+    /// </summary>
+    private float CalcHP(EntityUid uid)
+    {
+        if (!TryComp<DamageableComponent>(uid, out var damageable))
+            return 1;
+
+        if (!_mobState.IsAlive(uid))
+            return 0;
+
+        if (!_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var threshold))
+        {
+            Log.Error($"Borg({ToPrettyString(uid)}), doesn't have critical threshold.");
+            return 1;
+        }
+
+        return 1 - ((FixedPoint2)(damageable.TotalDamage / threshold)).Float();
+    }
+
+    /// <summary>
+    /// Returns true if the borg has a brain
+    /// </summary>
+    private bool CheckBrain(EntityUid? brainEntity)
+    {
+        if (brainEntity == null)
+            return false;
+
+        // if the brainEntity.Value has the component MMIComponent then it is a MMI,
+        // in that case it trys to get the "brain" of the MMI, if it is null the MMI is empty and so it returns false
+        if (TryComp<MMIComponent>(brainEntity.Value, out var mmi) && _itemSlotsSystem.GetItemOrNull(brainEntity.Value, mmi.BrainSlotId) == null)
+            return false;
+
+        return true;
     }
 }
