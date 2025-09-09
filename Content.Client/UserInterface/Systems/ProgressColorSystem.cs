@@ -1,4 +1,8 @@
-using System.Numerics;
+// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: MIT
+
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
 
@@ -44,7 +48,7 @@ public sealed class ProgressColorSystem : EntitySystem
 
             // lerp
             var hue = 5f / 18f * progress;
-            return Color.FromHsv(new Vector4(hue, 1f, 0.75f, 1f));
+            return Color.FromHsv((hue, 1f, 0.75f, 1f));
         }
 
         return InterpolateColorGaussian(Plasma, progress);

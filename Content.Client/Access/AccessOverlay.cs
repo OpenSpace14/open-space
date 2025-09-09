@@ -1,3 +1,13 @@
+// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
+// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
+// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
+// SPDX-FileCopyrightText: 2024 Wrexbe (Josh) <81056464+wrexbe@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 wrexbe <wrexbe@protonmail.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: MIT
+
 using System.Text;
 using Content.Client.Resources;
 using Content.Shared.Access.Components;
@@ -9,7 +19,7 @@ namespace Content.Client.Access;
 
 public sealed class AccessOverlay : Overlay
 {
-    private const string TextFontPath = "/Fonts/UbuntuSans/UbuntuSansNerdFont-Regular.ttf";
+    private const string TextFontPath = "/Fonts/Widock/Widock.otf";
     private const int TextFontSize = 12;
 
     private readonly IEntityManager _entityManager;

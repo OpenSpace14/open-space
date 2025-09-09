@@ -1,5 +1,16 @@
-﻿using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
+// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
+// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
+// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
+// SPDX-FileCopyrightText: 2025 KillanGenifer <killangenifer@gmail.com>
+// SPDX-FileCopyrightText: 2025 Tayrtahn <tayrtahn@gmail.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+﻿using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 
@@ -19,17 +30,22 @@ public sealed class RoboticsConsoleState : BoundUserInterfaceState
     /// </summary>
     public Dictionary<string, CyborgControlData> Cyborgs;
 
-    /// <summary>
-    /// If the UI will have the buttons to disable and destroy.
-    /// </summary>
-    public bool AllowBorgControl;
+    public bool HasCircuitBoard; // Corvax-Goob-MutableLaws
 
-    public RoboticsConsoleState(Dictionary<string, CyborgControlData> cyborgs, bool allowBorgControl)
+    public RoboticsConsoleState(Dictionary<string, CyborgControlData> cyborgs, bool hasCircuitBoard) // Corvax-Goob-MutableLaws
     {
+        HasCircuitBoard = hasCircuitBoard; // Corvax-Goob-MutableLaws
         Cyborgs = cyborgs;
-        AllowBorgControl = allowBorgControl;
     }
 }
+
+// Corvax-Goob-MutableLaws-Start
+[Serializable, NetSerializable]
+public sealed class RoboticsConsoleChangeLawsMessage(string address) : BoundUserInterfaceMessage
+{
+    public readonly string Address = address;
+}
+// Corvax-Goob-MutableLaws-End
 
 /// <summary>
 /// Message to disable the selected cyborg.
@@ -91,12 +107,6 @@ public partial record struct CyborgControlData
     public float Charge;
 
     /// <summary>
-    /// HP level from 0 to 1.
-    /// </summary>
-    [DataField]
-    public float HpPercent; // 0.0 to 1.0
-
-    /// <summary>
     /// How many modules this borg has, just useful information for roboticists.
     /// Lets them keep track of the latejoin borgs that need new modules and stuff.
     /// </summary>
@@ -123,16 +133,21 @@ public partial record struct CyborgControlData
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan Timeout = TimeSpan.Zero;
 
-    public CyborgControlData(SpriteSpecifier? chassisSprite, string chassisName, string name, float charge, float hpPercent, int moduleCount, bool hasBrain, bool canDisable)
+    // Corvax-Next-AiRemoteControl-Start
+    [DataField]
+    public bool IsAiControllable;
+    // Corvax-Next-AiRemoteControl-End
+
+    public CyborgControlData(SpriteSpecifier? chassisSprite, string chassisName, string name, float charge, int moduleCount, bool hasBrain, bool canDisable, bool isAiControllable) // Corvax-Next-AiRemoteControl
     {
         ChassisSprite = chassisSprite;
         ChassisName = chassisName;
         Name = name;
         Charge = charge;
-        HpPercent = hpPercent;
         ModuleCount = moduleCount;
         HasBrain = hasBrain;
         CanDisable = canDisable;
+        IsAiControllable = isAiControllable; // Corvax-Next-AiRemoteControl
     }
 }
 
@@ -142,6 +157,9 @@ public static class RoboticsConsoleConstants
     public const string NET_CYBORG_DATA = "cyborg-data";
 
     // sent by robotics console to cyborgs on Cyborg Control frequency
+    public const string NET_CHANGE_LAWS_COMMAND = "cyborg-change-laws"; // Corvax-Goob-MutableLaws
     public const string NET_DISABLE_COMMAND = "cyborg-disable";
     public const string NET_DESTROY_COMMAND = "cyborg-destroy";
+
+    public const string NET_CIRCUIT_BOARD = "cyborg-circuit-board"; // Corvax-Goob-MutableLaws
 }

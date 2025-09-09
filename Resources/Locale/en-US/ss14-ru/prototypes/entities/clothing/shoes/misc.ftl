@@ -20,5 +20,3 @@ ent-ActionToggleSpeedBoots = Toggle Speed Boots
     .desc = Toggles the speed boots on and off.
 ent-ClothingShoesBootsMoon = moon boots
     .desc = Special anti-gravity boots developed with a speciality blend of lunar rock gel. Shipped from the Netherlands.
-ent-ClothingShoesBootsJump = jump boots
-    .desc = High-tech boots that give you the incredible ability to JUMP! With these boots you can jump over lava, chasms and weird chemicals on the floor!

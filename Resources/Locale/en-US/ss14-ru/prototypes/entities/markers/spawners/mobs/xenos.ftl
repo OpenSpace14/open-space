@@ -19,6 +19,3 @@ ent-SpawnMobXenoRunner = Xeno Spawner
 ent-SpawnMobXenoSpitter = Xeno Spawner
     .suffix = Spitter
     .desc = { ent-MarkerBase.desc }
-ent-SpawnMobXenoLonePraetorian = Xeno Spawner
-    .suffix = Lone Praetorian, Exo Station
-    .desc = { ent-MarkerBase.desc }

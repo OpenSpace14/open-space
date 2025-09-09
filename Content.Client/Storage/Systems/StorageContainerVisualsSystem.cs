@@ -1,4 +1,9 @@
-﻿using Content.Client.Storage.Components;
+// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: MIT
+
+using Content.Client.Storage.Components;
 using Content.Shared.Rounding;
 using Content.Shared.Storage;
 using Robust.Client.GameObjects;
@@ -8,6 +13,8 @@ namespace Content.Client.Storage.Systems;
 /// <inheritdoc cref="StorageContainerVisualsComponent"/>
 public sealed class StorageContainerVisualsSystem : VisualizerSystem<StorageContainerVisualsComponent>
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+
     protected override void OnAppearanceChange(EntityUid uid, StorageContainerVisualsComponent component, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)
@@ -21,7 +28,7 @@ public sealed class StorageContainerVisualsSystem : VisualizerSystem<StorageCont
 
         var fraction = used / (float)capacity;
 
-        if (!SpriteSystem.LayerMapTryGet((uid, args.Sprite), component.FillLayer, out var fillLayer, false))
+        if (!_sprite.LayerMapTryGet((uid, args.Sprite), component.FillLayer, out var fillLayer, false))
             return;
 
         var closestFillSprite = Math.Min(ContentHelpers.RoundToNearestLevels(fraction, 1, component.MaxFillLevels + 1),
@@ -32,13 +39,13 @@ public sealed class StorageContainerVisualsSystem : VisualizerSystem<StorageCont
             if (component.FillBaseName == null)
                 return;
 
-            SpriteSystem.LayerSetVisible((uid, args.Sprite), fillLayer, true);
+            _sprite.LayerSetVisible((uid, args.Sprite), fillLayer, true);
             var stateName = component.FillBaseName + closestFillSprite;
-            SpriteSystem.LayerSetRsiState((uid, args.Sprite), fillLayer, stateName);
+            _sprite.LayerSetRsiState((uid, args.Sprite), fillLayer, stateName);
         }
         else
         {
-            SpriteSystem.LayerSetVisible((uid, args.Sprite), fillLayer, false);
+            _sprite.LayerSetVisible((uid, args.Sprite), fillLayer, false);
         }
     }
 }

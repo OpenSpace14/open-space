@@ -1,5 +1,7 @@
-ent-BaseDionaOrgan = { ent-BaseItem }
+ent-BaseDionaOrganUnGibbable = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
+ent-BaseDionaOrgan = { ent-BaseDionaOrganUnGibbable }
+    .desc = { ent-BaseDionaOrganUnGibbable.desc }
 ent-OrganDionaBrain = brain
     .desc = The central hub of a diona's pseudo-neurological activity, its root-like tendrils search for its former body.
 ent-OrganDionaEyes = eyes

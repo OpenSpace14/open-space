@@ -1,45 +1,49 @@
+// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 brainfood1183 <113240905+brainfood1183@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: MIT
+
 using Content.Shared.Chemistry.Reagent;
-using Content.Shared.FixedPoint;
+using Content.Goobstation.Maths.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Glue;
 
-/// <summary>
-/// This component indicates that an item is glue and can be used as such.
-/// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(GlueSystem))]
+[RegisterComponent, NetworkedComponent]
+[Access(typeof(SharedGlueSystem))]
 public sealed partial class GlueComponent : Component
 {
     /// <summary>
     /// Noise made when glue applied.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField("squeeze")]
     public SoundSpecifier Squeeze = new SoundPathSpecifier("/Audio/Items/squeezebottle.ogg");
 
     /// <summary>
     /// Solution on the entity that contains the glue.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField("solution")]
     public string Solution = "drink";
 
     /// <summary>
     /// Reagent that will be used as glue.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public ProtoId<ReagentPrototype> Reagent = "SpaceGlue";
+    [DataField("reagent", customTypeSerializer: typeof(PrototypeIdSerializer<ReagentPrototype>))]
+    public string Reagent = "SpaceGlue";
 
     /// <summary>
     /// Reagent consumption per use.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField("consumptionUnit"), ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 ConsumptionUnit = FixedPoint2.New(5);
 
     /// <summary>
     /// Duration per unit
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField("durationPerUnit"), ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan DurationPerUnit = TimeSpan.FromSeconds(6);
 }

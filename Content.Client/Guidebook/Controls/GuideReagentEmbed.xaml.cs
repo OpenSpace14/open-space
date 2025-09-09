@@ -1,3 +1,15 @@
+// SPDX-FileCopyrightText: 2023 Hebi <spiritbreakz@gmail.com>
+// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 TomaszKawalec <40093912+TK-A369@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Flesh <62557990+PolterTzi@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 KrasnoshchekovPavel <119816022+KrasnoshchekovPavel@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Client.Chemistry.EntitySystems;
@@ -22,22 +34,17 @@ namespace Content.Client.Guidebook.Controls;
 ///     Control for embedding a reagent into a guidebook.
 /// </summary>
 [UsedImplicitly, GenerateTypedNameReferences]
-public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISearchableControl, IPrototypeRepresentationControl
+public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISearchableControl
 {
     [Dependency] private readonly IEntitySystemManager _systemManager = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly ChemistryGuideDataSystem _chemistryGuideData;
-    private readonly ISawmill _sawmill;
-
-    public IPrototype? RepresentedPrototype { get; private set; }
 
     public GuideReagentEmbed()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-        _sawmill = _logManager.GetSawmill("guidebook.reagent");
         _chemistryGuideData = _systemManager.GetEntitySystem<ChemistryGuideDataSystem>();
         MouseFilter = MouseFilterMode.Stop;
     }
@@ -67,13 +74,13 @@ public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISea
         control = null;
         if (!args.TryGetValue("Reagent", out var id))
         {
-            _sawmill.Error("Reagent embed tag is missing reagent prototype argument");
+            Logger.Error("Reagent embed tag is missing reagent prototype argument");
             return false;
         }
 
         if (!_prototype.TryIndex<ReagentPrototype>(id, out var reagent))
         {
-            _sawmill.Error($"Specified reagent prototype \"{id}\" is not a valid reagent prototype");
+            Logger.Error($"Specified reagent prototype \"{id}\" is not a valid reagent prototype");
             return false;
         }
 
@@ -85,8 +92,6 @@ public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISea
 
     private void GenerateControl(ReagentPrototype reagent)
     {
-        RepresentedPrototype = reagent;
-
         NameBackground.PanelOverride = new StyleBoxFlat
         {
             BackgroundColor = reagent.SubstanceColor

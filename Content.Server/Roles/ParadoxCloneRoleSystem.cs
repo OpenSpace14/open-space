@@ -1,7 +1,7 @@
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.NameModifier.EntitySystems;
-using Content.Shared.Roles.Components;
+using Content.Shared.Roles;
 
 namespace Content.Server.Roles;
 

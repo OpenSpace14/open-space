@@ -1,3 +1,13 @@
+// SPDX-FileCopyrightText: 2022 Eoin Mcloughlin <helloworld@eoinrul.es>
+// SPDX-FileCopyrightText: 2022 eoineoineoin <eoin.mcloughlin+gh@gmail.com>
+// SPDX-FileCopyrightText: 2022 vulppine <vulppine@gmail.com>
+// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -388,21 +398,9 @@ public enum AtmosMonitorLimitType //<todo.eoin Very similar to the above...
 // fields you can find this prototype in
 public enum AtmosMonitorThresholdType
 {
-    Temperature = 0,
-    Pressure = 1,
-    Gas = 2
-}
-
-/// <summary>
-/// Bitflags version of <see cref="AtmosMonitorThresholdType"/>
-/// </summary>
-[Flags]
-public enum AtmosMonitorThresholdTypeFlags
-{
-    None = 0,
-    Temperature = 1 << 0,
-    Pressure = 1 << 1,
-    Gas = 1 << 2,
+    Temperature,
+    Pressure,
+    Gas
 }
 
 [Serializable, NetSerializable]

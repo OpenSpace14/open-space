@@ -1,3 +1,20 @@
+// SPDX-FileCopyrightText: 2023 Just-a-Unity-Dev <just-a-unity-dev@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 KP <13428215+nok-ko@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 LankLTE <135308300+LankLTE@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 LankLTE <twlowe06@gmail.com>
+// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
+// SPDX-FileCopyrightText: 2023 eclips_e <67359748+Just-a-Unity-Dev@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Aexxie <codyfox.077@gmail.com>
+// SPDX-FileCopyrightText: 2024 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
+// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 TemporalOroboros <TemporalOroboros@gmail.com>
+// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Defusable.Components;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Popups;
@@ -7,10 +24,9 @@ using Content.Shared.Construction.Components;
 using Content.Shared.Database;
 using Content.Shared.Defusable;
 using Content.Shared.Examine;
+using Content.Shared.Explosion.Components;
+using Content.Shared.Explosion.Components.OnTrigger;
 using Content.Shared.Popups;
-using Content.Shared.Trigger.Components;
-using Content.Shared.Trigger.Components.Effects;
-using Content.Shared.Trigger.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Wires;
 using Robust.Server.GameObjects;
@@ -73,13 +89,12 @@ public sealed class DefusableSystem : SharedDefusableSystem
             {
                 args.PushMarkup(Loc.GetString("defusable-examine-defused", ("name", uid)));
             }
-            else if (comp.Activated)
+            else if (comp.Activated && TryComp<ActiveTimerTriggerComponent>(uid, out var activeComp))
             {
-                var remaining = _trigger.GetRemainingTime(uid);
-                if (comp.DisplayTime && remaining != null)
+                if (comp.DisplayTime)
                 {
                     args.PushMarkup(Loc.GetString("defusable-examine-live", ("name", uid),
-                        ("time", Math.Floor(remaining.Value.TotalSeconds))));
+                        ("time", MathF.Floor(activeComp.TimeRemaining))));
                 }
                 else
                 {
@@ -139,9 +154,16 @@ public sealed class DefusableSystem : SharedDefusableSystem
         SetActivated(comp, true);
 
         _popup.PopupEntity(Loc.GetString("defusable-popup-begun", ("name", uid)), uid);
-        if (TryComp<TimerTriggerComponent>(uid, out var timerTrigger))
+        if (TryComp<OnUseTimerTriggerComponent>(uid, out var timerTrigger))
         {
-            _trigger.ActivateTimerTrigger((uid, timerTrigger));
+            _trigger.HandleTimerTrigger(
+                uid,
+                user,
+                timerTrigger.Delay,
+                timerTrigger.BeepInterval,
+                timerTrigger.InitialBeepDelay,
+                timerTrigger.BeepSound
+            );
         }
 
         RaiseLocalEvent(uid, new BombArmedEvent(uid));
@@ -161,7 +183,7 @@ public sealed class DefusableSystem : SharedDefusableSystem
 
         RaiseLocalEvent(uid, new BombDetonatedEvent(uid));
 
-        _explosion.TriggerExplosive(uid, user: detonator);
+        _explosion.TriggerExplosive(uid, user:detonator);
         QueueDel(uid);
 
         _appearance.SetData(uid, DefusableVisuals.Active, comp.Activated);
@@ -181,7 +203,7 @@ public sealed class DefusableSystem : SharedDefusableSystem
         {
             SetUsable(comp, false);
             RemComp<ExplodeOnTriggerComponent>(uid);
-            RemComp<TimerTriggerComponent>(uid);
+            RemComp<OnUseTimerTriggerComponent>(uid);
         }
         RemComp<ActiveTimerTriggerComponent>(uid);
 
@@ -239,7 +261,7 @@ public sealed class DefusableSystem : SharedDefusableSystem
         if (comp is not { Activated: true, DelayWireUsed: false })
             return;
 
-        _trigger.TryDelay(wire.Owner, TimeSpan.FromSeconds(30));
+        _trigger.TryDelay(wire.Owner, 30f);
         _popup.PopupEntity(Loc.GetString("defusable-popup-wire-chirp", ("name", wire.Owner)), wire.Owner);
         comp.DelayWireUsed = true;
     }
@@ -261,7 +283,7 @@ public sealed class DefusableSystem : SharedDefusableSystem
         if (comp is { Activated: true, ProceedWireUsed: false })
         {
             comp.ProceedWireUsed = true;
-            _trigger.TryDelay(wire.Owner, TimeSpan.FromSeconds(-15));
+            _trigger.TryDelay(wire.Owner, -15f);
         }
 
         _popup.PopupEntity(Loc.GetString("defusable-popup-wire-proceed-pulse", ("name", wire.Owner)), wire.Owner);
@@ -291,7 +313,7 @@ public sealed class DefusableSystem : SharedDefusableSystem
         {
             if (!comp.ActivatedWireUsed)
             {
-                _trigger.TryDelay(wire.Owner, TimeSpan.FromSeconds(30));
+                _trigger.TryDelay(wire.Owner, 30f);
                 _popup.PopupEntity(Loc.GetString("defusable-popup-wire-chirp", ("name", wire.Owner)), wire.Owner);
                 comp.ActivatedWireUsed = true;
             }

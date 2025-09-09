@@ -1,3 +1,47 @@
+// SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
+// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
+// SPDX-FileCopyrightText: 2021 Wrexbe <wrexbe@protonmail.com>
+// SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
+// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2022 theashtronaut <112137107+theashtronaut@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 HerCoyote23 <131214189+HerCoyote23@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
+// SPDX-FileCopyrightText: 2023 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
+// SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Jark255 <jaroslav.asanov@gmail.com>
+// SPDX-FileCopyrightText: 2024 JustCone <141039037+JustCone14@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
+// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
+// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
+// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
+// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 PopGamer46 <yt1popgamer@gmail.com>
+// SPDX-FileCopyrightText: 2024 Spessmann <156740760+Spessmann@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
+// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 c4llv07e <38111072+c4llv07e@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 coolboy911 <85909253+coolboy911@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
+// SPDX-FileCopyrightText: 2024 lunarcomets <140772713+lunarcomets@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
+// SPDX-FileCopyrightText: 2024 saintmuntzer <47153094+saintmuntzer@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Ghost;
@@ -36,6 +80,8 @@ public sealed partial class ActivatableUISystem : EntitySystem
         SubscribeLocalEvent<ActivatableUIComponent, GetVerbsEvent<ActivationVerb>>(GetActivationVerb);
         SubscribeLocalEvent<ActivatableUIComponent, GetVerbsEvent<Verb>>(GetVerb);
 
+        SubscribeLocalEvent<ActivatableUIComponent, GetVerbsEvent<AlternativeVerb>>(GetAltVerb); // Goobstation
+
         SubscribeLocalEvent<UserInterfaceComponent, OpenUiActionEvent>(OnActionPerform);
 
         InitializePower();
@@ -67,7 +113,7 @@ public sealed partial class ActivatableUISystem : EntitySystem
 
     private void GetActivationVerb(EntityUid uid, ActivatableUIComponent component, GetVerbsEvent<ActivationVerb> args)
     {
-        if (component.VerbOnly || !ShouldAddVerb(uid, component, args))
+        if (component.VerbOnly || component.AltVerb || !ShouldAddVerb(uid, component, args)) // Goobstation
             return;
 
         args.Verbs.Add(new ActivationVerb
@@ -81,10 +127,24 @@ public sealed partial class ActivatableUISystem : EntitySystem
 
     private void GetVerb(EntityUid uid, ActivatableUIComponent component, GetVerbsEvent<Verb> args)
     {
-        if (!component.VerbOnly || !ShouldAddVerb(uid, component, args))
+        if (!component.VerbOnly || component.AltVerb || !ShouldAddVerb(uid, component, args)) // Goobstation
             return;
 
         args.Verbs.Add(new Verb
+        {
+            Act = () => InteractUI(args.User, uid, component),
+            Text = Loc.GetString(component.VerbText),
+            // TODO VERB ICON find a better icon
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")),
+        });
+    }
+
+    private void GetAltVerb(EntityUid uid, ActivatableUIComponent component, GetVerbsEvent<AlternativeVerb> args) // Goobstation
+    {
+        if (!component.AltVerb || !ShouldAddVerb(uid, component, args))
+            return;
+
+        args.Verbs.Add(new AlternativeVerb
         {
             Act = () => InteractUI(args.User, uid, component),
             Text = Loc.GetString(component.VerbText),
@@ -108,15 +168,15 @@ public sealed partial class ActivatableUISystem : EntitySystem
 
             if (component.InHandsOnly)
             {
-                if (!_hands.IsHolding((args.User, args.Hands), uid, out var hand ))
+                if (!_hands.IsHolding(args.User, uid, out var hand, args.Hands))
                     return false;
 
-                if (component.RequireActiveHand && args.Hands.ActiveHandId != hand)
+                if (component.RequireActiveHand && args.Hands.ActiveHand != hand)
                     return false;
             }
         }
 
-        return (args.CanInteract || HasComp<GhostComponent>(args.User) && !component.BlockSpectators) && !RaiseCanOpenEventChecks(args.User, uid);
+        return args.CanInteract || HasComp<GhostComponent>(args.User) && !component.BlockSpectators;
     }
 
     private void OnUseInHand(EntityUid uid, ActivatableUIComponent component, UseInHandEvent args)
@@ -202,10 +262,10 @@ public sealed partial class ActivatableUISystem : EntitySystem
             if (!TryComp(user, out HandsComponent? hands))
                 return false;
 
-            if (!_hands.IsHolding((user, hands), uiEntity, out var hand))
+            if (!_hands.IsHolding(user, uiEntity, out var hand, hands))
                 return false;
 
-            if (aui.RequireActiveHand && hands.ActiveHandId != hand)
+            if (aui.RequireActiveHand && hands.ActiveHand != hand)
                 return false;
         }
 
@@ -225,7 +285,11 @@ public sealed partial class ActivatableUISystem : EntitySystem
 
         // If we've gotten this far, fire a cancellable event that indicates someone is about to activate this.
         // This is so that stuff can require further conditions (like power).
-        if (RaiseCanOpenEventChecks(user, uiEntity))
+        var oae = new ActivatableUIOpenAttemptEvent(user);
+        var uae = new UserOpenActivatableUIAttemptEvent(user, uiEntity);
+        RaiseLocalEvent(user, uae);
+        RaiseLocalEvent(uiEntity, oae);
+        if (oae.Cancelled || uae.Cancelled)
             return false;
 
         // Give the UI an opportunity to prepare itself if it needs to do anything
@@ -281,16 +345,5 @@ public sealed partial class ActivatableUISystem : EntitySystem
     {
         if (ent.Comp.InHandsOnly)
             CloseAll(ent, ent);
-    }
-
-    private bool RaiseCanOpenEventChecks(EntityUid user, EntityUid uiEntity)
-    {
-        // If we've gotten this far, fire a cancellable event that indicates someone is about to activate this.
-        // This is so that stuff can require further conditions (like power).
-        var oae = new ActivatableUIOpenAttemptEvent(user);
-        var uae = new UserOpenActivatableUIAttemptEvent(user, uiEntity);
-        RaiseLocalEvent(user, uae);
-        RaiseLocalEvent(uiEntity, oae);
-        return oae.Cancelled || uae.Cancelled;
     }
 }

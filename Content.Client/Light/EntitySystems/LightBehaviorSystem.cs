@@ -1,3 +1,11 @@
+// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
+// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
+// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using Content.Client.Light.Components;
 using Robust.Client.GameObjects;
@@ -63,7 +71,7 @@ public sealed class LightBehaviorSystem : EntitySystem
     /// </summary>
     private void CopyLightSettings(Entity<LightBehaviourComponent> entity, string property)
     {
-        if (TryComp(entity, out PointLightComponent? light))
+        if (EntityManager.TryGetComponent(entity, out PointLightComponent? light))
         {
             var propertyValue = AnimationHelper.GetAnimatableProperty(light, property);
             if (propertyValue != null)
@@ -73,7 +81,7 @@ public sealed class LightBehaviorSystem : EntitySystem
         }
         else
         {
-            Log.Warning($"{Comp<MetaDataComponent>(entity).EntityName} has a {nameof(LightBehaviourComponent)} but it has no {nameof(PointLightComponent)}! Check the prototype!");
+            Log.Warning($"{EntityManager.GetComponent<MetaDataComponent>(entity).EntityName} has a {nameof(LightBehaviourComponent)} but it has no {nameof(PointLightComponent)}! Check the prototype!");
         }
     }
 
@@ -84,7 +92,7 @@ public sealed class LightBehaviorSystem : EntitySystem
     /// </summary>
     public void StartLightBehaviour(Entity<LightBehaviourComponent> entity, string id = "")
     {
-        if (!TryComp(entity, out AnimationPlayerComponent? animation))
+        if (!EntityManager.TryGetComponent(entity, out AnimationPlayerComponent? animation))
         {
             return;
         }
@@ -113,7 +121,7 @@ public sealed class LightBehaviorSystem : EntitySystem
     /// <param name="resetToOriginalSettings">Should the light have its original settings applied?</param>
     public void StopLightBehaviour(Entity<LightBehaviourComponent> entity, string id = "", bool removeBehaviour = false, bool resetToOriginalSettings = false)
     {
-        if (!TryComp(entity, out AnimationPlayerComponent? animation))
+        if (!EntityManager.TryGetComponent(entity, out AnimationPlayerComponent? animation))
         {
             return;
         }
@@ -143,7 +151,7 @@ public sealed class LightBehaviorSystem : EntitySystem
             comp.Animations.Remove(container);
         }
 
-        if (resetToOriginalSettings && TryComp(entity, out PointLightComponent? light))
+        if (resetToOriginalSettings && EntityManager.TryGetComponent(entity, out PointLightComponent? light))
         {
             foreach (var (property, value) in comp.OriginalPropertyValues)
             {
@@ -161,7 +169,7 @@ public sealed class LightBehaviorSystem : EntitySystem
     public bool HasRunningBehaviours(Entity<LightBehaviourComponent> entity)
     {
         //var uid = Owner;
-        if (!TryComp(entity, out AnimationPlayerComponent? animation))
+        if (!EntityManager.TryGetComponent(entity, out AnimationPlayerComponent? animation))
         {
             return false;
         }

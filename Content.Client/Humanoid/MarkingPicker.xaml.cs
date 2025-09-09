@@ -1,4 +1,17 @@
+// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 DEATHB4DEFEAT <77995199+DEATHB4DEFEAT@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Morb <14136326+Morb0@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 csqrb <56765288+CaptainSqrBeard@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: MIT
+
 using System.Linq;
+using Content.Corvax.Interfaces.Shared;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
@@ -20,6 +33,7 @@ public sealed partial class MarkingPicker : Control
     [Dependency] private readonly MarkingManager _markingManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
+    private ISharedSponsorsManager? _sponsorsManager; // CorvaxGoob-Sponsors
 
     private readonly SpriteSystem _sprite;
 
@@ -127,6 +141,7 @@ public sealed partial class MarkingPicker : Control
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+        IoCManager.Instance!.TryResolveType(out _sponsorsManager); // CorvaxGoob-Sponsors
 
         _sprite = _entityManager.System<SpriteSystem>();
 
@@ -230,6 +245,10 @@ public sealed partial class MarkingPicker : Control
 
             var item = CMarkingsUnused.AddItem($"{GetMarkingName(marking)}", _sprite.Frame0(marking.Sprites[0]));
             item.Metadata = marking;
+            // CorvaxGoob-Sponsors-Start
+            if (marking.SponsorOnly && _sponsorsManager != null)
+                item.Disabled = !_sponsorsManager.GetClientPrototypes().Contains(marking.ID);
+            // CorvaxGoob-Sponsors-End
         }
 
         CMarkingPoints.Visible = _currentMarkings.PointsLeft(_selectedMarkingCategory) != -1;
@@ -416,7 +435,6 @@ public sealed partial class MarkingPicker : Control
             CMarkingColors.AddChild(colorContainer);
 
             ColorSelectorSliders colorSelector = new ColorSelectorSliders();
-            colorSelector.SelectorType = ColorSelectorSliders.ColorSelectorType.Hsv; // defaults color selector to HSV
             colorSliders.Add(colorSelector);
 
             colorContainer.AddChild(new Label { Text = $"{stateNames[i]} color:" });

@@ -1,3 +1,16 @@
+// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
+// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2021 mirrorcult <notzombiedude@gmail.com>
+// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
+// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: MIT
+
 using Content.Shared.Eui;
 using Robust.Server.Player;
 using Robust.Shared.Enums;
@@ -9,11 +22,8 @@ namespace Content.Server.EUI
 {
     public sealed class EuiManager : IPostInjectInit
     {
-        [Dependency] private readonly ILogManager _log = default!;
         [Dependency] private readonly IPlayerManager _players = default!;
         [Dependency] private readonly IServerNetManager _net = default!;
-
-        private ISawmill? _sawmill;
 
         private readonly Dictionary<ICommonSession, PlayerEuiData> _playerData =
             new();
@@ -37,7 +47,6 @@ namespace Content.Server.EUI
             _net.RegisterNetMessage<MsgEuiCtl>();
             _net.RegisterNetMessage<MsgEuiState>();
             _net.RegisterNetMessage<MsgEuiMessage>(RxMsgMessage);
-            _sawmill = _log.GetSawmill("eui");
         }
 
         public void SendUpdates()
@@ -103,7 +112,7 @@ namespace Content.Server.EUI
 
             if (!dat.OpenUIs.TryGetValue(message.Id, out var eui))
             {
-                _sawmill?.Warning($"Got EUI message from player {ply} for non-existing UI {message.Id}");
+                Logger.WarningS("eui", $"Got EUI message from player {ply} for non-existing UI {message.Id}");
                 return;
             }
 

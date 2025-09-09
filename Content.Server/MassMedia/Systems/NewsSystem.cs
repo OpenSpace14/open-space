@@ -1,3 +1,28 @@
+// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 MishaUnity <81403616+MishaUnity@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
+// SPDX-FileCopyrightText: 2023 PrPleGoo <PrPleGoo@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Simon <63975668+Simyon264@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
+// SPDX-FileCopyrightText: 2024 AsnDen <75905158+AsnDen@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Fildrance <fildrance@gmail.com>
+// SPDX-FileCopyrightText: 2024 Julian Giebel <juliangiebel@live.de>
+// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
+// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
+// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
+// SPDX-FileCopyrightText: 2024 Red Mushie <82113471+redmushie@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
+// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 pa.pecherskij <pa.pecherskij@interfax.ru>
+// SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
 using Content.Server.CartridgeLoader.Cartridges;
 using Content.Server.CartridgeLoader;
@@ -133,7 +158,7 @@ public sealed class NewsSystem : SharedNewsSystem
             _adminLogger.Add(
                 LogType.Chat, LogImpact.Medium,
                 $"{ToPrettyString(msg.Actor):actor} deleted news article {article.Title} by {article.Author}: {article.Content}"
-            );
+                );
 
             articles.RemoveAt(msg.ArticleNum);
             _audio.PlayPvs(ent.Comp.ConfirmSound, ent);
@@ -164,6 +189,9 @@ public sealed class NewsSystem : SharedNewsSystem
         if (!ent.Comp.PublishEnabled)
             return;
 
+        if (!TryGetArticles(ent, out var articles))
+            return;
+
         if (!CanUse(msg.Actor, ent.Owner))
             return;
 
@@ -177,80 +205,42 @@ public sealed class NewsSystem : SharedNewsSystem
         var title = msg.Title.Trim();
         var content = msg.Content.Trim();
 
-        if (TryAddNews(ent, title, content, out var article, authorName, msg.Actor))
-        {
-            _audio.PlayPvs(ent.Comp.ConfirmSound, ent);
-
-            _chatManager.SendAdminAnnouncement(Loc.GetString("news-publish-admin-announcement",
-                                                             ("actor", msg.Actor),
-                                                             ("title", article.Value.Title),
-                                                             ("author", article.Value.Author ?? Loc.GetString("news-read-ui-no-author"))
-            ));
-        }
-    }
-
-    /// <summary>
-    /// Set the alert level based on the station's entity ID.
-    /// </summary>
-    /// <param name="uid">Entity on the station to which news will be added.</param>
-    /// <param name="title">Title of the news article.</param>
-    /// <param name="content">Content of the news article.</param>
-    /// <param name="author">Author of the news article.</param>
-    /// <param name="actor">Entity which caused the news article to publish. Used for admin logs.</param>
-    public bool TryAddNews(EntityUid uid, string title, string content, [NotNullWhen(true)] out NewsArticle? article, string? author = null, EntityUid? actor = null)
-    {
-        if (!TryGetArticles(uid, out var articles))
-        {
-            article = null;
-            return false;
-        }
-
-        article = new NewsArticle
+        var article = new NewsArticle
         {
             Title = title.Length <= MaxTitleLength ? title : $"{title[..MaxTitleLength]}...",
             Content = content.Length <= MaxContentLength ? content : $"{content[..MaxContentLength]}...",
-            Author = author,
+            Author = authorName,
             ShareTime = _ticker.RoundDuration()
         };
 
-        articles.Add(article.Value);
+        _audio.PlayPvs(ent.Comp.ConfirmSound, ent);
 
-        if (actor != null)
-        {
-            _adminLogger.Add(
-                LogType.Chat,
-                LogImpact.Medium,
-                $"{ToPrettyString(actor):actor} created news article {article.Value.Title} by {article.Value.Author}: {article.Value.Content}");
-        }
-        else
-        {
-            _adminLogger.Add(
-                LogType.Chat,
-                LogImpact.Medium,
-                $"Created news article {article.Value.Title} by {article.Value.Author}: {article.Value.Content}");
-        }
+        _adminLogger.Add(
+            LogType.Chat,
+            LogImpact.Medium,
+            $"{ToPrettyString(msg.Actor):actor} created news article {article.Title} by {article.Author}: {article.Content}"
+            );
 
-        var args = new NewsArticlePublishedEvent(article.Value);
+        _chatManager.SendAdminAnnouncement(Loc.GetString("news-publish-admin-announcement",
+            ("actor", msg.Actor),
+            ("title", article.Title),
+            ("author", article.Author ?? Loc.GetString("news-read-ui-no-author"))
+            ));
+
+        articles.Add(article);
+
+        var args = new NewsArticlePublishedEvent(article);
         var query = EntityQueryEnumerator<NewsReaderCartridgeComponent>();
-
         while (query.MoveNext(out var readerUid, out _))
         {
             RaiseLocalEvent(readerUid, ref args);
         }
 
         if (_webhookSendDuringRound)
-            AddNewsSendWebhook(article.Value);
+            Task.Run(async () => await SendArticleToDiscordWebhook(article));
 
         UpdateWriterDevices();
-
-        return true;
     }
-
-    private async void AddNewsSendWebhook(NewsArticle article)
-    {
-        await Task.Run(async () => await SendArticleToDiscordWebhook(article));
-    }
-
     #endregion
 
     #region Reader Event Handlers
@@ -404,7 +394,7 @@ public sealed class NewsSystem : SharedNewsSystem
         if (_webhookSendDuringRound)
             return;
 
-        var query = EntityQueryEnumerator<StationNewsComponent>();
+        var query = EntityManager.EntityQueryEnumerator<StationNewsComponent>();
 
         while (query.MoveNext(out _, out var comp))
         {

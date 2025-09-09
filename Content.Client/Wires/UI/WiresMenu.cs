@@ -1,3 +1,25 @@
+// SPDX-FileCopyrightText: 2019 DamianX <DamianX@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2019 Pieter-Jan Briers <pieterjan.briers@gmail.com>
+// SPDX-FileCopyrightText: 2019 ZelteHonor <gabrieldionbouchard@gmail.com>
+// SPDX-FileCopyrightText: 2020 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
+// SPDX-FileCopyrightText: 2021 Antoine Chavasse <zlodo@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
+// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
+// SPDX-FileCopyrightText: 2024 chavonadelal <156101927+chavonadelal@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Numerics;
 using Content.Client.Examine;
 using Content.Client.Resources;
@@ -145,8 +167,8 @@ namespace Content.Client.Wires.UI
 
             LayoutContainer.SetAnchorPreset(topContainerWrap, LayoutContainer.LayoutPreset.Wide);
 
-            var font = _resourceCache.GetFont("/Fonts/Boxfont-round/Boxfont Round.ttf", 13);
-            var fontSmall = _resourceCache.GetFont("/Fonts/Boxfont-round/Boxfont Round.ttf", 10);
+            var font = _resourceCache.GetFont("/Fonts/Widock/Widock.otf", 13);
+            var fontSmall = _resourceCache.GetFont("/Fonts/Widock/Widock.otf", 10);
 
             Button helpButton;
             var topRow = new BoxContainer
@@ -317,7 +339,7 @@ namespace Content.Client.Wires.UI
                     VerticalAlignment = VAlignment.Bottom,
                     HorizontalAlignment = HAlignment.Center,
                     Align = Label.AlignMode.Center,
-                    FontOverride = _resourceCache.GetFont("/Fonts/Ubuntu/UbuntuNerdFont-Regular.ttf", 12),
+                    FontOverride = _resourceCache.GetFont("/Fonts/Widock/Widock.otf", 12),
                     FontColorOverride = Color.Gray,
                     ToolTip = letter.Name(),
                     MouseFilter = MouseFilterMode.Stop
@@ -564,7 +586,7 @@ namespace Content.Client.Wires.UI
                     };
                 }
 
-                var font = resourceCache.GetFont("/Fonts/Boxfont-round/Boxfont Round.ttf", 12);
+                var font = resourceCache.GetFont("/Fonts/Widock/Widock.otf", 12);
 
                 var hBox = new BoxContainer
                 {

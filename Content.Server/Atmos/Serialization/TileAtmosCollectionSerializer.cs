@@ -1,4 +1,14 @@
-﻿using System.Globalization;
+// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
+// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
+// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Jezithyr <jezithyr@gmail.com>
+// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Globalization;
 using Content.Shared.Atmos;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.Manager;
@@ -26,7 +36,7 @@ public sealed partial class TileAtmosCollectionSerializer : ITypeSerializer<Dict
         ISerializationManager.InstantiationDelegate<Dictionary<Vector2i, TileAtmosphere>>? instanceProvider = null)
     {
         node.TryGetValue("version", out var versionNode);
-        var version = ((ValueDataNode?)versionNode)?.AsInt() ?? 1;
+        var version = ((ValueDataNode?) versionNode)?.AsInt() ?? 1;
         Dictionary<Vector2i, TileAtmosphere> tiles = new();
 
         // Backwards compatability
@@ -48,8 +58,7 @@ public sealed partial class TileAtmosCollectionSerializer : ITypeSerializer<Dict
                     }
                     catch (ArgumentOutOfRangeException)
                     {
-                        var sawmill = dependencies.Resolve<ILogManager>().GetSawmill("szr");
-                        sawmill.Error(
+                        Logger.Error(
                             $"Error during atmos serialization! Tile at {indices} points to an unique mix ({mix}) out of range!");
                     }
                 }
@@ -57,7 +66,7 @@ public sealed partial class TileAtmosCollectionSerializer : ITypeSerializer<Dict
         }
         else
         {
-            var dataNode = (MappingDataNode)node["data"];
+            var dataNode = (MappingDataNode) node["data"];
             var chunkSize = serializationManager.Read<int>(dataNode["chunkSize"], hookCtx, context);
 
             dataNode.TryGet("uniqueMixes", out var mixNode);
@@ -65,7 +74,7 @@ public sealed partial class TileAtmosCollectionSerializer : ITypeSerializer<Dict
 
             if (unique != null)
             {
-                var tileNode = (MappingDataNode)dataNode["tiles"];
+                var tileNode = (MappingDataNode) dataNode["tiles"];
                 foreach (var (chunkNode, valueNode) in tileNode)
                 {
                     var chunkOrigin = serializationManager.Read<Vector2i>(tileNode.GetKeyNode(chunkNode), hookCtx, context);
@@ -77,7 +86,7 @@ public sealed partial class TileAtmosCollectionSerializer : ITypeSerializer<Dict
                         {
                             for (var y = 0; y < chunkSize; y++)
                             {
-                                var flag = data & (uint)(1 << (x + y * chunkSize));
+                                var flag = data & (uint) (1 << (x + y * chunkSize));
 
                                 if (flag == 0)
                                     continue;
@@ -92,8 +101,7 @@ public sealed partial class TileAtmosCollectionSerializer : ITypeSerializer<Dict
                                 }
                                 catch (ArgumentOutOfRangeException)
                                 {
-                                    var sawmill = dependencies.Resolve<ILogManager>().GetSawmill("szr");
-                                    sawmill.Error(
+                                    Logger.Error(
                                         $"Error during atmos serialization! Tile at {indices} points to an unique mix ({mix}) out of range!");
                                 }
                             }
@@ -130,7 +138,7 @@ public sealed partial class TileAtmosCollectionSerializer : ITypeSerializer<Dict
             var indices = SharedMapSystem.GetChunkRelative(gridIndices, chunkSize);
 
             var mixFlag = tileChunk.Data.GetOrNew(mixIndex);
-            mixFlag |= (uint)1 << (indices.X + indices.Y * chunkSize);
+            mixFlag |= (uint) 1 << (indices.X + indices.Y * chunkSize);
             tileChunk.Data[mixIndex] = mixFlag;
         }
 

@@ -1,4 +1,14 @@
-﻿using System.Linq;
+// SPDX-FileCopyrightText: 2023 Moony <moony@hellomouse.net>
+// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Linq;
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Content.Shared.Verbs;
@@ -14,9 +24,9 @@ public sealed class RunVerbAsCommand : ToolshedCommand
     private SharedVerbSystem? _verb;
 
     [CommandImplementation]
-    public IEnumerable<EntityUid> RunVerbAs(
+    public IEnumerable<NetEntity> RunVerbAs(
             IInvocationContext ctx,
-            [PipedArgument] IEnumerable<EntityUid> input,
+            [PipedArgument] IEnumerable<NetEntity> input,
             EntityUid runner,
             string verb
         )
@@ -24,7 +34,7 @@ public sealed class RunVerbAsCommand : ToolshedCommand
         _verb ??= GetSys<SharedVerbSystem>();
         verb = verb.ToLowerInvariant();
 
-        foreach (var eId in input)
+        foreach (var i in input)
         {
             if (EntityManager.Deleted(runner) && runner.IsValid())
                 ctx.ReportError(new DeadEntity(runner));
@@ -32,6 +42,7 @@ public sealed class RunVerbAsCommand : ToolshedCommand
             if (ctx.GetErrors().Any())
                 yield break;
 
+            var eId = EntityManager.GetEntity(i);
             var verbs = _verb.GetLocalVerbs(eId, runner, Verb.VerbTypes, true);
 
             // if the "verb name" is actually a verb-type, try run any verb of that type.
@@ -42,7 +53,7 @@ public sealed class RunVerbAsCommand : ToolshedCommand
                 if (verbTy != null)
                 {
                     _verb.ExecuteVerb(verbTy, runner, eId, forced: true);
-                    yield return eId;
+                    yield return i;
                 }
             }
 
@@ -51,7 +62,7 @@ public sealed class RunVerbAsCommand : ToolshedCommand
                 if (verbTy.Text.ToLowerInvariant() == verb)
                 {
                     _verb.ExecuteVerb(verbTy, runner, eId, forced: true);
-                    yield return eId;
+                    yield return i;
                 }
             }
         }

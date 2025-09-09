@@ -1,10 +1,14 @@
 ent-GasTrinaryBase = { ent-GasPipeBase }
     .desc = { ent-GasPipeBase.desc }
+ent-GasTrinaryFlippedBase = { "" }
+    .suffix = Flipped
+    .desc = { "" }
+ent-GasFilterBase = { ent-GasTrinaryBase }
+    .desc = { ent-GasTrinaryBase.desc }
 ent-GasFilter = gas filter
     .desc = Very useful for filtering gases.
-ent-GasFilterFlipped = gas filter
-    .suffix = Flipped
-    .desc = { ent-GasFilter.desc }
+ent-GasFilterFlipped = { ent-GasTrinaryFlippedBase }
+    .desc = { ent-GasTrinaryFlippedBase.desc }
 ent-GasMixer = gas mixer
     .desc = Very useful for mixing gases.
 ent-GasMixerFlipped = gas mixer

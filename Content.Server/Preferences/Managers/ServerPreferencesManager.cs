@@ -1,7 +1,42 @@
+// SPDX-FileCopyrightText: 2020 DamianX <DamianX@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
+// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2021 Leo <lzimann@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2021 Metal Gear Sloth <metalgearsloth@gmail.com>
+// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2021 mirrorcult <notzombiedude@gmail.com>
+// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 Javier Guardia Fernández <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 Veritius <veritiusgaming@gmail.com>
+// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
+// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
+// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 ElectroJr <leonsfriedrich@gmail.com>
+// SPDX-FileCopyrightText: 2024 Firewatch <54725557+musicmanvr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Mr. 27 <koolthunder019@gmail.com>
+// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
+// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers@gmail.com>
+// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
+// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Corvax.Interfaces.Shared;
 using Content.Server.Database;
 using Content.Shared.CCVar;
 using Content.Shared.Construction.Prototypes;
@@ -28,6 +63,7 @@ namespace Content.Server.Preferences.Managers
         [Dependency] private readonly IDependencyCollection _dependencies = default!;
         [Dependency] private readonly ILogManager _log = default!;
         [Dependency] private readonly UserDbDataManager _userDb = default!;
+        private ISharedSponsorsManager? _sponsors; // CorvaxGoob-Sponsors
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
         // Cache player prefs on the server so we don't need as much async hell related to them.
@@ -36,10 +72,11 @@ namespace Content.Server.Preferences.Managers
 
         private ISawmill _sawmill = default!;
 
-        private int MaxCharacterSlots => _cfg.GetCVar(CCVars.GameMaxCharacterSlots);
+        // private int MaxCharacterSlots => _cfg.GetCVar(CCVars.GameMaxCharacterSlots); // CorvaxGoob-Sponsors
 
         public void Init()
         {
+            IoCManager.Instance!.TryResolveType(out _sponsors); // CorvaxGoob-Sponsors
             _netManager.RegisterNetMessage<MsgPreferencesAndSettings>();
             _netManager.RegisterNetMessage<MsgSelectCharacter>(HandleSelectCharacterMessage);
             _netManager.RegisterNetMessage<MsgUpdateCharacter>(HandleUpdateCharacterMessage);
@@ -55,11 +92,11 @@ namespace Content.Server.Preferences.Managers
 
             if (!_cachedPlayerPrefs.TryGetValue(userId, out var prefsData) || !prefsData.PrefsLoaded)
             {
-                _sawmill.Warning($"User {userId} tried to modify preferences before they loaded.");
+                Logger.WarningS("prefs", $"User {userId} tried to modify preferences before they loaded.");
                 return;
             }
 
-            if (index < 0 || index >= MaxCharacterSlots)
+            if (index < 0 || index >= GetMaxUserCharacterSlots(userId)) // CorvaxGoob-Sponsors
             {
                 return;
             }
@@ -99,13 +136,18 @@ namespace Content.Server.Preferences.Managers
                 return;
             }
 
-            if (slot < 0 || slot >= MaxCharacterSlots)
+            if (slot < 0 || slot >= GetMaxUserCharacterSlots(userId)) // CorvaxGoob-Sponsors
                 return;
 
             var curPrefs = prefsData.Prefs!;
             var session = _playerManager.GetSessionById(userId);
 
-            profile.EnsureValid(session, _dependencies);
+            // CorvaxGoob-Sponsors-Start
+            var sponsorPrototypes = _sponsors != null && _sponsors.TryGetServerPrototypes(session.UserId, out var prototypes)
+                ? prototypes.ToArray()
+                : [];
+            profile.EnsureValid(session, _dependencies, sponsorPrototypes);
+            // CorvaxGoob-Sponsors-End
 
             var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
             {
@@ -141,11 +183,11 @@ namespace Content.Server.Preferences.Managers
 
             if (!_cachedPlayerPrefs.TryGetValue(userId, out var prefsData) || !prefsData.PrefsLoaded)
             {
-                _sawmill.Warning($"User {userId} tried to modify preferences before they loaded.");
+                Logger.WarningS("prefs", $"User {userId} tried to modify preferences before they loaded.");
                 return;
             }
 
-            if (slot < 0 || slot >= MaxCharacterSlots)
+            if (slot < 0 || slot >= GetMaxUserCharacterSlots(userId)) // CorvaxGoob-Sponsors
             {
                 return;
             }
@@ -247,6 +289,16 @@ namespace Content.Server.Preferences.Managers
                 async Task LoadPrefs()
                 {
                     var prefs = await GetOrCreatePreferencesAsync(session.UserId, cancel);
+                    // CorvaxGoob-Sponsors-Start: Remove sponsor markings from expired sponsors
+                    var collection = IoCManager.Instance!;
+                    foreach (var (_, profile) in prefs.Characters)
+                    {
+                        var sponsorPrototypes = _sponsors != null && _sponsors.TryGetServerPrototypes(session.UserId, out var prototypes)
+                            ? prototypes.ToArray()
+                            : [];
+                        profile.EnsureValid(session, collection, sponsorPrototypes);
+                    }
+                    // CorvaxGoob-Sponsors-End
                     prefsData.Prefs = prefs;
                 }
             }
@@ -267,7 +319,7 @@ namespace Content.Server.Preferences.Managers
             msg.Preferences = prefsData.Prefs;
             msg.Settings = new GameSettings
             {
-                MaxCharacterSlots = MaxCharacterSlots
+                MaxCharacterSlots = GetMaxUserCharacterSlots(session.UserId) // CorvaxGoob-Sponsors
             };
             _netManager.ServerSendMessage(msg, session.Channel);
         }
@@ -281,6 +333,15 @@ namespace Content.Server.Preferences.Managers
         {
             return _cachedPlayerPrefs.ContainsKey(session.UserId);
         }
+
+        // CorvaxGoob-Sponsors-Start: Calculate total available users slots with sponsors
+        private int GetMaxUserCharacterSlots(NetUserId userId)
+        {
+            var maxSlots = _cfg.GetCVar(CCVars.GameMaxCharacterSlots);
+            var extraSlots = _sponsors?.GetServerExtraCharSlots(userId) ?? 0;
+            return maxSlots + extraSlots;
+        }
+        // CorvaxGoob-Sponsors-End
 
 
         /// <summary>
@@ -345,9 +406,11 @@ namespace Content.Server.Preferences.Managers
             // Clean up preferences in case of changes to the game,
             // such as removed jobs still being selected.
 
+            var sponsorPrototypes = _sponsors != null && _sponsors.TryGetServerPrototypes(session.UserId, out var prototypes) ? prototypes.ToArray() : []; // CorvaxGoob-Sponsors
+
             return new PlayerPreferences(prefs.Characters.Select(p =>
             {
-                return new KeyValuePair<int, ICharacterProfile>(p.Key, p.Value.Validated(session, collection));
+                return new KeyValuePair<int, ICharacterProfile>(p.Key, p.Value.Validated(session, collection, sponsorPrototypes));
             }), prefs.SelectedCharacterIndex, prefs.AdminOOCColor, prefs.ConstructionFavorites);
         }
 

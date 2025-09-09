@@ -1,3 +1,14 @@
+// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Jake Huxell <JakeHuxell@pm.me>
+// SPDX-FileCopyrightText: 2024 MilenVolf <63782763+MilenVolf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
+// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using Content.Server.Gateway.Components;
 using Content.Server.Parallax;
@@ -27,6 +38,7 @@ public sealed class GatewayGeneratorSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefManager = default!;
     [Dependency] private readonly BiomeSystem _biome = default!;
     [Dependency] private readonly DungeonSystem _dungeon = default!;
@@ -36,9 +48,8 @@ public sealed class GatewayGeneratorSystem : EntitySystem
     [Dependency] private readonly SharedSalvageSystem _salvage = default!;
     [Dependency] private readonly TileSystem _tile = default!;
 
-    private static readonly ProtoId<LocalizedDatasetPrototype> PlanetNames = "NamesBorer";
-    private static readonly ProtoId<BiomeTemplatePrototype> BiomeTemplate = "Continental";
-    private static readonly ProtoId<DungeonConfigPrototype> DungeonConfig = "Experiment";
+    [ValidatePrototypeId<LocalizedDatasetPrototype>]
+    private const string PlanetNames = "NamesBorer";
 
     // TODO:
     // Fix shader some more
@@ -100,9 +111,10 @@ public sealed class GatewayGeneratorSystem : EntitySystem
         var tiles = new List<(Vector2i Index, Tile Tile)>();
         var seed = _random.Next();
         var random = new Random(seed);
-        var mapUid = _maps.CreateMap();
+        var mapId = _mapManager.CreateMap();
+        var mapUid = _mapManager.GetMapEntityId(mapId);
 
-        var gatewayName = _salvage.GetFTLName(_protoManager.Index(PlanetNames), seed);
+        var gatewayName = _salvage.GetFTLName(_protoManager.Index<LocalizedDatasetPrototype>(PlanetNames), seed);
         _metadata.SetEntityName(mapUid, gatewayName);
 
         var origin = new Vector2i(random.Next(-MaxOffset, MaxOffset), random.Next(-MaxOffset, MaxOffset));
@@ -112,7 +124,7 @@ public sealed class GatewayGeneratorSystem : EntitySystem
         };
         AddComp(mapUid, restricted);
 
-        _biome.EnsurePlanet(mapUid, _protoManager.Index(BiomeTemplate), seed);
+        _biome.EnsurePlanet(mapUid, _protoManager.Index<BiomeTemplatePrototype>("Continental"), seed);
 
         var grid = Comp<MapGridComponent>(mapUid);
 
@@ -120,7 +132,7 @@ public sealed class GatewayGeneratorSystem : EntitySystem
         {
             for (var y = -2; y <= 2; y++)
             {
-                tiles.Add((new Vector2i(x, y) + origin, new Tile(tileDef.TileId, variant: _tile.PickVariant((ContentTileDefinition)tileDef, random))));
+                tiles.Add((new Vector2i(x, y) + origin, new Tile(tileDef.TileId, variant: _tile.PickVariant((ContentTileDefinition) tileDef, random))));
             }
         }
 
@@ -184,7 +196,7 @@ public sealed class GatewayGeneratorSystem : EntitySystem
         var dungeonRotation = _dungeon.GetDungeonRotation(seed);
         var dungeonPosition = (origin + dungeonRotation.RotateVec(new Vector2i(0, dungeonDistance))).Floored();
 
-        _dungeon.GenerateDungeon(_protoManager.Index(DungeonConfig), args.MapUid, grid, dungeonPosition, seed);
+        _dungeon.GenerateDungeon(_protoManager.Index<DungeonConfigPrototype>("Experiment"), args.MapUid, grid, dungeonPosition, seed);
 
         // TODO: Dungeon mobs + loot.
 

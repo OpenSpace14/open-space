@@ -1,3 +1,9 @@
+// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
+// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
+// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Cloning;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
@@ -14,7 +20,7 @@ public sealed partial class ParadoxCloneRuleComponent : Component
     ///     Cloning settings to be used.
     /// </summary>
     [DataField]
-    public ProtoId<CloningSettingsPrototype> Settings = "ParadoxCloningSettings";
+    public ProtoId<CloningSettingsPrototype> Settings = "Antag";
 
     /// <summary>
     ///     Visual effect spawned when gibbing at round end.
@@ -47,4 +53,10 @@ public sealed partial class ParadoxCloneRuleComponent : Component
     /// </summary>
     [DataField]
     public EntityWhitelist? ObjectiveBlacklist;
+
+    /// <summary>
+    /// If an entity has one of these components, it cannot have a paradox clone. - Goobstation.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist? TargetBlacklist;
 }

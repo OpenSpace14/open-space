@@ -1,3 +1,8 @@
+// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Numerics;
 using System.Threading.Tasks;
 using Content.Shared.Maps;
@@ -41,7 +46,7 @@ public sealed partial class DungeonJob
                         if (dungeon.RoomTiles.Contains(neighbor))
                             continue;
 
-                        if (!_anchorable.TileFree((_gridUid, _grid), neighbor, DungeonSystem.CollisionLayer, DungeonSystem.CollisionMask))
+                        if (!_anchorable.TileFree(_grid, neighbor, DungeonSystem.CollisionLayer, DungeonSystem.CollisionMask))
                             continue;
 
                         roomEdges.Add(neighbor);
@@ -103,7 +108,7 @@ public sealed partial class DungeonJob
                 {
                     var node = nodeDistances[i].Node;
                     var gridPos = _maps.GridTileToLocal(_gridUid, _grid, node);
-                    if (!_anchorable.TileFree((_gridUid, _grid), node, DungeonSystem.CollisionLayer, DungeonSystem.CollisionMask))
+                    if (!_anchorable.TileFree(_grid, node, DungeonSystem.CollisionLayer, DungeonSystem.CollisionMask))
                         continue;
 
                     width--;

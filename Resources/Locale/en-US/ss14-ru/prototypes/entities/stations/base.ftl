@@ -28,7 +28,5 @@ ent-BaseStationSiliconLawCrewsimov = { "" }
     .desc = { "" }
 ent-BaseStationNews = { "" }
     .desc = { "" }
-ent-BaseStationDeliveries = { "" }
-    .desc = { "" }
 ent-BaseStationAllEventsEligible = { "" }
     .desc = { "" }

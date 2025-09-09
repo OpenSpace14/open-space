@@ -1,3 +1,12 @@
+// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
+// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: MIT
+
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.NameIdentifier;
@@ -9,27 +18,17 @@ public sealed partial class NameIdentifierGroupPrototype : IPrototype
     public string ID { get; private set; } = default!;
 
     /// <summary>
-    /// Should the identifier become the full name, or just append?
+    ///     Should the identifier become the full name, or just append?
     /// </summary>
-    [DataField]
+    [DataField("fullName")]
     public bool FullName = false;
 
-    /// <summary>
-    /// Optional format identifier. If set, the name will be formatted using it (e.g., "MK-500").
-    /// If not set, only the numeric part will be used (e.g., "500").
-    /// </summary>
-    [DataField]
-    public LocId? Format;
+    [DataField("prefix")]
+    public string? Prefix;
 
-    /// <summary>
-    /// The maximal value appearing in an identifier.
-    /// </summary>
-    [DataField]
+    [DataField("maxValue")]
     public int MaxValue = 1000;
 
-    /// <summary>
-    /// The minimal value appearing in an identifier.
-    /// </summary>
-    [DataField]
+    [DataField("minValue")]
     public int MinValue = 0;
 }

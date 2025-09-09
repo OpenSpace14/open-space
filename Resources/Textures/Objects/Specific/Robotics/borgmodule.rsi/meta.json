@@ -38,9 +38,6 @@
             "name": "icon-clown"
         },
         {
-            "name": "icon-clown-adv"
-        },
-        {
             "name": "icon-construction"
         },
         {
@@ -119,9 +116,6 @@
             "name": "icon-xenoborg-cloak"
         },
         {
-            "name": "icon-xenoborg-cloak2"
-        },
-        {
             "name": "icon-xenoborg-fire-extinguisher"
         },
         {
@@ -153,6 +147,12 @@
         },
         {
             "name": "icon-syndicate"
+        },
+        {
+            "name": "icon-surgery"
+        },
+        {
+            "name": "icon-advanced-surgery"
         },
         {
             "name": "janitor"

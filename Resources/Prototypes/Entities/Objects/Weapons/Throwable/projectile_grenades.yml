@@ -1,4 +1,16 @@
-﻿- type: entity
+# SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 BramvanZijp <56019239+BramvanZijp@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
+# SPDX-FileCopyrightText: 2025 K-Dynamic <20566341+K-Dynamic@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 Killerqu00 <47712032+Killerqu00@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
+# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
   abstract: true
   parent: BaseItem
   id: ProjectileGrenadeBase
@@ -7,8 +19,6 @@
   - type: Damageable
     damageContainer: Inorganic
   - type: DeleteOnTrigger
-    keysIn:
-    - timer
   - type: Destructible
     thresholds:
     - trigger:
@@ -16,7 +26,6 @@
         damage: 10
       behaviors:
       - !type:TriggerBehavior
-        keyOut: timer # explode immediately
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -31,16 +40,6 @@
   - type: Tag
     tags:
     - HandGrenade
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape: !type:PhysShapeCircle
-          radius: 0.2
-        density: 20 # derived from base_item
-        mask:
-        - ItemMask
-        restitution: 0.3
-        friction: 0.2
 
 - type: entity
   parent: [ProjectileGrenadeBase, BaseSecurityContraband]
@@ -57,17 +56,11 @@
     fillPrototype: PelletClusterRubber
     capacity: 30
   - type: EmitSoundOnTrigger
-    keysIn:
-    - timer
     sound:
       path: "/Audio/Effects/flash_bang.ogg"
   - type: SpawnOnTrigger
-    keysIn:
-    - timer
     proto: GrenadeFlashEffect
-    predicted: true
-  - type: TriggerOnUse
-  - type: TimerTrigger
+  - type: OnUseTimerTrigger
     initialBeepDelay: 0
     beepInterval: 2
     delay: 3.5
@@ -89,8 +82,7 @@
   - type: ProjectileGrenade
     fillPrototype: PelletClusterIncendiary
     capacity: 30
-  - type: TriggerOnUse
-  - type: TimerTrigger
+  - type: OnUseTimerTrigger
     beepSound:
       path: "/Audio/Effects/beep1.ogg"
       params:
@@ -99,8 +91,6 @@
     beepInterval: 2
     delay: 3.5
   - type: EmitSoundOnTrigger
-    keysIn:
-    - timer
     sound:
       path: "/Audio/Weapons/Guns/Gunshots/batrifle.ogg"
   - type: StaticPrice
@@ -120,8 +110,7 @@
   - type: ProjectileGrenade
     fillPrototype: PelletClusterLethal
     capacity: 30
-  - type: TriggerOnUse
-  - type: TimerTrigger
+  - type: OnUseTimerTrigger
     beepSound:
       path: "/Audio/Effects/beep1.ogg"
       params:
@@ -130,8 +119,6 @@
     beepInterval: 2
     delay: 3.5
   - type: EmitSoundOnTrigger
-    keysIn:
-    - timer
     sound:
       path: "/Audio/Weapons/Guns/Gunshots/batrifle.ogg"
   - type: StaticPrice

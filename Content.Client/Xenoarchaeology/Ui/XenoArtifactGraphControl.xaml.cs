@@ -44,7 +44,7 @@ public sealed partial class XenoArtifactGraphControl : BoxContainer
         _artifactSystem = _entityManager.System<XenoArtifactSystem>();
 
         var fontResource = IoCManager.Resolve<IResourceCache>()
-                                     .GetResource<FontResource>("/Fonts/UbuntuSans/UbuntuSansNerdFont-Regular.ttf");
+                                     .GetResource<FontResource>("/EngineFonts/NotoSans/NotoSansMono-Regular.ttf");
         _font = new VectorFont(fontResource, 16);
     }
 

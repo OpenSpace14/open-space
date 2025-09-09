@@ -1,17 +1,61 @@
+// SPDX-FileCopyrightText: 2021 Paul Ritter <ritter.paul1@gmail.com>
+// SPDX-FileCopyrightText: 2021 Paul Ritter <ritter.paul1@googlemail.com>
+// SPDX-FileCopyrightText: 2022 ElectroJr <leonsfriedrich@gmail.com>
+// SPDX-FileCopyrightText: 2022 Emisse <99158783+Emisse@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 keronshb <54602815+keronshb@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 moonheart08 <moonheart08@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 IntegerTempest <30300017+IntegerTempest@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 MisterMecky <mrmecky@hotmail.com>
+// SPDX-FileCopyrightText: 2023 Slava0135 <super.novalskiy_0135@inbox.ru>
+// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
+// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Krunklehorn <42424291+Krunklehorn@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
+// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Plykiya <plykiya@protonmail.com>
+// SPDX-FileCopyrightText: 2024 PrPleGoo <PrPleGoo@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Rane <60792108+Elijahrane@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
+// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
+// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
+// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Milon <milonpl.git@proton.me>
+// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
+// SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
+// SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Armor;
 using Content.Shared.Atmos;
 using Content.Shared.Chat;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Hypospray.Events;
 using Content.Shared.Climbing.Events;
+using Content.Shared._CorvaxGoob.TTS;
 using Content.Shared.Contraband;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Electrocution;
-using Content.Shared.Emoting;
 using Content.Shared.Explosion;
 using Content.Shared.Eye.Blinding.Systems;
-using Content.Shared.Flash;
 using Content.Shared.Gravity;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Implants;
@@ -19,7 +63,6 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.NameModifier.EntitySystems;
-using Content.Shared.Nutrition;
 using Content.Shared.Overlays;
 using Content.Shared.Projectiles;
 using Content.Shared.Radio;
@@ -28,7 +71,6 @@ using Content.Shared.Strip.Components;
 using Content.Shared.Temperature;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Wieldable;
 using Content.Shared.Zombies;
 
 namespace Content.Shared.Inventory;
@@ -46,6 +88,7 @@ public partial class InventorySystem
         SubscribeLocalEvent<InventoryComponent, ModifyChangedTemperatureEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetDefaultRadioChannelEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, RefreshNameModifiersEvent>(RelayInventoryEvent);
+
         SubscribeLocalEvent<InventoryComponent, TransformSpeakerNameEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, SelfBeforeHyposprayInjectsEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, TargetBeforeHyposprayInjectsEvent>(RelayInventoryEvent);
@@ -56,7 +99,9 @@ public partial class InventorySystem
         SubscribeLocalEvent<InventoryComponent, IsEquippingTargetAttemptEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, IsUnequippingTargetAttemptEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, ChameleonControllerOutfitSelectedEvent>(RelayInventoryEvent);
-        SubscribeLocalEvent<InventoryComponent, BeforeEmoteEvent>(RelayInventoryEvent);
+
+        // CorvaxGoob-TTS
+        SubscribeLocalEvent<InventoryComponent, TransformSpeakerVoiceEvent>(RelayInventoryEvent);
 
         // by-ref events
         SubscribeLocalEvent<InventoryComponent, RefreshFrictionModifiersEvent>(RefRelayInventoryEvent);
@@ -70,10 +115,6 @@ public partial class InventorySystem
         SubscribeLocalEvent<InventoryComponent, ProjectileReflectAttemptEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, HitScanReflectAttemptEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetContrabandDetailsEvent>(RefRelayInventoryEvent);
-        SubscribeLocalEvent<InventoryComponent, FlashAttemptEvent>(RefRelayInventoryEvent);
-        SubscribeLocalEvent<InventoryComponent, WieldAttemptEvent>(RefRelayInventoryEvent);
-        SubscribeLocalEvent<InventoryComponent, UnwieldAttemptEvent>(RefRelayInventoryEvent);
-        SubscribeLocalEvent<InventoryComponent, IngestionAttemptEvent>(RefRelayInventoryEvent);
 
         // Eye/vision events
         SubscribeLocalEvent<InventoryComponent, CanSeeAttemptEvent>(RelayInventoryEvent);
@@ -92,6 +133,7 @@ public partial class InventorySystem
         SubscribeLocalEvent<InventoryComponent, RefreshEquipmentHudEvent<ShowCriminalRecordIconsComponent>>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, RefreshEquipmentHudEvent<BlackAndWhiteOverlayComponent>>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, RefreshEquipmentHudEvent<NoirOverlayComponent>>(RefRelayInventoryEvent);
+
 
         SubscribeLocalEvent<InventoryComponent, GetVerbsEvent<EquipmentVerb>>(OnGetEquipmentVerbs);
         SubscribeLocalEvent<InventoryComponent, GetVerbsEvent<InnateVerb>>(OnGetInnateVerbs);
@@ -190,7 +232,7 @@ public interface IClothingSlots
 /// <summary>
 ///     Events that should be relayed to inventory slots should implement this interface.
 /// </summary>
-public interface IInventoryRelayEvent
+public interface IInventoryRelayEvent // this needs to get moved to common...
 {
     /// <summary>
     ///     What inventory slots should this event be relayed to, if any?

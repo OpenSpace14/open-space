@@ -1,4 +1,12 @@
-﻿using System.Linq;
+// SPDX-FileCopyrightText: 2022 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Brandon Hu <103440971+Brandon-Huu@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Linq;
 using Content.Server.Administration.Notes;
 using Content.Shared.Administration;
 using Robust.Server.Player;
@@ -9,9 +17,6 @@ namespace Content.Server.Administration.Commands;
 [AdminCommand(AdminFlags.ViewNotes)]
 public sealed class OpenAdminNotesCommand : LocalizedCommands
 {
-    [Dependency] private readonly IAdminNotesManager _adminNotes = default!;
-    [Dependency] private readonly IPlayerLocator _locator = default!;
-
     public const string CommandName = "adminnotes";
 
     public override string Command => CommandName;
@@ -31,7 +36,8 @@ public sealed class OpenAdminNotesCommand : LocalizedCommands
             case 1 when Guid.TryParse(args[0], out notedPlayer):
                 break;
             case 1:
-                var dbGuid = await _locator.LookupIdByNameAsync(args[0]);
+                var locator = IoCManager.Resolve<IPlayerLocator>();
+                var dbGuid = await locator.LookupIdByNameAsync(args[0]);
 
                 if (dbGuid == null)
                 {
@@ -46,7 +52,7 @@ public sealed class OpenAdminNotesCommand : LocalizedCommands
                 return;
         }
 
-        await _adminNotes.OpenEui(player, notedPlayer);
+        await IoCManager.Resolve<IAdminNotesManager>().OpenEui(player, notedPlayer);
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)

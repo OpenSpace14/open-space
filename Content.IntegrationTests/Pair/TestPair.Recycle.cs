@@ -1,3 +1,13 @@
+// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
+// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
+// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 #nullable enable
 using System.IO;
 using System.Linq;
@@ -13,7 +23,6 @@ using Robust.Server.Player;
 using Robust.Shared.Exceptions;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
-using Robust.Shared.Utility;
 
 namespace Content.IntegrationTests.Pair;
 
@@ -85,7 +94,6 @@ public sealed partial class TestPair : IAsyncDisposable
 
         var returnTime = Watch.Elapsed;
         await _testOut.WriteLineAsync($"{nameof(CleanReturnAsync)}: PoolManager took {returnTime.TotalMilliseconds} ms to put pair {Id} back into the pool");
-        State = PairState.Ready;
     }
 
     private async Task ResetModifiedPreferences()
@@ -106,7 +114,7 @@ public sealed partial class TestPair : IAsyncDisposable
         await _testOut.WriteLineAsync($"{nameof(CleanReturnAsync)}: Return of pair {Id} started");
         State = PairState.CleanDisposed;
         await OnCleanDispose();
-        DebugTools.Assert(State is PairState.Dead or PairState.Ready);
+        State = PairState.Ready;
         PoolManager.NoCheckReturn(this);
         ClearContext();
     }
