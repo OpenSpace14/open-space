@@ -8,7 +8,7 @@
 
 - type: font
   id: Default
-  path: /Fonts/Ubuntu/UbuntuSansNerdFont-Regular.ttf
+  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-Regular.ttf
 
 - type: font
   id: DefaultItalic
@@ -24,19 +24,19 @@
 
 - type: font
   id: NotoSansDisplay
-  path: /Fonts/Ubuntu/UbuntuNerdFont-Regular.ttf
+  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-Regular.ttf
 
 - type: font
   id: NotoSansDisplayItalic
-  path: /Fonts/Ubuntu/UbuntuNerdFont-Italic.ttf
+  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-Italic.ttf
 
 - type: font
   id: NotoSansDisplayBold
-  path: /Fonts/Ubuntu/UbuntuNerdFont-Bold.ttf
+  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-Bold.ttf
 
 - type: font
   id: NotoSansDisplayBoldItalic
-  path: /Fonts/Ubuntu/UbuntuNerdFont-BoldItalic.ttf
+  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-BoldItalic.ttf
 
 - type: font
   id: BoxRound
