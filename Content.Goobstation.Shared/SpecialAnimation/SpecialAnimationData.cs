@@ -85,7 +85,7 @@ public sealed partial class SpecialAnimationData
     /// Font for the text to use.
     /// </summary>
     [DataField]
-    public string TextFontPath = "/Fonts/NotoSans/NotoSans-Regular.ttf";
+    public string TextFontPath = "/Fonts/Ubuntu/UbuntuNerdFont-Regular.ttf";
 
     /// <summary>
     /// Text font size.
@@ -158,7 +158,7 @@ public sealed partial class SpecialAnimationData
         TextOverrideColor = Color.White,
         TextPosition = new Vector2(-250, 100),
         TextFontSize = 26,
-        TextFontPath = "/Fonts/NotoSans/NotoSans-Bold.ttf", // Bald.
+        TextFontPath = "/Fonts/Widock/Widock.otf", // Bald.
     };
 
     /// <summary>

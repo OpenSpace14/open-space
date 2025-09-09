@@ -167,8 +167,8 @@ namespace Content.Client.Wires.UI
 
             LayoutContainer.SetAnchorPreset(topContainerWrap, LayoutContainer.LayoutPreset.Wide);
 
-            var font = _resourceCache.GetFont("/Fonts/Boxfont-round/Boxfont Round.ttf", 13);
-            var fontSmall = _resourceCache.GetFont("/Fonts/Boxfont-round/Boxfont Round.ttf", 10);
+            var font = _resourceCache.GetFont("/Fonts/Widock/Widock.otf", 13);
+            var fontSmall = _resourceCache.GetFont("/Fonts/Widock/Widock.otf", 10);
 
             Button helpButton;
             var topRow = new BoxContainer
@@ -339,7 +339,7 @@ namespace Content.Client.Wires.UI
                     VerticalAlignment = VAlignment.Bottom,
                     HorizontalAlignment = HAlignment.Center,
                     Align = Label.AlignMode.Center,
-                    FontOverride = _resourceCache.GetFont("/Fonts/NotoSansDisplay/NotoSansDisplay-Bold.ttf", 12),
+                    FontOverride = _resourceCache.GetFont("/Fonts/Widock/Widock.otf", 12),
                     FontColorOverride = Color.Gray,
                     ToolTip = letter.Name(),
                     MouseFilter = MouseFilterMode.Stop
@@ -586,7 +586,7 @@ namespace Content.Client.Wires.UI
                     };
                 }
 
-                var font = resourceCache.GetFont("/Fonts/Boxfont-round/Boxfont Round.ttf", 12);
+                var font = resourceCache.GetFont("/Fonts/Widock/Widock.otf", 12);
 
                 var hBox = new BoxContainer
                 {

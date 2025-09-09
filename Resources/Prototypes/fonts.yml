@@ -12,15 +12,15 @@
 
 - type: font
   id: DefaultItalic
-  path: /Fonts/NotoSans/NotoSans-Italic.ttf
+  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-Italic.ttf
 
 - type: font
   id: DefaultBold
-  path: /Fonts/NotoSans/NotoSans-Bold.ttf
+  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-Bold.ttf
 
 - type: font
   id: DefaultBoldItalic
-  path: /Fonts/NotoSans/NotoSans-BoldItalic.ttf
+  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-BoldItalic.ttf
 
 - type: font
   id: NotoSansDisplay
@@ -40,6 +40,10 @@
 
 - type: font
   id: BoxRound
+  path: /Fonts/Widock/Widock.otf
+
+- type: font
+  id: BoxRoundOLD
   path: /Fonts/Boxfont-round/Boxfont Round.ttf
 
 - type: font
@@ -48,7 +52,7 @@
 
 - type: font
   id: Monospace
-  path: /EngineFonts/NotoSans/NotoSansMono-Regular.ttf
+  path: /Fonts/Ubuntu/UbuntuMonoNerdFont-Regular.ttf
 
 - type: font
   id: Emoji
