@@ -39,8 +39,8 @@ public sealed partial class AtmosMonitoringEntryContainer : BoxContainer
         NetworkColorStripe.Modulate = data.Color;
 
         // Load fonts
-        var headerFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Bold.ttf"), 11);
-        var normalFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/NotoSansDisplay/NotoSansDisplay-Regular.ttf"), 11);
+        var headerFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/Widock/Widock.otf"), 11);
+        var normalFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/Ubuntu/UbuntuSansNerdFont-Regular.ttf"), 11);
 
         // Set fonts
         TemperatureHeaderLabel.FontOverride = headerFont;

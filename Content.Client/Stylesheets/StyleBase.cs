@@ -68,10 +68,10 @@ namespace Content.Client.Stylesheets
             (
                 new []
                 {
-                    "/Fonts/NotoSans/NotoSans-Regular.ttf",
-                    "/Fonts/NotoSans/NotoSansSC-Regular.ttf",
+                    "/Fonts/Ubuntu/UbuntuSansNerdFontPropo-Regular.ttf",
+                    "/Fonts/Ubuntu/UbuntuSansNerdFont-Regular.ttf",
                     "/Fonts/NotoSans/NotoSansSymbols-Regular.ttf",
-                    "/Fonts/NotoSans/NotoSansSymbols2-Regular.ttf",
+                    "/Fonts/NotoSans/NotoSansSymbols2-Regular.ttf"
                 },
                 12
             );
@@ -79,10 +79,10 @@ namespace Content.Client.Stylesheets
             (
                 new []
                 {
-                    "/Fonts/NotoSans/NotoSans-Italic.ttf",
-                    "/Fonts/NotoSans/NotoSansSC-Regular.ttf",
+                    "/Fonts/Ubuntu/UbuntuSansNerdFontPropo-Italic.ttf",
+                    "/Fonts/Ubuntu/UbuntuSansNerdFont-Italic.ttf",
                     "/Fonts/NotoSans/NotoSansSymbols-Regular.ttf",
-                    "/Fonts/NotoSans/NotoSansSymbols2-Regular.ttf",
+                    "/Fonts/NotoSans/NotoSansSymbols2-Regular.ttf"
                 },
                 12
             );
