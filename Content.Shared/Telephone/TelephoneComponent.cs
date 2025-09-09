@@ -1,5 +1,12 @@
+// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Chat;
 using Content.Shared.Speech;
+using Content.Shared._EinsteinEngines.Language;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
@@ -80,6 +87,12 @@ public sealed partial class TelephoneComponent : Component
     /// </summary>
     [DataField]
     public float ListeningRange = 2;
+
+    /// <summary>
+    /// Specifies whether this telephone require power to fucntion
+    /// </summary>
+    [DataField]
+    public bool RequiresPower = true;
 
     /// <summary>
     /// This telephone should not appear on public telephone directories
@@ -173,7 +186,7 @@ public readonly record struct TelephoneMessageSentEvent(string Message, MsgChatM
 /// Raised when a chat message is received by a telephone from another
 /// </summary>
 [ByRefEvent]
-public readonly record struct TelephoneMessageReceivedEvent(string Message, MsgChatMessage ChatMsg, EntityUid MessageSource, Entity<TelephoneComponent> TelephoneSource);
+public readonly record struct TelephoneMessageReceivedEvent(string Message, MsgChatMessage ChatMsg, EntityUid MessageSource, Entity<TelephoneComponent> TelephoneSource, LanguagePrototype? Language = null); // Einstein Engines - Language
 
 #endregion
 

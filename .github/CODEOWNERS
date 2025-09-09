@@ -1,2 +1,15 @@
-# Ping all for all
-* @lzk228
+# Last match in file takes precedence.
+
+# Ping for all PRs
+* @KillanGenifer
+
+# Locale
+/Resources/Locale @Ko4ergaPunk
+
+# Map files
+/Resources/Prototypes/_CorvaxGoob/Entities/Stations @Ko4ergaPunk
+/Resources/Prototypes/_CorvaxGoob/Maps @Ko4ergaPunk
+/Resources/Maps/_CorvaxGoob @Ko4ergaPunk
+
+# TTS
+/Content.*/_CorvaxGoob/TTS @Morb0

@@ -1,10 +1,14 @@
+// SPDX-FileCopyrightText: 2023 Vordenburg <114301317+Vordenburg@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 keronshb <54602815+keronshb@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: MIT
+
 using System.Text;
 using System.Text.RegularExpressions;
-using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -12,7 +16,9 @@ public sealed class RatvarianLanguageSystem : SharedRatvarianLanguageSystem
 {
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
 
-    private static readonly ProtoId<StatusEffectPrototype> RatvarianKey = "RatvarianLanguage";
+
+    [ValidatePrototypeId<StatusEffectPrototype>]
+    private const string RatvarianKey = "RatvarianLanguage";
 
     // This is the word of Ratvar and those who speak it shall abide by His rules:
     /*

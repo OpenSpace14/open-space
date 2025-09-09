@@ -1,12 +1,12 @@
 ent-BaseMagazineBoxMagnum = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
 ent-MagazineBoxMagnum = коробка патронов (.45 магнум)
-    .desc = Картонная коробка патронов калибра .45 магнум. Предназначена для хранения универсальных кинетических боеприпасов.
+    .desc = { ent-BaseMagazineBoxMagnum.desc }
 ent-MagazineBoxMagnumPractice = коробка патронов (.45 магнум учебные)
-    .desc = Картонная коробка патронов калибра .45 магнум. Предназначена для хранения безвредных меловых боеприпасов.
+    .desc = { ent-BaseMagazineBoxMagnum.desc }
 ent-MagazineBoxMagnumIncendiary = коробка патронов (.45 магнум зажигательные)
-    .desc = Картонная коробка патронов калибра .45 магнум. Предназначена для хранения самовоспламеняющихся зажигательных боеприпасов.
+    .desc = { ent-BaseMagazineBoxMagnum.desc }
 ent-MagazineBoxMagnumUranium = коробка патронов (.45 магнум урановые)
-    .desc = Картонная коробка патронов калибра .45 магнум. Предназначена для хранения экзотических боеприпасов с урановым сердечником.
+    .desc = { ent-BaseMagazineBoxMagnum.desc }
 ent-MagazineBoxMagnumAP = коробка патронов (.45 магнум бронебойные)
-    .desc = Картонная коробка патронов калибра .45 магнум. Предназначена для хранения редких бронебойных боеприпасов.
+    .desc = { ent-BaseMagazineBoxMagnum.desc }

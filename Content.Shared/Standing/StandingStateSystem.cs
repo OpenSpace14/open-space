@@ -1,6 +1,35 @@
-using Content.Shared.Climbing.Events;
+// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
+// SPDX-FileCopyrightText: 2021 Clyybber <darkmine956@gmail.com>
+// SPDX-FileCopyrightText: 2021 Galactic Chimp <GalacticChimpanzee@gmail.com>
+// SPDX-FileCopyrightText: 2021 Paul <ritter.paul1@googlemail.com>
+// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 Alex Evgrashin <aevgrashin@yandex.ru>
+// SPDX-FileCopyrightText: 2022 Fishfish458 <47410468+Fishfish458@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 Francesco <frafonia@gmail.com>
+// SPDX-FileCopyrightText: 2022 Jacob Tong <10494922+ShadowCommander@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 fishfish458 <fishfish458>
+// SPDX-FileCopyrightText: 2022 keronshb <54602815+keronshb@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
+// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
+// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
+// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
+// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+// HEAVILY EDITED
+// if wizden ever does something to this system we're FUCKED
+// regards.
+
+using Content.Shared.Buckle;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Hands.Components;
-using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Rotation;
@@ -9,24 +38,22 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared.Standing;
-
 public sealed class StandingStateSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!; // WD EDIT
+    [Dependency] private readonly SharedBuckleSystem _buckle = default!; // WD EDIT
 
     // If StandingCollisionLayer value is ever changed to more than one layer, the logic needs to be edited.
-    public const int StandingCollisionLayer = (int) CollisionGroup.MidImpassable;
+    private const int StandingCollisionLayer = (int) CollisionGroup.MidImpassable;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<StandingStateComponent, AttemptMobCollideEvent>(OnMobCollide);
         SubscribeLocalEvent<StandingStateComponent, AttemptMobTargetCollideEvent>(OnMobTargetCollide);
-        SubscribeLocalEvent<StandingStateComponent, RefreshFrictionModifiersEvent>(OnRefreshFrictionModifiers);
-        SubscribeLocalEvent<StandingStateComponent, TileFrictionEvent>(OnTileFriction);
-        SubscribeLocalEvent<StandingStateComponent, EndClimbEvent>(OnEndClimb);
     }
 
     private void OnMobTargetCollide(Entity<StandingStateComponent> ent, ref AttemptMobTargetCollideEvent args)
@@ -45,42 +72,18 @@ public sealed class StandingStateSystem : EntitySystem
         }
     }
 
-    private void OnRefreshFrictionModifiers(Entity<StandingStateComponent> entity, ref RefreshFrictionModifiersEvent args)
-    {
-        if (entity.Comp.Standing)
-            return;
-
-        args.ModifyFriction(entity.Comp.DownFrictionMod);
-        args.ModifyAcceleration(entity.Comp.DownFrictionMod);
-    }
-
-    private void OnTileFriction(Entity<StandingStateComponent> entity, ref TileFrictionEvent args)
-    {
-        if (!entity.Comp.Standing)
-            args.Modifier *= entity.Comp.DownFrictionMod;
-    }
-
-    private void OnEndClimb(Entity<StandingStateComponent> entity, ref EndClimbEvent args)
-    {
-        if (entity.Comp.Standing)
-            return;
-
-        // Currently only Climbing also edits fixtures layers like this so this is fine for now.
-        ChangeLayers(entity);
-    }
-
     public bool IsDown(EntityUid uid, StandingStateComponent? standingState = null)
     {
         if (!Resolve(uid, ref standingState, false))
             return false;
 
-        return !standingState.Standing;
+        return standingState.CurrentState is StandingState.Lying or StandingState.GettingUp;
     }
 
     public bool Down(EntityUid uid,
         bool playSound = true,
         bool dropHeldItems = true,
-        bool force = false,
+        bool force = true,
         StandingStateComponent? standingState = null,
         AppearanceComponent? appearance = null,
         HandsComponent? hands = null)
@@ -92,7 +95,7 @@ public sealed class StandingStateSystem : EntitySystem
         // Optional component.
         Resolve(uid, ref appearance, ref hands, false);
 
-        if (!standingState.Standing)
+        if (standingState.CurrentState is StandingState.Lying or StandingState.GettingUp)
             return true;
 
         // This is just to avoid most callers doing this manually saving boilerplate
@@ -114,7 +117,7 @@ public sealed class StandingStateSystem : EntitySystem
                 return false;
         }
 
-        standingState.Standing = false;
+        standingState.CurrentState = StandingState.Lying;
         Dirty(uid, standingState);
         RaiseLocalEvent(uid, new DownedEvent(), false);
 
@@ -122,7 +125,17 @@ public sealed class StandingStateSystem : EntitySystem
         _appearance.SetData(uid, RotationVisuals.RotationState, RotationState.Horizontal, appearance);
 
         // Change collision masks to allow going under certain entities like flaps and tables
-        ChangeLayers((uid, standingState));
+        if (TryComp(uid, out FixturesComponent? fixtureComponent))
+        {
+            foreach (var (key, fixture) in fixtureComponent.Fixtures)
+            {
+                if ((fixture.CollisionMask & StandingCollisionLayer) == 0)
+                    continue;
+
+                standingState.ChangedFixtures.Add(key);
+                _physics.SetCollisionMask(uid, key, fixture, fixture.CollisionMask & ~StandingCollisionLayer, manager: fixtureComponent);
+            }
+        }
 
         // check if component was just added or streamed to client
         // if true, no need to play sound - mob was down before player could seen that
@@ -134,6 +147,7 @@ public sealed class StandingStateSystem : EntitySystem
             _audio.PlayPredicted(standingState.DownSound, uid, uid);
         }
 
+        _movement.RefreshMovementSpeedModifiers(uid); // WD EDIT
         return true;
     }
 
@@ -149,61 +163,37 @@ public sealed class StandingStateSystem : EntitySystem
         // Optional component.
         Resolve(uid, ref appearance, false);
 
-        if (standingState.Standing)
+        if (standingState.CurrentState is StandingState.Standing)
             return true;
+
+        if (TryComp(uid, out BuckleComponent? buckle) && buckle.Buckled && !_buckle.TryUnbuckle(uid, uid, buckleComp: buckle)) // WD EDIT
+            return false;
 
         if (!force)
         {
             var msg = new StandAttemptEvent();
             RaiseLocalEvent(uid, msg, false);
-
             if (msg.Cancelled)
                 return false;
         }
 
-        standingState.Standing = true;
+        standingState.CurrentState = StandingState.Standing;
         Dirty(uid, standingState);
         RaiseLocalEvent(uid, new StoodEvent(), false);
 
         _appearance.SetData(uid, RotationVisuals.RotationState, RotationState.Vertical, appearance);
-
-        RevertLayers((uid, standingState));
+        if (TryComp(uid, out FixturesComponent? fixtureComponent))
+        {
+            foreach (var key in standingState.ChangedFixtures)
+            {
+                if (fixtureComponent.Fixtures.TryGetValue(key, out var fixture))
+                    _physics.SetCollisionMask(uid, key, fixture, fixture.CollisionMask | StandingCollisionLayer, fixtureComponent);
+            }
+        }
+        standingState.ChangedFixtures.Clear();
+        _movement.RefreshMovementSpeedModifiers(uid); // WD EDIT
 
         return true;
-    }
-
-    // TODO: This should be moved to a PhysicsModifierSystem which raises events so multiple systems can modify fixtures at once
-    private void ChangeLayers(Entity<StandingStateComponent, FixturesComponent?> entity)
-    {
-        if (!Resolve(entity, ref entity.Comp2, false))
-            return;
-
-        foreach (var (key, fixture) in entity.Comp2.Fixtures)
-        {
-            if ((fixture.CollisionMask & StandingCollisionLayer) == 0 || !fixture.Hard)
-                continue;
-
-            entity.Comp1.ChangedFixtures.Add(key);
-            _physics.SetCollisionMask(entity, key, fixture, fixture.CollisionMask & ~StandingCollisionLayer, manager: entity.Comp2);
-        }
-    }
-
-    // TODO: This should be moved to a PhysicsModifierSystem which raises events so multiple systems can modify fixtures at once
-    private void RevertLayers(Entity<StandingStateComponent, FixturesComponent?> entity)
-    {
-        if (!Resolve(entity, ref entity.Comp2, false))
-        {
-            entity.Comp1.ChangedFixtures.Clear();
-            return;
-        }
-
-        foreach (var key in entity.Comp1.ChangedFixtures)
-        {
-            if (entity.Comp2.Fixtures.TryGetValue(key, out var fixture) && fixture.Hard)
-                _physics.SetCollisionMask(entity, key, fixture, fixture.CollisionMask | StandingCollisionLayer, entity.Comp2);
-        }
-
-        entity.Comp1.ChangedFixtures.Clear();
     }
 }
 

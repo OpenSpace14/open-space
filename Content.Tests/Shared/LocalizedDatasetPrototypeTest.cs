@@ -1,3 +1,9 @@
+// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
+// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System;
 using Content.Shared.Dataset;
 using NUnit.Framework;
@@ -12,8 +18,6 @@ namespace Content.Tests.Shared;
 [TestOf(typeof(LocalizedDatasetPrototype))]
 public sealed class LocalizedDatasetPrototypeTest : ContentUnitTest
 {
-    private const string TestDatasetId = "Test";
-
     private IPrototypeManager _prototypeManager;
 
     [OneTimeSetUp]
@@ -26,9 +30,9 @@ public sealed class LocalizedDatasetPrototypeTest : ContentUnitTest
         _prototypeManager.ResolveResults();
     }
 
-    private const string TestPrototypes = $@"
+    private const string TestPrototypes = @"
 - type: localizedDataset
-  id: {TestDatasetId}
+  id: Test
   values:
     prefix: test-dataset-
     count: 4
@@ -37,7 +41,7 @@ public sealed class LocalizedDatasetPrototypeTest : ContentUnitTest
     [Test]
     public void LocalizedDatasetTest()
     {
-        var testPrototype = _prototypeManager.Index<LocalizedDatasetPrototype>(TestDatasetId);
+        var testPrototype = _prototypeManager.Index<LocalizedDatasetPrototype>("Test");
         var values = new ValueList<string>();
         foreach (var value in testPrototype.Values)
         {

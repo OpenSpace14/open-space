@@ -1,3 +1,14 @@
+// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
+// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Globalization;
 using System.Linq;
 using Content.Server.Administration;
@@ -6,12 +17,10 @@ using Content.Server.EUI;
 using Content.Server.Item;
 using Content.Server.Power.Components;
 using Content.Shared.Administration;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.Item;
 using Content.Shared.Research.Prototypes;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee;
-using Content.Shared.Wieldable.Components;
 using Robust.Shared.Console;
 using Robust.Shared.Prototypes;
 
@@ -172,13 +181,10 @@ public sealed class StatValuesCommand : IConsoleCommand
         return state;
     }
 
-    private static readonly ProtoId<DamageTypePrototype> StructuralDamageType = "Structural";
-
     private StatValuesEuiMessage GetMelee()
     {
         var values = new List<string[]>();
         var meleeName = _entManager.ComponentFactory.GetComponentName<MeleeWeaponComponent>();
-        var increaseDamageName = _entManager.ComponentFactory.GetComponentName<IncreaseDamageOnWieldComponent>();
 
         foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
         {
@@ -191,45 +197,26 @@ public sealed class StatValuesCommand : IConsoleCommand
 
             var comp = (MeleeWeaponComponent) meleeComp.Component;
 
+            // TODO: Wielded damage
             // TODO: Esword damage
-
-            var structuralDamage = comp.Damage.DamageDict.GetValueOrDefault(StructuralDamageType);
-            var baseDamage = comp.Damage.GetTotal() - comp.Damage.DamageDict.GetValueOrDefault(StructuralDamageType);
-
-            var wieldedStructuralDamage = "-";
-            var wieldedDamage = "-";
-            if (proto.Components.TryGetValue(increaseDamageName, out var increaseDamageComp))
-            {
-                var comp2 = (IncreaseDamageOnWieldComponent) increaseDamageComp.Component;
-
-                wieldedStructuralDamage = (structuralDamage + comp2.BonusDamage.DamageDict.GetValueOrDefault(StructuralDamageType)).ToString();
-                wieldedDamage = (baseDamage + comp2.BonusDamage.GetTotal() - comp2.BonusDamage.DamageDict.GetValueOrDefault(StructuralDamageType)).ToString();
-            }
 
             values.Add(new[]
             {
                 proto.ID,
-                baseDamage.ToString(),
-                wieldedDamage,
-                comp.AttackRate.ToString("0.00", CultureInfo.CurrentCulture),
-                (comp.AttackRate * baseDamage).Float().ToString("0.00", CultureInfo.CurrentCulture),
-                structuralDamage.ToString(),
-                wieldedStructuralDamage,
+                (comp.Damage.GetTotal() * comp.AttackRate).ToString(),
+                comp.AttackRate.ToString(CultureInfo.CurrentCulture),
+                comp.Damage.GetTotal().ToString(),
+                comp.Range.ToString(CultureInfo.CurrentCulture),
             });
         }
 
-        var state = new StatValuesEuiMessage
+        var state = new StatValuesEuiMessage()
         {
-            Title = Loc.GetString("stat-melee-values"),
-            Headers = new List<string>
+            Title = "Cargo sell prices",
+            Headers = new List<string>()
             {
-                Loc.GetString("stat-melee-id"),
-                Loc.GetString("stat-melee-base-damage"),
-                Loc.GetString("stat-melee-wield-damage"),
-                Loc.GetString("stat-melee-attack-rate"),
-                Loc.GetString("stat-melee-dps"),
-                Loc.GetString("stat-melee-structural-damage"),
-                Loc.GetString("stat-melee-structural-wield-damage"),
+                "ID",
+                "Price",
             },
             Values = values,
         };

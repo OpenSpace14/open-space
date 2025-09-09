@@ -1,3 +1,21 @@
+// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
+// SPDX-FileCopyrightText: 2023 deltanedas <deltanedas@laptop>
+// SPDX-FileCopyrightText: 2023 deltanedas <user@zenith>
+// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Arendian <137322659+Arendian@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Saphire <lattice@saphi.re>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
+// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
+// SPDX-FileCopyrightText: 2025 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
+// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Administration.Logs;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
@@ -9,6 +27,7 @@ using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Serialization;
+using Content.Shared.Whitelist; // Shitmed - Starlight Abductors
 
 namespace Content.Shared.Emag.Systems;
 
@@ -25,6 +44,7 @@ public sealed class EmagSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // DeltaV - Add a whitelist/blacklist to the Emag
 
     public override void Initialize()
     {
@@ -51,9 +71,9 @@ public sealed class EmagSystem : EntitySystem
     }
 
     /// <summary>
-    /// Does the emag effect on a specified entity with a specified EmagType. The optional field customEmagType can be used to override the emag type defined in the component.
+    /// Does the emag effect on a specified entity
     /// </summary>
-    public bool TryEmagEffect(Entity<EmagComponent?> ent, EntityUid user, EntityUid target, EmagType? customEmagType = null)
+    public bool TryEmagEffect(Entity<EmagComponent?> ent, EntityUid user, EntityUid target)
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return false;
@@ -68,19 +88,23 @@ public sealed class EmagSystem : EntitySystem
             return false;
         }
 
-        var typeToUse = customEmagType ?? ent.Comp.EmagType;
+        // Shitmed - Starlight Abductors: Check if the target has a whitelist, and check if it passes
+        if (_whitelist.IsWhitelistFail(ent.Comp.ValidTargets, target))
+        {
+            _popup.PopupClient(Loc.GetString("emag-attempt-failed", ("tool", ent)), user, user);
+            return false;
+        }
 
-        var emaggedEvent = new GotEmaggedEvent(user, typeToUse);
+        var emaggedEvent = new GotEmaggedEvent(user, ent.Comp.EmagType, EmagUid: ent);
         RaiseLocalEvent(target, ref emaggedEvent);
-
         if (!emaggedEvent.Handled)
             return false;
 
-        _popup.PopupPredicted(Loc.GetString("emag-success", ("target", Identity.Entity(target, EntityManager))), user, user, PopupType.Medium);
+        _popup.PopupPredicted(Loc.GetString(ent.Comp.SuccessText, ("target", Identity.Entity(target, EntityManager))), user, user, PopupType.Medium); // Goobstation - Success text de-hardcoded
 
         _audio.PlayPredicted(ent.Comp.EmagSound, ent, ent);
 
-        _adminLogger.Add(LogType.Emag, LogImpact.High, $"{ToPrettyString(user):player} emagged {ToPrettyString(target):target} with flag(s): {typeToUse}");
+        _adminLogger.Add(LogType.Emag, LogImpact.High, $"{ToPrettyString(user):player} emagged {ToPrettyString(target):target} with flag(s): {ent.Comp.EmagType}");
 
         if (emaggedEvent.Handled)
             _sharedCharges.TryUseCharge(chargesEnt);
@@ -89,7 +113,7 @@ public sealed class EmagSystem : EntitySystem
         {
             EnsureComp<EmaggedComponent>(target, out var emaggedComp);
 
-            emaggedComp.EmagType |= typeToUse;
+            emaggedComp.EmagType |= ent.Comp.EmagType;
             Dirty(target, emaggedComp);
         }
 
@@ -131,10 +155,9 @@ public sealed class EmagSystem : EntitySystem
 
 [Flags]
 [Serializable, NetSerializable]
-public enum EmagType
+public enum EmagType : byte
 {
     None = 0,
-    All = ~None,
     Interaction = 1 << 1,
     Access = 1 << 2
 }
@@ -145,6 +168,7 @@ public enum EmagType
 /// <param name="Type">The emag type to use</param>
 /// <param name="Handled">Did the emagging succeed? Causes a user-only popup to show on client side</param>
 /// <param name="Repeatable">Can the entity be emagged more than once? Prevents adding of <see cref="EmaggedComponent"/></param>
+/// <param name="EmagUid">Uid of emag entity, Goobstation</param>
 /// <remarks>Needs to be handled in shared/client, not just the server, to actually show the emagging popup</remarks>
 [ByRefEvent]
-public record struct GotEmaggedEvent(EntityUid UserUid, EmagType Type, bool Handled = false, bool Repeatable = false);
+public record struct GotEmaggedEvent(EntityUid UserUid, EmagType Type, bool Handled = false, bool Repeatable = false, EntityUid? EmagUid = null); // Goob edit

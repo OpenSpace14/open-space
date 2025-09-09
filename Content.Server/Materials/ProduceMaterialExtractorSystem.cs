@@ -1,10 +1,14 @@
+// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using Content.Server.Botany.Components;
 using Content.Server.Materials.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Popups;
 using Robust.Server.Audio;
 
 namespace Content.Server.Materials;
@@ -14,7 +18,6 @@ public sealed class ProduceMaterialExtractorSystem : EntitySystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly MaterialStorageSystem _materialStorage = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -41,16 +44,7 @@ public sealed class ProduceMaterialExtractorSystem : EntitySystem
         var matAmount = solution.Value.Comp.Solution.Contents
             .Where(r => ent.Comp.ExtractionReagents.Contains(r.Reagent.Prototype))
             .Sum(r => r.Quantity.Float());
-
-        var changed = (int)matAmount;
-
-        if (changed == 0)
-        {
-            _popup.PopupEntity(Loc.GetString("material-extractor-comp-wrongreagent", ("used", args.Used)), args.User, args.User);
-            return;
-        }
-
-        _materialStorage.TryChangeMaterialAmount(ent, ent.Comp.ExtractedMaterial, changed);
+        _materialStorage.TryChangeMaterialAmount(ent, ent.Comp.ExtractedMaterial, (int) matAmount);
 
         _audio.PlayPvs(ent.Comp.ExtractSound, ent);
         QueueDel(args.Used);

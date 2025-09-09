@@ -1,6 +1,21 @@
+// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
+// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Vordenburg <114301317+Vordenburg@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
+// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
+// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
+// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
+// SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
-using Content.Server.Hands.Systems;
 using Content.Shared.Access.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Hands.Components;
@@ -25,6 +40,9 @@ public sealed partial class NPCBlackboard : IEnumerable<KeyValuePair<string, obj
         {"InteractRange", SharedInteractionSystem.InteractionRange},
         {"MaximumIdleTime", 7f},
         {MedibotInjectRange, 4f},
+        {WeldbotWeldRange, 4f}, // Einstein Engines
+        {FillbotPickupRange, 10f}, // Einstein Engines
+        {PlantbotServiceRange, 4f}, // Einstein Engines
         {MeleeMissChance, 0.3f},
         {"MeleeRange", 1f},
         {"MinimumIdleTime", 2f},
@@ -151,8 +169,6 @@ public sealed partial class NPCBlackboard : IEnumerable<KeyValuePair<string, obj
         value = default;
         EntityUid owner;
 
-        var handSys = entManager.System<HandsSystem>();
-
         switch (key)
         {
             case Access:
@@ -169,24 +185,37 @@ public sealed partial class NPCBlackboard : IEnumerable<KeyValuePair<string, obj
             case ActiveHand:
             {
                 if (!TryGetValue(Owner, out owner, entManager) ||
-                    handSys.GetActiveHand(owner) is not { } activeHand)
+                    !entManager.TryGetComponent<HandsComponent>(owner, out var hands) ||
+                    hands.ActiveHand == null)
                 {
                     return false;
                 }
 
-                value = activeHand;
+                value = hands.ActiveHand;
+                return true;
+            }
+            case ActiveHandEntity: // Goobstation
+            {
+                if (!TryGetValue(Owner, out owner, entManager) ||
+                    !entManager.TryGetComponent<HandsComponent>(owner, out var hands) ||
+                    hands.ActiveHandEntity == null)
+                {
+                    return false;
+                }
+
+                value = hands.ActiveHandEntity;
                 return true;
             }
             case ActiveHandFree:
             {
                 if (!TryGetValue(Owner, out owner, entManager) ||
                     !entManager.TryGetComponent<HandsComponent>(owner, out var hands) ||
-                    handSys.GetActiveHand(owner) is not { } activeHand)
+                    hands.ActiveHand == null)
                 {
                     return false;
                 }
 
-                value = handSys.HandIsEmpty((owner, hands), activeHand);
+                value = hands.ActiveHand.IsEmpty;
                 return true;
             }
             case CanMove:
@@ -204,16 +233,16 @@ public sealed partial class NPCBlackboard : IEnumerable<KeyValuePair<string, obj
             {
                 if (!TryGetValue(Owner, out owner, entManager) ||
                     !entManager.TryGetComponent<HandsComponent>(owner, out var hands) ||
-                    handSys.GetActiveHand(owner) is null)
+                    hands.ActiveHand == null)
                 {
                     return false;
                 }
 
                 var handos = new List<string>();
 
-                foreach (var id in hands.Hands.Keys)
+                foreach (var (id, hand) in hands.Hands)
                 {
-                    if (!handSys.HandIsEmpty((owner, hands), id))
+                    if (!hand.IsEmpty)
                         continue;
 
                     handos.Add(id);
@@ -226,16 +255,16 @@ public sealed partial class NPCBlackboard : IEnumerable<KeyValuePair<string, obj
             {
                 if (!TryGetValue(Owner, out owner, entManager) ||
                     !entManager.TryGetComponent<HandsComponent>(owner, out var hands) ||
-                    handSys.GetActiveHand(owner) is null)
+                    hands.ActiveHand == null)
                 {
                     return false;
                 }
 
                 var handos = new List<string>();
 
-                foreach (var id in hands.Hands.Keys)
+                foreach (var (id, hand) in hands.Hands)
                 {
-                    if (!handSys.HandIsEmpty((owner, hands), id))
+                    if (!hand.IsEmpty)
                         continue;
 
                     handos.Add(id);
@@ -286,12 +315,16 @@ public sealed partial class NPCBlackboard : IEnumerable<KeyValuePair<string, obj
 
     public const string Access = "Access";
     public const string ActiveHand = "ActiveHand";
+    public const string ActiveHandEntity = "ActiveHandEntity"; // Goobstation
     public const string ActiveHandFree = "ActiveHandFree";
     public const string CanMove = "CanMove";
     public const string FreeHands = "FreeHands";
     public const string FollowTarget = "FollowTarget";
     public const string Inventory = "Inventory";
     public const string MedibotInjectRange = "MedibotInjectRange";
+    public const string WeldbotWeldRange = "WeldbotWeldRange"; // Einstein Engines
+    public const string FillbotPickupRange = "FillbotPickupRange"; // Einstein Engines
+    public const string PlantbotServiceRange = "PlantbotServiceRange"; // Einstein Engines
 
     public const string MeleeMissChance = "MeleeMissChance";
 
@@ -318,6 +351,8 @@ public sealed partial class NPCBlackboard : IEnumerable<KeyValuePair<string, obj
     /// Can the NPC climb obstacles for steering.
     /// </summary>
     public const string NavClimb = "NavClimb";
+
+     public const string NavBlob = "NavBlob"; // Goobstation - Blob
 
     /// <summary>
     /// Default key storage for a movement pathfind.

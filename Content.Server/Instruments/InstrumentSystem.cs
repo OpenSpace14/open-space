@@ -1,7 +1,47 @@
+// SPDX-FileCopyrightText: 2020 Campbell Suter <znix@znix.xyz>
+// SPDX-FileCopyrightText: 2020 ComicIronic <comicironic@gmail.com>
+// SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2020 chairbender <kwhipke1@gmail.com>
+// SPDX-FileCopyrightText: 2020 silicons <2003111+silicons@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2020 zumorica <zddm@outlook.es>
+// SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
+// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
+// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2021 Metal Gear Sloth <metalgearsloth@gmail.com>
+// SPDX-FileCopyrightText: 2021 metalgearsloth <comedian_vs_clown@hotmail.com>
+// SPDX-FileCopyrightText: 2021 metalgearsloth <metalgearsloth@gmail.com>
+// SPDX-FileCopyrightText: 2021 pointer-to-null <91910481+pointer-to-null@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 Alex Evgrashin <aevgrashin@yandex.ru>
+// SPDX-FileCopyrightText: 2022 Vera Aguilera Puerto <gradientvera@outlook.com>
+// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
+// SPDX-FileCopyrightText: 2023 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
+// SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
+// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
+// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
+// SPDX-FileCopyrightText: 2025 J <billsmith116@gmail.com>
+// SPDX-FileCopyrightText: 2025 Pieter-Jan Briers <pieterjan.briers@gmail.com>
+// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
+// SPDX-FileCopyrightText: 2025 Simon <63975668+Simyon264@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 krusti <43324723+Topicranger@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 krusti <krusti@fluffytech.xyz>
+// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
-using Content.Server.Interaction;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
 using Content.Shared.Administration;
@@ -10,7 +50,6 @@ using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Instruments;
 using Content.Shared.Instruments.UI;
-using Content.Shared.Physics;
 using Content.Shared.Popups;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
@@ -19,9 +58,7 @@ using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.GameStates;
-using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Server.Instruments;
 
@@ -234,7 +271,7 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
         if (msg.Value)
         {
             // Prevent stuck notes when turning off a channel... Shrimple.
-            RaiseNetworkEvent(new InstrumentMidiEventEvent(msg.Uid, new []{RobustMidiEvent.AllNotesOff((byte)msg.Channel, 0)}));
+            RaiseNetworkEvent(new InstrumentMidiEventEvent(msg.Uid, new[] { RobustMidiEvent.AllNotesOff((byte) msg.Channel, 0) }));
         }
 
         Dirty(uid, instrument);
@@ -271,20 +308,20 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
 
     public (NetEntity, string)[] GetBands(EntityUid uid)
     {
-        var metadataQuery = GetEntityQuery<MetaDataComponent>();
+        var metadataQuery = EntityManager.GetEntityQuery<MetaDataComponent>();
 
         if (Deleted(uid))
             return Array.Empty<(NetEntity, string)>();
 
         var list = new ValueList<(NetEntity, string)>();
-        var instrumentQuery = GetEntityQuery<InstrumentComponent>();
+        var instrumentQuery = EntityManager.GetEntityQuery<InstrumentComponent>();
 
         if (!TryComp(uid, out InstrumentComponent? originInstrument)
-            || originInstrument.InstrumentPlayer is not {} originPlayer)
+            || originInstrument.InstrumentPlayer is not { } originPlayer)
             return Array.Empty<(NetEntity, string)>();
 
         // It's probably faster to get all possible active instruments than all entities in range
-        var activeEnumerator = EntityQueryEnumerator<ActiveInstrumentComponent>();
+        var activeEnumerator = EntityManager.EntityQueryEnumerator<ActiveInstrumentComponent>();
         while (activeEnumerator.MoveNext(out var entity, out _))
         {
             if (entity == uid)
@@ -295,7 +332,7 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
                 continue;
 
             // We want to use the instrument player's name.
-            if (instrument.InstrumentPlayer is not {} playerUid)
+            if (instrument.InstrumentPlayer is not { } playerUid)
                 continue;
 
             // Maybe a bit expensive but oh well GetBands is queued and has a timer anyway.
@@ -323,7 +360,7 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
             var netUid = GetNetEntity(uid);
 
             // Reset puppet instruments too.
-            RaiseNetworkEvent(new InstrumentMidiEventEvent(netUid, new[]{RobustMidiEvent.SystemReset(0)}));
+            RaiseNetworkEvent(new InstrumentMidiEventEvent(netUid, new[] { RobustMidiEvent.SystemReset(0) }));
 
             RaiseNetworkEvent(new InstrumentStopMidiEvent(netUid));
         }
@@ -427,13 +464,13 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
             _bandRequestQueue.Clear();
         }
 
-        var activeQuery = GetEntityQuery<ActiveInstrumentComponent>();
-        var transformQuery = GetEntityQuery<TransformComponent>();
+        var activeQuery = EntityManager.GetEntityQuery<ActiveInstrumentComponent>();
+        var transformQuery = EntityManager.GetEntityQuery<TransformComponent>();
 
         var query = AllEntityQuery<ActiveInstrumentComponent, InstrumentComponent>();
         while (query.MoveNext(out var uid, out _, out var instrument))
         {
-            if (instrument.Master is {} master)
+            if (instrument.Master is { } master)
             {
                 if (Deleted(master))
                 {
@@ -459,9 +496,9 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
                 (instrument.BatchesDropped >= MaxMidiBatchesDropped
                  || instrument.LaggedBatches >= MaxMidiLaggedBatches))
             {
-                if (instrument.InstrumentPlayer is {Valid: true} mob)
+                if (instrument.InstrumentPlayer is { Valid: true } mob)
                 {
-                    _stuns.TryUpdateParalyzeDuration(mob, TimeSpan.FromSeconds(1));
+                    _stuns.TryParalyze(mob, TimeSpan.FromSeconds(1), true);
 
                     _popup.PopupEntity(Loc.GetString("instrument-component-finger-cramps-max-message"),
                         uid, mob, PopupType.LargeCaution);

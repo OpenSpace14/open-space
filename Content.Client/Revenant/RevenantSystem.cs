@@ -1,6 +1,11 @@
+// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
+// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.Alerts;
-using Content.Shared.Alert;
-using Content.Shared.Alert.Components;
 using Content.Shared.Revenant;
 using Content.Shared.Revenant.Components;
 using Robust.Client.GameObjects;
@@ -17,7 +22,7 @@ public sealed class RevenantSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RevenantComponent, AppearanceChangeEvent>(OnAppearanceChange);
-        SubscribeLocalEvent<RevenantComponent, GetGenericAlertCounterAmountEvent>(OnGetCounterAmount);
+        SubscribeLocalEvent<RevenantComponent, UpdateAlertSpriteEvent>(OnUpdateAlert);
     }
 
     private void OnAppearanceChange(EntityUid uid, RevenantComponent component, ref AppearanceChangeEvent args)
@@ -42,14 +47,14 @@ public sealed class RevenantSystem : EntitySystem
         }
     }
 
-    private void OnGetCounterAmount(Entity<RevenantComponent> ent, ref GetGenericAlertCounterAmountEvent args)
+    private void OnUpdateAlert(Entity<RevenantComponent> ent, ref UpdateAlertSpriteEvent args)
     {
-        if (args.Handled)
+        if (args.Alert.ID != ent.Comp.EssenceAlert)
             return;
 
-        if (ent.Comp.EssenceAlert != args.Alert)
-            return;
-
-        args.Amount = ent.Comp.Essence.Int();
+        var essence = Math.Clamp(ent.Comp.Essence.Int(), 0, 999);
+        _sprite.LayerSetRsiState(args.SpriteViewEnt.AsNullable(), RevenantVisualLayers.Digit1, $"{(essence / 100) % 10}");
+        _sprite.LayerSetRsiState(args.SpriteViewEnt.AsNullable(), RevenantVisualLayers.Digit2, $"{(essence / 10) % 10}");
+        _sprite.LayerSetRsiState(args.SpriteViewEnt.AsNullable(), RevenantVisualLayers.Digit3, $"{essence % 10}");
     }
 }

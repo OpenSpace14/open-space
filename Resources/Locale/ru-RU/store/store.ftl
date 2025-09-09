@@ -1,6 +1,5 @@
 store-ui-default-title = Магазин
 store-ui-default-withdraw-text = Вывести
-store-ui-refund-text = Возврат
 store-ui-balance-display = { $currency }: { $amount }
 store-ui-price-display = { $amount } { $currency }
 store-ui-discount-display-with-currency = скидка { $amount }{ $currency }
@@ -12,3 +11,5 @@ store-ui-button-out-of-stock = { "" } (Нет в наличии)
 store-not-account-owner = Этот { $store } не привязан к вам!
 store-preset-name-uplink = Аплинк
 store-preset-name-spellbook = Книга заклинаний
+store-preset-name-uplink-ghost = Contravend Uplink
+store-preset-name-spellbook-ghost = Ghostly Spellshop

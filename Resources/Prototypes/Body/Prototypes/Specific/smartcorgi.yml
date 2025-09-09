@@ -1,14 +1,12 @@
 - type: body
   id: SmartCorgi
   name: corgi
-  root: torso
+  root: chest
   slots:
-    torso:
-      part: TorsoAnimal
+    chest:
+      part: ChestAnimal
       connections:
-      - righthand
-      - lefthand
-      - legs
+      - groin
       organs:
         brain: OrganHumanBrain # feels strange but it is what it is
         lungs: OrganAnimalLungs
@@ -16,10 +14,14 @@
         liver: OrganAnimalLiver
         heart: OrganAnimalHeart
         kidneys: OrganAnimalKidneys
-    lefthand:
-      part: LeftHandSmartCorgi
-    righthand:
-      part: RightHandSmartCorgi
+    groin:
+      part: GroinAnimal
+      connections:
+      - legs
+      organs:
+        stomach: OrganAnimalStomach
+        liver: OrganAnimalLiver
+        kidneys: OrganAnimalKidneys
     legs:
       part: LegsAnimal
       connections:

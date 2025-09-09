@@ -1,3 +1,8 @@
+// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: MIT
+
 using System.Numerics;
 using Content.Client.Gameplay;
 using Content.Shared.Popups;
@@ -26,9 +31,9 @@ public sealed class PopupUIController : UIController, IOnStateEntered<GameplaySt
         base.Initialize();
         var cache = IoCManager.Resolve<IResourceCache>();
 
-        _smallFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/UbuntuSans/UbuntuSansNerdFont-Italic.ttf"), 10);
-        _mediumFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/UbuntuSans/UbuntuSansNerdFont-Italic.ttf"), 12);
-        _largeFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/UbuntuSans/UbuntuSansNerdFont-BoldItalic.ttf"), 14);
+        _smallFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/Ubuntu/UbuntuSansNerdFont-Italic.ttf"), 10);
+        _mediumFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/Ubuntu/UbuntuSansNerdFont-Italic.ttf"), 12);
+        _largeFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/Widock/Widock.otf"), 14);
     }
 
     public void OnStateEntered(GameplayState state)

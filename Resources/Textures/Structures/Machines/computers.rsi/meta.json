@@ -434,28 +434,6 @@
             ]
         },
         {
-            "name": "comm_wizard",
-            "directions": 4,
-            "delays": [
-                [
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1
-                ]
-            ]
-        },
-        {
             "name": "command",
             "directions": 4,
             "delays": [
@@ -2025,10 +2003,6 @@
         },
         {
             "name": "service_keys",
-            "directions": 4
-        },
-        {
-            "name": "wizard_key",
             "directions": 4
         }
     ]

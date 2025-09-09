@@ -1,43 +1,45 @@
+# SPDX-FileCopyrightText: 2022 Peptide90 <78795277+Peptide90@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
+# SPDX-FileCopyrightText: 2024 Debug <49997488+DebugOk@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+#
+# SPDX-License-Identifier: MIT
 # Non-fungible apes, anyone?
 - type: nameIdentifierGroup
   id: Monkey
-  format: name-identifier-format-monkey
+  prefix: MK
 
 - type: nameIdentifierGroup
   id: Kobold
-  format: name-identifier-format-kobold
+  prefix: KB
 
 - type: nameIdentifierGroup
   id: Holoparasite
-  format: name-identifier-format-holoparasite
+  prefix: HOLO
 
 - type: nameIdentifierGroup
   id: MMI
-  format: name-identifier-format-mmi
+  prefix: MMI
   minValue: 100
   maxValue: 999
 
 - type: nameIdentifierGroup
   id: PositronicBrain
-  format: name-identifier-format-positronic-brain
+  prefix: PB
   minValue: 10
   maxValue: 99
 
 - type: nameIdentifierGroup
   id: Silicon
-  format: name-identifier-format-silicon
-  minValue: 1000
-  maxValue: 9999
-
-- type: nameIdentifierGroup
-  id: Xenoborg
-  format: name-identifier-format-xenoborg
+  prefix: Si
   minValue: 1000
   maxValue: 9999
 
 - type: nameIdentifierGroup
   id: StationAi
-  format: name-identifier-format-station-ai
+  prefix: AI
   minValue: 100
   maxValue: 999
 
@@ -57,6 +59,6 @@
 
 - type: nameIdentifierGroup
   id: CargoTelepads
-  format: name-identifier-format-telepad
+  prefix: TELE
   minValue: 0
   maxValue: 999

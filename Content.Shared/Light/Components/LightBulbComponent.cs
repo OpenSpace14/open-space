@@ -1,3 +1,12 @@
+// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
+// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: MIT
+
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
@@ -8,61 +17,69 @@ namespace Content.Shared.Light.Components;
 /// Component that represents a light bulb. Can be broken, or burned, which turns them mostly useless.
 /// TODO: Breaking and burning should probably be moved to another component eventually.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class LightBulbComponent : Component
 {
     /// <summary>
     /// The color of the lightbulb and the light it produces.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField("color")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public Color Color = Color.White;
 
     /// <summary>
     /// The type of lightbulb. Tube/bulb/etc...
     /// </summary>
     [DataField("bulb")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public LightBulbType Type = LightBulbType.Tube;
 
     /// <summary>
     /// The initial state of the lightbulb.
     /// </summary>
-    [DataField("startingState"), AutoNetworkedField]
+    [DataField("startingState")]
     public LightBulbState State = LightBulbState.Normal;
 
     /// <summary>
     /// The temperature the air around the lightbulb is exposed to when the lightbulb burns out.
     /// </summary>
     [DataField("BurningTemperature")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public int BurningTemperature = 1400;
 
     /// <summary>
     /// Relates to how bright the light produced by the lightbulb is.
     /// </summary>
-    [DataField]
+    [DataField("lightEnergy")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public float LightEnergy = 0.8f;
 
     /// <summary>
     /// The maximum radius of the point light source this light produces.
     /// </summary>
-    [DataField]
+    [DataField("lightRadius")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public float LightRadius = 10;
 
     /// <summary>
     /// Relates to the falloff constant of the light produced by the lightbulb.
     /// </summary>
-    [DataField]
+    [DataField("lightSoftness")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public float LightSoftness = 1;
 
     /// <summary>
     /// The amount of power used by the lightbulb when it's active.
     /// </summary>
     [DataField("PowerUse")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public int PowerUse = 60;
 
     /// <summary>
     /// The sound produced when the lightbulb breaks.
     /// </summary>
-    [DataField]
+    [DataField("breakSound")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public SoundSpecifier BreakSound = new SoundCollectionSpecifier("GlassBreak", AudioParams.Default.WithVolume(-6f));
 
     #region Appearance
@@ -70,19 +87,22 @@ public sealed partial class LightBulbComponent : Component
     /// <summary>
     /// The sprite state used when the lightbulb is intact.
     /// </summary>
-    [DataField]
+    [DataField("normalSpriteState")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public string NormalSpriteState = "normal";
 
     /// <summary>
     /// The sprite state used when the lightbulb is broken.
     /// </summary>
-    [DataField]
+    [DataField("brokenSpriteState")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public string BrokenSpriteState = "broken";
 
     /// <summary>
     /// The sprite state used when the lightbulb is burned.
     /// </summary>
-    [DataField]
+    [DataField("burnedSpriteState")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public string BurnedSpriteState = "burned";
 
     #endregion Appearance

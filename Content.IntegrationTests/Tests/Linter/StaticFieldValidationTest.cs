@@ -1,9 +1,16 @@
+// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Collections.Generic;
 using System.Linq;
 using Content.Shared.Tag;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Reflection;
+using Robust.Shared.Serialization.Manager.Attributes;
 
 namespace Content.IntegrationTests.Tests.Linter;
 
@@ -65,25 +72,25 @@ public sealed class StaticFieldValidationTest
     [Reflect(false)]
     private sealed class StringValid
     {
-        public static readonly ProtoId<TagPrototype> Tag = "StaticFieldTestTag";
+        [ValidatePrototypeId<TagPrototype>] public static string Tag = "StaticFieldTestTag";
     }
 
     [Reflect(false)]
     private sealed class StringInvalid
     {
-        public static readonly ProtoId<TagPrototype> Tag = string.Empty;
+        [ValidatePrototypeId<TagPrototype>] public static string Tag = string.Empty;
     }
 
     [Reflect(false)]
     private sealed class StringArrayValid
     {
-        public static readonly ProtoId<TagPrototype>[] Tag = ["StaticFieldTestTag", "StaticFieldTestTag"];
+        [ValidatePrototypeId<TagPrototype>] public static string[] Tag = ["StaticFieldTestTag", "StaticFieldTestTag"];
     }
 
     [Reflect(false)]
     private sealed class StringArrayInvalid
     {
-        public static readonly ProtoId<TagPrototype>[] Tag = [string.Empty, "StaticFieldTestTag", string.Empty];
+        [ValidatePrototypeId<TagPrototype>] public static string[] Tag = [string.Empty, "StaticFieldTestTag", string.Empty];
     }
 
     [Reflect(false)]

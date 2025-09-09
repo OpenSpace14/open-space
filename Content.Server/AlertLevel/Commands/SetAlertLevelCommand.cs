@@ -1,16 +1,30 @@
-﻿using System.Linq;
+// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2022 Morber <14136326+Morb0@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2022 Morbo <14136326+Morb0@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
+// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
+// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Linq;
 using Content.Server.Administration;
 using Content.Server.Station.Systems;
 using Content.Shared.Administration;
+using JetBrains.Annotations;
 using Robust.Shared.Console;
 
 namespace Content.Server.AlertLevel.Commands
 {
+    [UsedImplicitly]
     [AdminCommand(AdminFlags.Fun)]
-    public sealed class SetAlertLevelCommand : LocalizedEntityCommands
+    public sealed class SetAlertLevelCommand : LocalizedCommands
     {
-        [Dependency] private readonly AlertLevelSystem _alertLevelSystem = default!;
-        [Dependency] private readonly StationSystem _stationSystem = default!;
+        [Dependency] private readonly IEntitySystemManager _entitySystems = default!;
 
         public override string Command => "setalertlevel";
 
@@ -20,9 +34,11 @@ namespace Content.Server.AlertLevel.Commands
             var player = shell.Player;
             if (player?.AttachedEntity != null)
             {
-                var stationUid = _stationSystem.GetOwningStation(player.AttachedEntity.Value);
+                var stationUid = _entitySystems.GetEntitySystem<StationSystem>().GetOwningStation(player.AttachedEntity.Value);
                 if (stationUid != null)
+                {
                     levelNames = GetStationLevelNames(stationUid.Value);
+                }
             }
 
             return args.Length switch
@@ -57,7 +73,7 @@ namespace Content.Server.AlertLevel.Commands
                 return;
             }
 
-            var stationUid = _stationSystem.GetOwningStation(player.AttachedEntity.Value);
+            var stationUid = _entitySystems.GetEntitySystem<StationSystem>().GetOwningStation(player.AttachedEntity.Value);
             if (stationUid == null)
             {
                 shell.WriteLine(LocalizationManager.GetString("cmd-setalertlevel-invalid-grid"));
@@ -72,12 +88,13 @@ namespace Content.Server.AlertLevel.Commands
                 return;
             }
 
-            _alertLevelSystem.SetLevel(stationUid.Value, level, true, true, true, locked);
+            _entitySystems.GetEntitySystem<AlertLevelSystem>().SetLevel(stationUid.Value, level, true, true, true, locked);
         }
 
         private string[] GetStationLevelNames(EntityUid station)
         {
-            if (!EntityManager.TryGetComponent<AlertLevelComponent>(station, out var alertLevelComp))
+            var entityManager = IoCManager.Resolve<IEntityManager>();
+            if (!entityManager.TryGetComponent<AlertLevelComponent>(station, out var alertLevelComp))
                 return new string[]{};
 
             if (alertLevelComp.AlertLevels == null)

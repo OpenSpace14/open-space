@@ -1,10 +1,21 @@
+// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
+// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
+// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
+// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
+// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
+// SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Dataset;
 using Content.Shared.Tips;
-using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
@@ -68,13 +79,9 @@ public sealed class TipsSystem : EntitySystem
     {
         return args.Length switch
         {
-            1 => CompletionResult.FromHintOptions(
-                CompletionHelper.SessionNames(players: _playerManager),
-                Loc.GetString("cmd-tippy-auto-1")),
+            1 => CompletionResult.FromHintOptions(CompletionHelper.SessionNames(), Loc.GetString("cmd-tippy-auto-1")),
             2 => CompletionResult.FromHint(Loc.GetString("cmd-tippy-auto-2")),
-            3 => CompletionResult.FromHintOptions(
-                CompletionHelper.PrototypeIdsLimited<EntityPrototype>(args[2], _prototype),
-                Loc.GetString("cmd-tippy-auto-3")),
+            3 => CompletionResult.FromHintOptions(CompletionHelper.PrototypeIDs<EntityPrototype>(), Loc.GetString("cmd-tippy-auto-3")),
             4 => CompletionResult.FromHint(Loc.GetString("cmd-tippy-auto-4")),
             5 => CompletionResult.FromHint(Loc.GetString("cmd-tippy-auto-5")),
             6 => CompletionResult.FromHint(Loc.GetString("cmd-tippy-auto-6")),

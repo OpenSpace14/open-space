@@ -1,3 +1,15 @@
+// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
+// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
+// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
+// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Humanoid;
 using Content.Shared.Speech;
 using Robust.Shared.Prototypes;
 
@@ -32,9 +44,20 @@ public sealed partial class VoiceMaskComponent : Component
     [DataField]
     public EntProtoId Action = "ActionChangeVoiceMask";
 
+    // CorvaxGoob-TTS-Start
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public string VoiceId = SharedHumanoidAppearanceSystem.DefaultVoice;
+    // CorvaxGoob-TTS-End
+
     /// <summary>
     ///     Reference to the action.
     /// </summary>
     [DataField]
     public EntityUid? ActionEntity;
+    /// <summary>
+    ///     if UI Action shud be added on equipt
+    /// </summary>
+    [DataField]
+    public bool EnableAction = true; //Goobstation
 }

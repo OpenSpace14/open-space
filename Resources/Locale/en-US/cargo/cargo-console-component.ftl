@@ -1,3 +1,16 @@
+# SPDX-FileCopyrightText: 2022 EmoGarbage404 <98561806+EmoGarbage404@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2022 Marat Gadzhiev <15rinkashikachi15@gmail.com>
+# SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
+# SPDX-FileCopyrightText: 2024 Andrew <blackledgecreates@gmail.com>
+# SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2024 icekot8 <93311212+icekot8@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## UI
 cargo-console-menu-title = Cargo request console
 cargo-console-menu-account-name-label = Account:{" "}
@@ -45,6 +58,10 @@ cargo-console-unlock-approved-order-broadcast = [bold]{$productName} x{$orderAmo
 cargo-console-fund-withdraw-broadcast = [bold]{$name} withdrew {$amount} spesos from {$name1} \[{$code1}\]
 cargo-console-fund-transfer-broadcast = [bold]{$name} transferred {$amount} spesos from {$name1} \[{$code1}\] to {$name2} \[{$code2}\][/bold]
 cargo-console-fund-transfer-user-unknown = Unknown
+
+# GoobStation - cooldown on Cargo Orders (specifically gamba)
+cargo-console-cooldown-count = Cannot order more than one {$product} at a time.
+cargo-console-cooldown-active = Orders for {$product} cannot be placed for another {$timeCount} {$timeUnits}.
 
 cargo-console-paper-reason-default = None
 cargo-console-paper-approver-default = Self
