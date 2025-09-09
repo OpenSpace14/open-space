@@ -1,10 +1,3 @@
-# SPDX-FileCopyrightText: 2023 Nairod <110078045+Nairodian@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 PixelTK <85175107+PixelTheKermit@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-#
-# SPDX-License-Identifier: MIT
 # Chelicerae
 - type: marking
   id: ArachnidCheliceraeDownwards
@@ -298,7 +291,7 @@
 - type: marking
   id: ArachnidRArmStripes
   bodyPart: RArm
-  markingCategory: RightArm
+  markingCategory: Arms
   speciesRestriction: [Arachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/arms.rsi
@@ -311,7 +304,7 @@
 - type: marking
   id: ArachnidLArmStripes
   bodyPart: LArm
-  markingCategory: LeftArm
+  markingCategory: Arms
   speciesRestriction: [Arachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/arms.rsi
@@ -325,7 +318,7 @@
 - type: marking
   id: ArachnidRLegStripes
   bodyPart: RLeg
-  markingCategory: RightLeg
+  markingCategory: Legs
   speciesRestriction: [Arachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/legs.rsi
@@ -338,7 +331,7 @@
 - type: marking
   id: ArachnidLLegStripes
   bodyPart: LLeg
-  markingCategory: LeftLeg
+  markingCategory: Legs
   speciesRestriction: [Arachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/legs.rsi
@@ -358,3 +351,4 @@
   sprites:
   - sprite: Mobs/Customization/Arachnid/overlay.rsi
     state: fuzzy
+

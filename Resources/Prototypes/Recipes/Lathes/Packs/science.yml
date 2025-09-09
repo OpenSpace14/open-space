@@ -1,22 +1,11 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Speebro <100388782+Speebr0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Speebro <speebro@notreal.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
 ## Static
 
 - type: latheRecipePack
   id: ScienceBoardsStatic
   recipes:
-  #- ProtolatheMachineCircuitboard - Goobstation - Moved to SharedBoardsStatic
-  #- AutolatheMachineCircuitboard
-  #- CircuitImprinterMachineCircuitboard
+  - ProtolatheMachineCircuitboard
+  - AutolatheMachineCircuitboard
+  - CircuitImprinterMachineCircuitboard
   - ExosuitFabricatorMachineCircuitboard
   - CutterMachineCircuitboard
   - BorgChargerCircuitboard
@@ -28,13 +17,6 @@
   - FloorBlueCircuit
   - FloorRedCircuit
 
-# Keeps flash payloads out of the hands of tiders, I guess. All triggers roundstart for autolathes and med/sci/secfab
-- type: latheRecipePack
-  id: ScienceExplosives
-  recipes:
-  - ChemicalPayload
-  - FlashPayload
-
 ## Dynamic
 
 - type: latheRecipePack
@@ -45,20 +27,21 @@
   - AnomalyLocator
   - AnomalyLocatorWide
   - HoloprojectorField
-  #- SignallerAdvanced - Goobstation - Removed from there. Still in Equipment.
+  - SignallerAdvanced
   - DeviceQuantumSpinInverter
   - DeviceDesynchronizer
+  - ClothingBackpackHarmpack
 
 - type: latheRecipePack
   id: ScienceClothing
   recipes:
   - ClothingShoesBootsMagSci
   - ClothingShoesBootsMoon
-#  - ClothingShoesBootsSpeed - Goobstation - Nuked due to sprinting.
+  - ClothingShoesBootsSpeed
+  - ClothingShoesBootsJump
   - ClothingBackpackHolding
   - ClothingBackpackSatchelHolding
   - ClothingBackpackDuffelHolding
-  - ClothingBackpackMessengerHolding # Frontier
 
 - type: latheRecipePack
   id: PowerCells
@@ -72,8 +55,10 @@
   recipes:
   - WeaponPistolCHIMP
   - WeaponForceGun
-  #- WeaponLaserSvalinn - Goobstation - Moved to ServiceWeapons
-  #- WeaponProtoKineticAccelerator - Goobstation - Moved to MiningWeapons
+  - WeaponProtoKineticAccelerator
+  - PKAUpgradeDamage
+  - PKAUpgradeRange
+  - PKAUpgradeFireRate
   - WeaponTetherGun
   - WeaponGauntletGorilla
 
@@ -86,21 +71,28 @@
   - FauxTileAstroIce
   - FauxTileAstroSnow
   - FauxTileAstroAsteroidSand
-  - TileItemBluespace # Corvax-Goob-BluespaceTile
+
+# Only contains parts for making basic modular grenades, no actual explosives
+- type: latheRecipePack
+  id: ScienceExplosives
+  recipes:
+  - ChemicalPayload
+  - FlashPayload
+  - TimerTrigger
+  - SignalTrigger
+  - VoiceTrigger
 
 - type: latheRecipePack
   id: ScienceBoards
   recipes:
-  #- TurboItemRechargerCircuitboard - Goobstation - Moved to SharedBoards
-  # Begin DeltaV Removals - replaced by techfabs/upgrade kits
-  #- AutolatheHyperConvectionMachineCircuitboard
-  #- ProtolatheHyperConvectionMachineCircuitboard
-  #- CircuitImprinterHyperConvectionMachineCircuitboard
-  # End DeltaV Removals
+  - TurboItemRechargerCircuitboard
+  - AutolatheHyperConvectionMachineCircuitboard
+  - ProtolatheHyperConvectionMachineCircuitboard
+  - CircuitImprinterHyperConvectionMachineCircuitboard
   - TechDiskComputerCircuitboard
-  #- FlatpackerMachineCircuitboard - Moved to SharedBoards
-  #- SheetifierMachineCircuitboard - Moved to ServiceBoards
-  #- PowerCageRechargerCircuitboard - Moved to SharedBoards
+  - FlatpackerMachineCircuitboard
+  - SheetifierMachineCircuitboard
+  - PowerCageRechargerCircuitboard
   - AnalysisComputerCircuitboard
   - AnomalyVesselCircuitboard
   - AnomalyVesselExperimentalCircuitboard
@@ -108,7 +100,6 @@
   - APECircuitboard
   - ArtifactAnalyzerMachineCircuitboard
   - ArtifactCrusherMachineCircuitboard
-  - QuantumTelepadMachineCircuitboard # CorvaxGoob-QuantumTelepad
 
 - type: latheRecipePack
   id: CameraBoards
@@ -135,8 +126,6 @@
 - type: latheRecipePack
   id: ShuttleBoards
   recipes:
-  - ShuttleRemoteControlSystemCircuitboard # CorvaxGoob-LinkableDrones
-  - ComputerIFFCircuitboard # CorvaxGoob-IIF-Improves
   - ShuttleConsoleCircuitboard
   - RadarConsoleCircuitboard
   - ThrusterMachineCircuitboard

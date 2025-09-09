@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Content.Shared.Hands.Components;
@@ -30,11 +25,8 @@ public sealed class FTLDiskCommand : LocalizedCommands
 
     public override string Command => "ftldisk";
 
-    [ValidatePrototypeId<EntityPrototype>]
-    public const string CoordinatesDisk = "CoordinatesDisk";
-
-    [ValidatePrototypeId<EntityPrototype>]
-    public const string DiskCase = "DiskCase";
+    public static readonly EntProtoId CoordinatesDisk = "CoordinatesDisk";
+    public static readonly EntProtoId DiskCase = "DiskCase";
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length == 0)
@@ -157,7 +149,7 @@ public sealed class FTLDiskCommand : LocalizedCommands
 
                 if (_entManager.TryGetComponent<StorageComponent>(cdCaseUid, out var storage) && storageSystem.Insert(cdCaseUid, cdUid, out _, storageComp: storage, playSound: false))
                 {
-                    if (_entManager.TryGetComponent<HandsComponent>(entity, out var handsComponent) && handsSystem.TryGetEmptyHand(entity, out var emptyHand, handsComponent))
+                    if (_entManager.TryGetComponent<HandsComponent>(entity, out var handsComponent) && handsSystem.TryGetEmptyHand((entity, handsComponent), out var emptyHand))
                     {
                         handsSystem.TryPickup(entity, cdCaseUid, emptyHand, checkActionBlocker: false, handsComp: handsComponent);
                     }
@@ -166,7 +158,7 @@ public sealed class FTLDiskCommand : LocalizedCommands
                 {
                     _entManager.DeleteEntity(cdCaseUid); // something went wrong so just yeet the chaf
 
-                    if (_entManager.TryGetComponent<HandsComponent>(entity, out var handsComponent) && handsSystem.TryGetEmptyHand(entity, out var emptyHand, handsComponent))
+                    if (_entManager.TryGetComponent<HandsComponent>(entity, out var handsComponent) && handsSystem.TryGetEmptyHand((entity, handsComponent), out var emptyHand))
                     {
                         handsSystem.TryPickup(entity, cdUid, emptyHand, checkActionBlocker: false, handsComp: handsComponent);
                     }

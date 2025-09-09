@@ -1,0 +1,70 @@
+name: Update Changelog
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract PR Number
+        id: extract_pr
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          PR_NUMBER=$(echo "$COMMIT_MESSAGE" | grep -oP '(?<=#)\d+(?= from|\s|$)' | head -1 || echo "")
+          if [ -z "$PR_NUMBER" ]; then
+            PR_NUMBER=$(echo "$COMMIT_MESSAGE" | grep -oP '(?<=Merge pull request #)\d+' | head -1 || echo "")
+          fi
+          if [ -z "$PR_NUMBER" ]; then
+            PR_NUMBER=$(echo "$COMMIT_MESSAGE" | grep -oP '(?<=\(#)\d+(?=\))' | head -1 || echo "")
+          fi
+          if [ -n "$PR_NUMBER" ]; then
+            echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Python
+        if: steps.extract_pr.outputs.pr_number != ''
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        if: steps.extract_pr.outputs.pr_number != ''
+        run: pip install pyyaml PyGithub
+
+      - name: Update Changelog
+        if: steps.extract_pr.outputs.pr_number != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.extract_pr.outputs.pr_number }}
+          CHANGELOG_FILE_PATH: "Resources/Changelog/ChangelogOS.yml"
+        run: |
+          python ./Tools/_OS/update_changelog.py
+
+      - name: Commit and Push Changes
+        if: steps.extract_pr.outputs.pr_number != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if ! git diff --exit-code --quiet Resources/Changelog/ChangelogOS.yml; then
+            git add Resources/Changelog/ChangelogOS.yml
+            git commit -m "Update changelog for PR #${{ steps.extract_pr.outputs.pr_number }} [skip ci]"
+            BRANCH_NAME=${GITHUB_REF#refs/heads/}
+            for i in {1..3}; do
+              git pull --rebase origin "$BRANCH_NAME"
+              git push origin "HEAD:$BRANCH_NAME" && break || sleep 5
+            done
+          fi

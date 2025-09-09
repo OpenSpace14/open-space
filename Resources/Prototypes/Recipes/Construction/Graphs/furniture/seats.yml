@@ -1,17 +1,3 @@
-# SPDX-FileCopyrightText: 2021 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2022 Peptide90 <78795277+Peptide90@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Alekshhh <44923899+Alekshhh@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ko4ergaPunk <62609550+Ko4ergaPunk@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 MACMAN2003 <macman2003c@gmail.com>
-# SPDX-FileCopyrightText: 2024 Nairod <110078045+Nairodian@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Nim <128169402+Nimfar11@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
-
 - type: constructionGraph
   id: Seat
   start: start
@@ -40,12 +26,12 @@
             - material: Brass
               amount: 1
               doAfter: 1
-        - to: rollingChairOffice # CorvaxGoob-OfficeChairsMappingFix
+        - to: chairOffice
           steps:
             - material: Steel
               amount: 2
               doAfter: 1
-        - to: rollingChairOfficeDark # CorvaxGoob-OfficeChairsMappingFix
+        - to: chairOfficeDark
           steps:
             - material: Steel
               amount: 2
@@ -81,6 +67,11 @@
           steps:
             - material: Steel
               amount: 2
+              doAfter: 1
+        - to: stoolCard
+          steps:
+            - material: Cardboard
+              amount: 3
               doAfter: 1
         - to: chairWoodBench
           steps:
@@ -170,32 +161,6 @@
             - tool: Screwing
               doAfter: 1
 
-    # CorvaxGoob-OfficeChairsMappingFix-Start
-    - node: rollingChairOffice
-      entity: RollingChairOfficeLight
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-          steps:
-            - tool: Screwing
-              doAfter: 1
-
-    - node: rollingChairOfficeDark
-      entity: RollingChairOfficeDark
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-          steps:
-            - tool: Screwing
-              doAfter: 1
-    # CorvaxGoob-OfficeChairsMappingFix-End
-
     - node: chairComfy
       entity: ComfyChair
       edges:
@@ -271,6 +236,20 @@
             - tool: Screwing
               doAfter: 1
 
+    - node: stoolCard
+      entity: CardStool
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialCardboard1
+              amount: 3
+            - !type:PlaySound
+              sound: /Audio/Items/Toys/ToyFall2.ogg
+          steps:
+            - tool: Slicing
+              doAfter: 1
+
     - node: chairWoodBench
       entity: WoodenBench
       edges:
@@ -299,6 +278,7 @@
               doAfter: 1
             - tool: Screwing
               doAfter: 1
+
     - node: blueComfBench
       entity: BenchBlueComfy
       edges:

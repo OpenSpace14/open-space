@@ -1,6 +1,6 @@
 ent-IDCardStandard = identification card
     .desc = A card necessary to access various areas aboard the station.
-ent-PassengerIDCard = assistant ID card
+ent-PassengerIDCard = passenger ID card
     .desc = { ent-IDCardStandard.desc }
 ent-TechnicalAssistantIDCard = technical assistant ID card
     .desc = { ent-PassengerIDCard.desc }
@@ -124,6 +124,8 @@ ent-SeniorPhysicianIDCard = senior physician ID card
     .desc = { ent-MedicalIDCard.desc }
 ent-SeniorOfficerIDCard = senior officer ID card
     .desc = { ent-SecurityIDCard.desc }
+ent-WizardIDCard = wizard ID card
+    .desc = { ent-IDCardStandard.desc }
 ent-UniversalIDCard = universal ID card
     .desc = An ID card that gives you access beyond your wildest dreams.
     .suffix = Admin

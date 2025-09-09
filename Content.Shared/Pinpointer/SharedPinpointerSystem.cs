@@ -1,28 +1,9 @@
-// SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2021 Alexander Evgrashin <evgrashin.adl@gmail.com>
-// SPDX-FileCopyrightText: 2022 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
-using Content.Shared.Popups;
-using Content.Shared.Whitelist;
 
 namespace Content.Shared.Pinpointer;
 
@@ -30,8 +11,6 @@ public abstract class SharedPinpointerSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
-    [Dependency] protected readonly EntityWhitelistSystem Whitelist = default!; // Goob edit
-    [Dependency] private readonly SharedPopupSystem _popup = default!; // Goob edit
 
     public override void Initialize()
     {
@@ -46,89 +25,36 @@ public abstract class SharedPinpointerSystem : EntitySystem
     /// </summary>
     private void OnAfterInteract(EntityUid uid, PinpointerComponent component, AfterInteractEvent args)
     {
-        if (!args.CanReach || args.Target is not { } target || args.Handled)
+        if (!args.CanReach || args.Target is not { } target)
             return;
 
         if (!component.CanRetarget || component.IsActive)
             return;
 
-        // Goob edit start: retargeting has a whitelist
-        args.Handled = true;
-
-        if (Whitelist.IsWhitelistFail(component.RetargetingWhitelist, target) ||
-            Whitelist.IsBlacklistPass(component.RetargetingBlacklist, target))
-        {
-            return;
-        }
-
         // TODO add doafter once the freeze is lifted
-        // ignore can target multiple, because too hard to support
-        component.Targets.Clear();
-        component.Targets.Add(target);
-        _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(args.User):player} set target of {ToPrettyString(uid):pinpointer} to {ToPrettyString(target):target}");
+        args.Handled = true;
+        component.Target = args.Target;
+        _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(args.User):player} set target of {ToPrettyString(uid):pinpointer} to {ToPrettyString(component.Target.Value):target}");
         if (component.UpdateTargetName)
-            component.TargetName = Identity.Name(target, EntityManager);
-
-        _popup.PopupPredicted(Loc.GetString("pinpointer-link-success"), uid, args.User);
-        // Goob edit end
+            component.TargetName = component.Target == null ? null : Identity.Name(component.Target.Value, EntityManager);
     }
 
     /// <summary>
     ///     Set pinpointers target to track
-    ///     Goob edit: If CanTargetMultiple is true in Pinpointer component, then it will be ADDED, not set
     /// </summary>
     public virtual void SetTarget(EntityUid uid, EntityUid? target, PinpointerComponent? pinpointer = null)
     {
         if (!Resolve(uid, ref pinpointer))
             return;
 
-        if (target == null || pinpointer.Targets.Contains(target.Value))
-        {
+        if (pinpointer.Target == target)
             return;
-        }
 
-        if (!pinpointer.CanTargetMultiple)
-        {
-            pinpointer.Targets.Clear();
-        }
-
-        if (TerminatingOrDeleted(target.Value))
-        {
-            TrySetArrowAngle(uid, Angle.Zero, pinpointer);
-            return;
-        }
-
-        pinpointer.Targets.Add(target.Value);
-
+        pinpointer.Target = target;
         if (pinpointer.UpdateTargetName)
-            pinpointer.TargetName = Identity.Name(target.Value, EntityManager);
-        // WD EDIT START - UpdateDirectionToTarget is triggered when updating, no need to run it again
-        // if (pinpointer.IsActive)
-        //    UpdateDirectionToTarget(uid, pinpointer);
-        // WD EDIT END
-    }
-
-    /// <summary>
-    /// Goob edit: sets a list of targets for a pinpointer.
-    /// </summary>
-    public virtual void SetTargets(EntityUid uid, List<EntityUid> targets, PinpointerComponent? pinpointer = null)
-    {
-        if (!Resolve(uid, ref pinpointer))
-            return;
-
-        if (!pinpointer.CanTargetMultiple)
-        {
-            return; // No.
-        }
-
-        var targetsList = targets.Where(Exists).ToList();
-
-        pinpointer.Targets = targetsList;
-
-        // WD EDIT START - UpdateDirectionToTarget is triggered when updating, no need to run it again
-        // if (pinpointer.IsActive)
-        //    UpdateDirectionToTarget(uid, pinpointer);
-        // WD EDIT END
+            pinpointer.TargetName = target == null ? null : Identity.Name(target.Value, EntityManager);
+        if (pinpointer.IsActive)
+            UpdateDirectionToTarget(uid, pinpointer);
     }
 
     /// <summary>
@@ -141,7 +67,7 @@ public abstract class SharedPinpointerSystem : EntitySystem
 
     private void OnExamined(EntityUid uid, PinpointerComponent component, ExaminedEvent args)
     {
-        if (!component.CanExamine || !args.IsInDetailsRange || component.TargetName == null) // WD EDIT
+        if (!args.IsInDetailsRange || component.TargetName == null)
             return;
 
         args.PushMarkup(Loc.GetString("examine-pinpointer-linked", ("target", component.TargetName)));
@@ -212,25 +138,16 @@ public abstract class SharedPinpointerSystem : EntitySystem
 
     private void OnEmagged(EntityUid uid, PinpointerComponent component, ref GotEmaggedEvent args)
     {
-        // WD EDIT START
-        if (!component.CanEmag)
-            return;
-        // WD EDIT END
-
         if (!_emag.CompareFlag(args.Type, EmagType.Interaction))
             return;
 
         if (_emag.CheckFlag(uid, EmagType.Interaction))
             return;
 
-        args.Handled = true;
-
         if (component.CanRetarget)
-        {
-            component.RetargetingWhitelist = null; // Can target anything
             return;
-        }
 
+        args.Handled = true;
         component.CanRetarget = true;
     }
 }

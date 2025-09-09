@@ -4,6 +4,7 @@ barsign-ui-set-label = Выбрать вывеску:
 
 # Bar signs prototypes
 
+
 ## The Harmbaton
 
 barsign-prototype-name-harmbaton = Хармбатон
@@ -97,7 +98,7 @@ barsign-prototype-description-wiggle-room = MoMMI маневрируют в та
 ## The Lightbulb
 
 barsign-prototype-name-the-lightbulb = Лампочка
-barsign-prototype-description-the-lightbulb = Кафе, популярное среди ниан и молей. Однажды его закрыли на неделю после того, как барменша использовала нафталин для обработки своей запасной униформы.
+barsign-prototype-description-the-lightbulb = Кафе, популярное среди молей и мотыльков. Однажды его закрыли на неделю после того, как барменша использовала нафталин для обработки своей запасной униформы.
 
 ## The Loose Goose
 

@@ -1,13 +1,9 @@
 ent-PartArachnid = arachnid body part
     .desc = { ent-BaseItem.desc }
-ent-PartArachnid2 = arachnid body part
-    .desc = { ent-BaseItem.desc }
-ent-ChestArachnid = arachnid chest
-    .desc = { ent-PartArachnid.desc }
-ent-GroinArachnid = arachnid groin
+ent-TorsoArachnid = arachnid torso
     .desc = { ent-PartArachnid.desc }
 ent-HeadArachnid = arachnid head
-    .desc = { ent-PartArachnid2.desc }
+    .desc = { ent-PartArachnid.desc }
 ent-LeftArmArachnid = left arachnid arm
     .desc = { ent-PartArachnid.desc }
 ent-RightArmArachnid = right arachnid arm

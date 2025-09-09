@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Chat.Systems;
 using Content.Server.Emoting.Components;
 using Content.Shared.Chat.Prototypes;
@@ -21,15 +14,8 @@ public sealed class BodyEmotesSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<BodyEmotesComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<BodyEmotesComponent, EmoteEvent>(OnEmote);
-    }
 
-    private void OnStartup(EntityUid uid, BodyEmotesComponent component, ComponentStartup args)
-    {
-        if (component.SoundsId == null)
-            return;
-        _proto.TryIndex(component.SoundsId, out component.Sounds);
+        SubscribeLocalEvent<BodyEmotesComponent, EmoteEvent>(OnEmote);
     }
 
     private void OnEmote(EntityUid uid, BodyEmotesComponent component, ref EmoteEvent args)
@@ -50,6 +36,9 @@ public sealed class BodyEmotesSystem : EntitySystem
         if (!TryComp(uid, out HandsComponent? hands) || hands.Count <= 0)
             return false;
 
-        return _chat.TryPlayEmoteSound(uid, component.Sounds, emote);
+        if (!_proto.Resolve(component.SoundsId, out var sounds))
+            return false;
+
+        return _chat.TryPlayEmoteSound(uid, sounds, emote);
     }
 }

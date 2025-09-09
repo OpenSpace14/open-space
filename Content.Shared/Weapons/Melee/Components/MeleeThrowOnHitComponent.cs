@@ -1,18 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 ActiveMammmoth <140334666+ActiveMammmoth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 ActiveMammmoth <kmcsmooth@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-// using Content.Shared._Goobstation.Boomerang; NO!!
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Weapons.Melee.Components;
@@ -21,8 +6,8 @@ namespace Content.Shared.Weapons.Melee.Components;
 /// This is used for a melee weapon that throws whatever gets hit by it in a line
 /// until it hits a wall or a time limit is exhausted.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-// [Access(typeof(MeleeThrowOnHitSystem), typeof(BoomerangSystem))] // Goobstation Edit - No implicit access
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
+[Access(typeof(MeleeThrowOnHitSystem))]
 public sealed partial class MeleeThrowOnHitComponent : Component
 {
     /// <summary>
@@ -56,10 +41,19 @@ public sealed partial class MeleeThrowOnHitComponent : Component
     public bool ActivateOnThrown;
 
     /// <summary>
-    /// Goobstation - should it throw while being on delay?
+    /// Whether the entity can apply knockback this instance of being thrown.
+    /// If true, the entity cannot apply knockback.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool ThrowWhileOnDelay;
+    [ViewVariables(VVAccess.ReadOnly)]
+    public bool ThrowOnCooldown;
+
+    /// <summary>
+    /// Whether this item has hit anyone while it was thrown.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadOnly)]
+    public bool HitWhileThrown;
 }
 
 /// <summary>

@@ -4,8 +4,7 @@ public enum AdminOverlayAntagFormat
 {
     Binary,
     Roletype,
-    Subtype,
-    Off // Goobstation
+    Subtype
 }
 
 public enum AdminOverlayAntagSymbolStyle

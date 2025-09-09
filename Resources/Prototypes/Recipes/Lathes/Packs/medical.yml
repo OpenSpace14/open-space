@@ -1,13 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Nyxilath <colton.malone@gmail.com>
-# SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Speebro <100388782+Speebr0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Speebro <speebro@notreal.com>
-# SPDX-FileCopyrightText: 2025 TurboTracker <130304754+TurboTrackerss14@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
 ## Static
 
 - type: latheRecipePack
@@ -25,7 +15,6 @@
   - Syringe
   - PillCanister
   - HandLabeler
-  - ChemicalPayload
   - BaseChemistryEmptyVial
 
 - type: latheRecipePack
@@ -55,6 +44,8 @@
   - DiseaseSwab
   - BodyBag
   - WhiteCane
+  - OffsetCane
+  - OffsetCaneWood
 
 - type: latheRecipePack
   id: RollerBedsStatic
@@ -81,7 +72,7 @@
   - MedkitBrute
   - MedkitAdvanced
   - MedkitRadiation
-#  - MedkitCombat #goob - Move combat kit to research
+  - MedkitCombat
 
 - type: latheRecipePack
   id: MedicalBoardsStatic
@@ -99,14 +90,13 @@
 - type: latheRecipePack
   id: Chemistry
   recipes:
+  - ChemicalPayload
   - CryostasisBeaker
   - SyringeCryostasis
   - BluespaceBeaker
   - SyringeBluespace
-  - BluespaceBodyBag # Corvax-Goob-AdvancedBodyBags
-  - MedkitCombat #goob - Move combat kit to research
-  - FillableMedipen # CorvaxGoob-RefillableMedipens
-  - VialBluespace # goob edit - bluespace vials
+  - LauncherSyringe
+  - MiniSyringe
 
 - type: latheRecipePack
   id: MedicalBoards
@@ -114,5 +104,3 @@
   - StasisBedMachineCircuitboard
   - CryoPodMachineCircuitboard
   - BiomassReclaimerMachineCircuitboard
-  - StasisOperatingTableCircuitboard # Corvax-Goob-StasisOperatingTable
-  - MachineMedipenRefillerCircuitboard # CorvaxGoob-RefillableMedipens

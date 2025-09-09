@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Client.Computer;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Shuttles.BUIStates;
@@ -23,13 +17,6 @@ public sealed partial class IFFConsoleWindow : FancyWindow,
     public event Action<bool>? ShowIFF;
     public event Action<bool>? ShowVessel;
 
-    // CorvaxGoob-IIF-Improves-Start
-    public event Action<Color, string>? ApplyRadarSettings; 
-
-    private string? _currentGridName;
-    private Color _currentColor = Color.Gold;
-    // CorvaxGoob-IIF-End
-
     public IFFConsoleWindow()
     {
         RobustXamlLoader.Load(this);
@@ -42,8 +29,6 @@ public sealed partial class IFFConsoleWindow : FancyWindow,
         ShowVesselOnButton.Group = _showVesselButtonGroup;
         ShowVesselOnButton.OnPressed += args => ShowVesselPressed(true);
         ShowVesselOffButton.OnPressed += args => ShowVesselPressed(false);
-
-        ApplySettings.OnPressed += args => ApplySettingsPressed(ColorPicker.Color, ShuttleName.Text); // CorvaxGoob-IIF-Improves
     }
 
     private void ShowIFFPressed(bool pressed)
@@ -55,19 +40,6 @@ public sealed partial class IFFConsoleWindow : FancyWindow,
     {
         ShowVessel?.Invoke(pressed);
     }
-
-    // CorvaxGoob-IIF-Improves-Start
-    private void ApplySettingsPressed(Color newColor, string newGridName)
-    {
-        if (newColor != _currentColor || newGridName != _currentGridName)
-        {
-            _currentColor = newColor;
-            _currentGridName = newGridName;
-
-            ApplyRadarSettings?.Invoke(newColor, newGridName);
-        }
-    }
-    // CorvaxGoob-IIF-Improves-End
 
     public void UpdateState(IFFConsoleBoundUserInterfaceState state)
     {
@@ -110,12 +82,5 @@ public sealed partial class IFFConsoleWindow : FancyWindow,
             ShowVesselOffButton.Disabled = true;
             ShowVesselOnButton.Disabled = true;
         }
-
-        // CorvaxGoob-IIF-Improves-Start
-        if (state.Name is not null)
-            ShuttleName.Text = state.Name;
-
-        ColorPicker.Color = state.Color;
-        // CorvaxGoob-IIF-Improves-End
     }
 }

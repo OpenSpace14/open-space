@@ -1,13 +1,6 @@
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Server._CorvaxGoob.Announcer;
+using System.Numerics;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking.Rules;
-using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.StationEvents.Components;
 using Content.Shared.GameTicking.Components;
@@ -18,7 +11,6 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
-using System.Numerics;
 
 namespace Content.Server.StationEvents.Events;
 
@@ -28,7 +20,6 @@ public sealed class MeteorSwarmSystem : GameRuleSystem<MeteorSwarmComponent>
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly AnnouncerSystem _announcer = default!;
 
     protected override void Added(EntityUid uid, MeteorSwarmComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args)
     {
@@ -36,23 +27,13 @@ public sealed class MeteorSwarmSystem : GameRuleSystem<MeteorSwarmComponent>
 
         component.WaveCounter = component.Waves.Next(RobustRandom);
 
-        if (!TryComp<StationEventComponent>(uid, out var stationEvent)) // CorvaxGoob-CustomAnnouncers
-            return;
-
         // we don't want to send to players who aren't in game (i.e. in the lobby)
         Filter allPlayersInGame = Filter.Empty().AddWhere(GameTicker.UserHasJoinedGame);
 
-        // CorvaxGoob-CustomAnnouncers-Start
-        if (stationEvent.StartAnnouncement is not null)
-            _chat.DispatchFilteredAnnouncement(allPlayersInGame, Loc.GetString(stationEvent.StartAnnouncement), playSound: false, colorOverride: stationEvent.StartAnnouncementColor);
+        if (component.Announcement is { } locId)
+            _chat.DispatchFilteredAnnouncement(allPlayersInGame, Loc.GetString(locId), playSound: false, colorOverride: Color.Gold);
 
-        var startAudio = stationEvent.StartAudio;
-
-        if (_announcer.TryGetAnnouncerToday(out var announcerPrototype) && stationEvent.AnnouncersStartAudio.ContainsKey(announcerPrototype.ID))
-            startAudio = stationEvent.AnnouncersStartAudio[announcerPrototype.ID];
-
-        _audio.PlayGlobal(startAudio, allPlayersInGame, true);
-        // CorvaxGoob-CustomAnnouncers-End
+        _audio.PlayGlobal(component.AnnouncementSound, allPlayersInGame, true);
     }
 
     protected override void ActiveTick(EntityUid uid, MeteorSwarmComponent component, GameRuleComponent gameRule, float frameTime)
@@ -60,13 +41,14 @@ public sealed class MeteorSwarmSystem : GameRuleSystem<MeteorSwarmComponent>
         if (Timing.CurTime < component.NextWaveTime)
             return;
 
-        component.NextWaveTime = TimeSpan.FromSeconds(component.WaveCooldown.Next(RobustRandom)) + Timing.CurTime; // CorvaxGoob-CustomAnnouncers : this shitcode really fucks my mind when I seen it
+        component.NextWaveTime += TimeSpan.FromSeconds(component.WaveCooldown.Next(RobustRandom));
+
 
         if (_station.GetStations().Count == 0)
             return;
 
         var station = RobustRandom.Pick(_station.GetStations());
-        if (_station.GetLargestGrid(Comp<StationDataComponent>(station)) is not { } grid)
+        if (_station.GetLargestGrid(station) is not { } grid)
             return;
 
         var mapId = Transform(grid).MapID;
@@ -106,27 +88,5 @@ public sealed class MeteorSwarmSystem : GameRuleSystem<MeteorSwarmComponent>
         {
             ForceEndSelf(uid, gameRule);
         }
-    }
-
-    // CorvaxGoob-CustomAnnouncers
-    protected override void Ended(EntityUid uid, MeteorSwarmComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
-    {
-        base.Ended(uid, component, gameRule, args);
-
-        if (!TryComp<StationEventComponent>(uid, out var stationEvent))
-            return;
-
-        // we don't want to send to players who aren't in game (i.e. in the lobby)
-        Filter allPlayersInGame = Filter.Empty().AddWhere(GameTicker.UserHasJoinedGame);
-
-        if (stationEvent.EndAnnouncement is not null)
-            _chat.DispatchFilteredAnnouncement(allPlayersInGame, Loc.GetString(stationEvent.EndAnnouncement), playSound: false, colorOverride: stationEvent.EndAnnouncementColor);
-
-        var endAudio = stationEvent.EndAudio;
-
-        if (_announcer.TryGetAnnouncerToday(out var announcerPrototype) && stationEvent.AnnouncersEndAudio.ContainsKey(announcerPrototype.ID))
-            endAudio = stationEvent.AnnouncersEndAudio[announcerPrototype.ID];
-
-        _audio.PlayGlobal(endAudio, allPlayersInGame, true);
     }
 }

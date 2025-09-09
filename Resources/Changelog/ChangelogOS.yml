@@ -1,0 +1,86 @@
+Entries:
+- author: AL-S
+  changes:
+  - message: GitWorkflow
+    type: Add
+  id: 1
+  time: '2025-08-25T05:57:00.000000+00:00'
+  url: https://github.com/OpenSpace14/space-station/
+- author: OpenSpace Team
+  changes:
+  - message: Добавлены Анимированные фоны в лобби.
+    type: Add
+  id: 602
+  time: '2025-08-25T09:33:46.000000+00:00'
+  url: https://github.com/OpenSpace14/space-station/pull/6
+- author: OpenSpace Team
+  changes:
+  - message: Изменёны Шрифты.
+    type: Tweak
+  id: 603
+  time: '2025-08-25T09:33:46.000000+00:00'
+  url: https://github.com/OpenSpace14/space-station/pull/6
+- author: OpenSpace Team
+  changes:
+  - message: Readme.
+    type: Tweak
+  id: 604
+  time: '2025-08-25T09:33:46.000000+00:00'
+  url: https://github.com/OpenSpace14/space-station/pull/6
+- author: AL-S
+  changes:
+  - message: Новые спрайты
+    type: Tweak
+  id: 1305
+  time: '2025-08-26T06:32:35.000000+00:00'
+  url: https://github.com/OpenSpace14/space-station/pull/7
+- author: AL-S
+  changes:
+  - message: LobbyState.cs - фикс анимированных фонов в лобби
+    type: Fix
+  id: 2206
+  time: '2025-08-26T14:00:24.000000+00:00'
+  url: https://github.com/OpenSpace14/space-station/pull/9
+- author: AL-S
+  changes:
+  - message: Окна можно ломать
+    type: Fix
+  id: 2207
+  time: '2025-08-26T14:00:24.000000+00:00'
+  url: https://github.com/OpenSpace14/space-station/pull/9
+- author: AL-S
+  changes:
+  - message: Фикс труб в атмосе
+    type: Fix
+  id: 2208
+  time: '2025-08-26T14:00:24.000000+00:00'
+  url: https://github.com/OpenSpace14/space-station/pull/9
+- author: AL-S
+  changes:
+  - message: Фикс светильников
+    type: Fix
+  id: 2209
+  time: '2025-08-26T14:00:24.000000+00:00'
+  url: https://github.com/OpenSpace14/space-station/pull/9
+- author: AL-S
+  changes:
+  - message: Кароче фикс туевой кучи ошибок
+    type: Fix
+  id: 2210
+  time: '2025-08-26T14:00:24.000000+00:00'
+  url: https://github.com/OpenSpace14/space-station/pull/9
+- author: AL-S
+  changes:
+  - message: Новые звуки после конца раунда
+    type: Add
+  id: 3211
+  time: '2025-08-27T08:15:20.000000+00:00'
+  url: https://github.com/OpenSpace14/space-station/pull/10
+- author: AL-S
+  changes:
+  - message: Удалил сатрый музыка раунд конец
+    type: Remove
+  id: 3212
+  time: '2025-08-27T08:15:20.000000+00:00'
+  url: https://github.com/OpenSpace14/space-station/pull/10
+

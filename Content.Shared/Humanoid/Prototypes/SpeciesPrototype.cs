@@ -1,40 +1,7 @@
-// SPDX-FileCopyrightText: 2022 EmoGarbage404 <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Javier Guardia Fernández <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 T-Stalker <43253663+DogZeroX@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 ZeroDayDaemon <60460608+ZeroDayDaemon@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DEATHB4DEFEAT <77995199+DEATHB4DEFEAT@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Firewatch <54725557+musicmanvr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <koolthunder019@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 ScyronX <166930367+ScyronX@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 portfiend <109661617+portfiend@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 MarkerWicker <markerWicker@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Dataset;
 using Content.Shared.Humanoid.Markings;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Humanoid.Prototypes;
 
@@ -66,14 +33,6 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField(required: true)]
     public bool RoundStart { get; private set; } = false;
-
-    // CorvaxGoob-Sponsors-Start
-    /// <summary>
-    /// Whether the species is available only for sponsors
-    /// </summary>
-    [DataField]
-    public bool SponsorOnly { get; private set; } = false;
-    // CorvaxGoob-Sponsors-End
 
     // The below two are to avoid fetching information about the species from the entity
     // prototype.
@@ -130,8 +89,14 @@ public sealed partial class SpeciesPrototype : IPrototype
     [DataField]
     public ProtoId<LocalizedDatasetPrototype> FemaleFirstNames { get; private set; } = "NamesFirstFemale";
 
+    // RU-Localization-Start: Split lastname field by gender
     [DataField]
-    public ProtoId<LocalizedDatasetPrototype> LastNames { get; private set; } = "NamesLast";
+    // public ProtoId<LocalizedDatasetPrototype> LastNames { get; private set; } = "NamesLast";
+    public ProtoId<LocalizedDatasetPrototype> MaleLastNames { get; private set; } = "NamesLastMale";
+
+    [DataField]
+    public ProtoId<LocalizedDatasetPrototype> FemaleLastNames { get; private set; } = "NamesLastFemale";
+    // RU-Localization-End
 
     [DataField]
     public SpeciesNaming Naming { get; private set; } = SpeciesNaming.FirstLast;
@@ -163,64 +128,6 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField]
     public int MaxAge = 120;
-
-    // begin Goobstation: port EE height/width sliders
-
-    /// <summary>
-    ///     The minimum height and width ratio for this species
-    /// </summary>
-    [DataField]
-    public float SizeRatio = 1.2f;
-
-    /// <summary>
-    ///     The minimum height for this species
-    /// </summary>
-    [DataField]
-    public float MinHeight = 0.80f;
-
-    /// <summary>
-    ///     The default height for this species
-    /// </summary>
-    [DataField]
-    public float DefaultHeight = 1f;
-
-    /// <summary>
-    ///     The maximum height for this species
-    /// </summary>
-    [DataField]
-    public float MaxHeight = 1.20f;
-
-    /// <summary>
-    ///     The minimum width for this species
-    /// </summary>
-    [DataField]
-    public float MinWidth = 0.85f;
-
-    /// <summary>
-    ///     The default width for this species
-    /// </summary>
-    [DataField]
-    public float DefaultWidth = 1f;
-
-    /// <summary>
-    ///     The maximum width for this species
-    /// </summary>
-    [DataField]
-    public float MaxWidth = 1.15f;
-
-    /// <summary>
-    ///     The average height in centimeters for this species, used to calculate player facing height values in UI elements
-    /// </summary>
-    [DataField]
-    public float AverageHeight = 176.1f;
-
-    /// <summary>
-    ///     The average shoulder-to-shoulder width in cm for this species, used to calculate player facing width values in UI elements
-    /// </summary>
-    [DataField]
-    public float AverageWidth = 40f;
-
-    // end Goobstation: port EE height/width sliders
 }
 
 public enum SpeciesNaming : byte
@@ -229,8 +136,4 @@ public enum SpeciesNaming : byte
     FirstLast,
     FirstDashFirst,
     TheFirstofLast,
-    LastFirst, // DeltaV
-    LastNoFirst, // DeltaV
-    FirstDashLast, // Goobstation
-    FirstRoman // EE Plasmeme Change
 }

@@ -24,5 +24,3 @@ ent-FoamedAluminiumMetal = foamed aluminium metal
     .desc = Leftover sparse foam from an aluminum foam grenade. Easily destroyed.
 ent-ReactionFlash = { "" }
     .desc = { "" }
-ent-Resin = resin
-    .desc = { ent-BaseFoam.desc }

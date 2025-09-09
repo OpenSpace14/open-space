@@ -1,17 +1,3 @@
-// SPDX-FileCopyrightText: 2023 deltanedas <deltanedas@laptop>
-// SPDX-FileCopyrightText: 2023 deltanedas <user@zenith>
-// SPDX-FileCopyrightText: 2023 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 BramvanZijp <56019239+BramvanZijp@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 YourUsername <you@example.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 godisdeadLOL <169250097+godisdeadLOL@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Emp;
 using Content.Server.Ninja.Events;
 using Content.Server.Power.Components;
@@ -19,6 +5,7 @@ using Content.Server.PowerCell;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Ninja.Components;
 using Content.Shared.Ninja.Systems;
+using Content.Shared.Popups;
 using Content.Shared.PowerCell.Components;
 using Robust.Shared.Containers;
 
@@ -147,9 +134,8 @@ public sealed class NinjaSuitSystem : SharedNinjaSuitSystem
             return;
         }
 
-        // Goob edit
-        // if (CheckDisabled(ent, user))
-        //    return;
+        if (CheckDisabled(ent, user))
+            return;
 
         // TODO: teleporting into belt slot
         var message = _hands.TryPickupAnyHand(user, katana)
@@ -170,9 +156,8 @@ public sealed class NinjaSuitSystem : SharedNinjaSuitSystem
             return;
         }
 
-        // Goob edit
-        // if (CheckDisabled(ent, user))
-        //   return;
+        if (CheckDisabled(ent, user))
+            return;
 
         var coords = _transform.GetMapCoordinates(user);
         _emp.EmpPulse(coords, comp.EmpRange, comp.EmpConsumption, comp.EmpDuration);

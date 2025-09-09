@@ -1,2 +1,2 @@
-ent-ActionToggleKnuckleDustersStun = Переключить электрошоковые кастеты
-    .desc = Переключает встроенный электрошоковый режим кастета.
+ent-ActionToggleKnuckleDustersStun = Переключить шок-кастеты
+    .desc = Переключить встроенную в кастеты дубинку-шокер.

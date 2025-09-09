@@ -1,29 +1,8 @@
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 CatMagic <135462166+CatMagic1@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 DEATHB4DEFEAT <77995199+DEATHB4DEFEAT@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Kira Bridgeton <161087999+Verbalase@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 KittenColony <149278380+KittenColony@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Skubman <ba.fallaria@gmail.com>
-# SPDX-FileCopyrightText: 2024 portfiend <109661617+portfiend@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Арт <123451459+JustArt1m@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ark <189933909+ark1368@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Froffy025 <78222136+Froffy025@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Froffy025 <scotttaco025@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: marking
   id: GauzeLefteyePatch
   bodyPart: Eyes
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Arachnid, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Arachnid]
   coloring:
     default:
       type:
@@ -37,7 +16,7 @@
   id: GauzeLefteyePad
   bodyPart: Eyes
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -51,7 +30,7 @@
   id: GauzeRighteyePatch
   bodyPart: Eyes
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Arachnid, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Arachnid]
   coloring:
     default:
       type:
@@ -65,7 +44,7 @@
   id: GauzeRighteyePad
   bodyPart: Eyes
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -79,7 +58,7 @@
   id: GauzeBlindfold
   bodyPart: Eyes
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Arachnid, Felinid, Harpy, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Harpy, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Arachnid]
   coloring:
     default:
       type:
@@ -93,7 +72,7 @@
   id: GauzeShoulder
   bodyPart: Chest
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -102,12 +81,12 @@
   sprites:
   - sprite: Mobs/Customization/gauze.rsi
     state: gauze_shoulder
-
+    
 - type: marking
   id: GauzeStomach
   bodyPart: Chest
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -121,7 +100,7 @@
   id: GauzeUpperArmRight
   bodyPart: RArm
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, SlimePerson, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -135,7 +114,7 @@
   id: GauzeLowerArmRight
   bodyPart: RArm, RHand
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, SlimePerson, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -149,7 +128,7 @@
   id: GauzeLeftArm
   bodyPart: LArm, LHand
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -163,7 +142,7 @@
   id: GauzeLowerLegLeft
   bodyPart: LFoot
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Arachnid, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Arachnid]
   coloring:
     default:
       type:
@@ -177,7 +156,7 @@
   id: GauzeUpperLegLeft
   bodyPart: LLeg
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -191,7 +170,7 @@
   id: GauzeUpperLegRight
   bodyPart: RLeg
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -200,12 +179,12 @@
   sprites:
   - sprite: Mobs/Customization/gauze.rsi
     state: gauze_upperleg_r
-
+    
 - type: marking
   id: GauzeLowerLegRight
   bodyPart: RFoot
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Arachnid, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Arachnid]
   coloring:
     default:
       type:
@@ -214,12 +193,12 @@
   sprites:
   - sprite: Mobs/Customization/gauze.rsi
     state: gauze_lowerleg_r
-
+    
 - type: marking
   id: GauzeBoxerWrapRight
   bodyPart: RHand
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, SlimePerson, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -228,12 +207,12 @@
   sprites:
   - sprite: Mobs/Customization/gauze.rsi
     state: gauze_boxerwrap_r
-
+    
 - type: marking
   id: GauzeBoxerWrapLeft
   bodyPart: LHand
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, SlimePerson, Felinid, Vulpkanin, Rodentia, Tajaran] # Delta V - Felinid, Vulpkanin, Rodentia; Goob - Tajaran
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -247,7 +226,7 @@
   id: GauzeHead
   bodyPart: Head
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Moth, Chitinid] # Delta V - Chitinid
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Moth]
   coloring:
     default:
       type:
@@ -333,7 +312,7 @@
   id: GauzeMothBlindfold
   bodyPart: Eyes
   markingCategory: Overlay
-  speciesRestriction: [Moth, Chitinid] # Delta V - Chitinid
+  speciesRestriction: [Moth]
   coloring:
     default:
       type:
@@ -347,7 +326,7 @@
   id: GauzeMothShoulder
   bodyPart: Chest
   markingCategory: Overlay
-  speciesRestriction: [Moth, Chitinid] # Delta V - Chitinid
+  speciesRestriction: [Moth]
   coloring:
     default:
       type:
@@ -361,7 +340,7 @@
   id: GauzeMothStomach
   bodyPart: Chest
   markingCategory: Overlay
-  speciesRestriction: [Moth, Chitinid] # Delta V - Chitinid
+  speciesRestriction: [Moth]
   coloring:
     default:
       type:
@@ -375,7 +354,7 @@
   id: GauzeMothLeftEyePatch
   bodyPart: Eyes
   markingCategory: Overlay
-  speciesRestriction: [Moth, Chitinid] # Delta V - Chitinid
+  speciesRestriction: [Moth]
   coloring:
     default:
       type:
@@ -389,7 +368,7 @@
   id: GauzeMothLeftEyePad
   bodyPart: Eyes
   markingCategory: Overlay
-  speciesRestriction: [Moth, Chitinid] # Delta V - Chitinid
+  speciesRestriction: [Moth]
   coloring:
     default:
       type:
@@ -403,7 +382,7 @@
   id: GauzeMothRightEyePatch
   bodyPart: Eyes
   markingCategory: Overlay
-  speciesRestriction: [Moth, Chitinid] # Delta V - Chitinid
+  speciesRestriction: [Moth]
   coloring:
     default:
       type:
@@ -417,7 +396,7 @@
   id: GauzeMothRightEyePad
   bodyPart: Eyes
   markingCategory: Overlay
-  speciesRestriction: [Moth, Chitinid] # Delta V - Chitinid
+  speciesRestriction: [Moth]
   coloring:
     default:
       type:
@@ -431,7 +410,7 @@
   id: GauzeMothUpperArmRight
   bodyPart: RArm
   markingCategory: Overlay
-  speciesRestriction: [Moth, Chitinid] # Delta V - Chitinid
+  speciesRestriction: [Moth]
   coloring:
     default:
       type:
@@ -445,7 +424,7 @@
   id: GauzeMothUpperArmLeft
   bodyPart: LArm
   markingCategory: Overlay
-  speciesRestriction: [Moth, Chitinid] # Delta V - Chitinid
+  speciesRestriction: [Moth]
   coloring:
     default:
       type:
@@ -459,7 +438,7 @@
   id: GauzeMothUpperLegRight
   bodyPart: RLeg
   markingCategory: Overlay
-  speciesRestriction: [Moth, Chitinid] # Delta V - Chitinid
+  speciesRestriction: [Moth]
   coloring:
     default:
       type:
@@ -473,7 +452,7 @@
   id: GauzeMothUpperLegLeft
   bodyPart: LLeg
   markingCategory: Overlay
-  speciesRestriction: [Moth, Chitinid] # Delta V - Chitinid
+  speciesRestriction: [Moth]
   coloring:
     default:
       type:
@@ -487,7 +466,7 @@
   id: GauzeMothLowerLegRight
   bodyPart: RFoot
   markingCategory: Overlay
-  speciesRestriction: [Moth, Chitinid] # Delta V - Chitinid
+  speciesRestriction: [Moth]
   coloring:
     default:
       type:
@@ -501,7 +480,7 @@
   id: GauzeMothLowerLegLeft
   bodyPart: LFoot
   markingCategory: Overlay
-  speciesRestriction: [Moth, Chitinid] # Delta V - Chitinid
+  speciesRestriction: [Moth]
   coloring:
     default:
       type:

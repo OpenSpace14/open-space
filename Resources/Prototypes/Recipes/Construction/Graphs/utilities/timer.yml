@@ -1,10 +1,3 @@
-# SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-# SPDX-FileCopyrightText: 2023 qwerltaz <69696513+qwerltaz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
-
 - type: constructionGraph
   id: Timer
   start: start
@@ -44,7 +37,7 @@
         steps:
         - tag: TimerSignalElectronics
           store: board
-          name: construction-graph-tag-signal-timer-electronics
+          name: "signal timer electronics"
           icon:
             sprite: "Objects/Misc/module.rsi"
             state: "charger_APC"
@@ -53,7 +46,7 @@
         steps:
         - tag: TimerScreenElectronics
           store: board
-          name: construction-graph-tag-screen-timer-electronics
+          name: "screen timer electronics"
           icon:
             sprite: "Objects/Misc/module.rsi"
             state: "charger_APC"
@@ -62,7 +55,7 @@
         steps:
         - tag: TimerBrigElectronics
           store: board
-          name: construction-graph-tag-brig-timer-electronics
+          name: "brig timer electronics"
           icon:
             sprite: "Objects/Misc/module.rsi"
             state: "charger_APC"

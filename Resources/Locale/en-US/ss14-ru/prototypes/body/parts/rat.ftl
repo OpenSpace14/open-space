@@ -1,2 +1,2 @@
-ent-ChestRat = rat chest
-    .desc = { ent-ChestAnimal.desc }
+ent-TorsoRat = animal torso
+    .desc = { ent-PartAnimal.desc }

@@ -1,49 +1,37 @@
-# SPDX-FileCopyrightText: 2023 /ʊniɹɑː/ <onoira@psiko.zone>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Julian Giebel <juliangiebel@live.de>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
-
 - type: font
   id: Default
-  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-Regular.ttf
+  path: /Fonts/UbuntuSans/UbuntuSansNerdFont-Regular.ttf
 
 - type: font
   id: DefaultItalic
-  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-Italic.ttf
+  path: /Fonts/UbuntuSans/UbuntuSansMonoNerdFont-Italic.ttf
 
 - type: font
   id: DefaultBold
-  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-Bold.ttf
+  path: /Fonts/UbuntuSans/UbuntuSansMonoNerdFont-Bold.ttf
 
 - type: font
   id: DefaultBoldItalic
-  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-BoldItalic.ttf
+  path: /Fonts/UbuntuSans/UbuntuSansMonoNerdFont-BoldItalic.ttf
 
 - type: font
   id: NotoSansDisplay
-  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-Regular.ttf
+  path: /Fonts/Ubuntu/UbuntuNerdFont-Regular.ttf
 
 - type: font
   id: NotoSansDisplayItalic
-  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-Italic.ttf
+  path: /Fonts/Ubuntu/UbuntuNerdFont-Italic.ttf
 
 - type: font
   id: NotoSansDisplayBold
-  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-Bold.ttf
+  path: /Fonts/Ubuntu/UbuntuNerdFont-Bold.ttf
 
 - type: font
   id: NotoSansDisplayBoldItalic
-  path: /Fonts/Ubuntu/UbuntuSansMonoNerdFont-BoldItalic.ttf
+  path: /Fonts/Ubuntu/UbuntuNerdFont-BoldItalic.ttf
 
 - type: font
   id: BoxRound
-  path: /Fonts/Widock/Widock.otf
-
-- type: font
-  id: BoxRoundOLD
   path: /Fonts/Boxfont-round/Boxfont Round.ttf
 
 - type: font
@@ -52,7 +40,7 @@
 
 - type: font
   id: Monospace
-  path: /Fonts/Ubuntu/UbuntuMonoNerdFont-Regular.ttf
+  path: /Fonts/UbuntuMono/UbuntuMonoNerdFont-Regular.ttf
 
 - type: font
   id: Emoji

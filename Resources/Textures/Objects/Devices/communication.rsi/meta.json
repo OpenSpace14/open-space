@@ -70,6 +70,17 @@
       "directions": 4
     },
     {
+      "name": "old-radio"
+    },
+    {
+      "name": "old-radio-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "old-radio-inhand-right",
+      "directions": 4
+    },
+    {
       "name": "old-radio-syndicat"
     },
     {
