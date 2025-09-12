@@ -262,8 +262,8 @@
       - Butchering
   # Corvax-Goob-start
   - type: MovementSpeedModifier
-    baseSprintSpeed: 30
-    baseWalkSpeed: 12
+    baseSprintSpeed: 15
+    baseWalkSpeed: 30
   # Corvax-Goob-end
 
 - type: entity

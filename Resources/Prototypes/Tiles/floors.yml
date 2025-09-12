@@ -816,9 +816,16 @@
   id: FloorSteelDirty
   name: tiles-dirty-steel-floor
   sprite: /Textures/Tiles/steel_dirty.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
   baseTurf: Plating
   isSubfloor: false
-  deconstructTools: [ Prying ]
+  deconstructTools:
+  - Prying
   footstepSounds:
     collection: FootstepPlating
   itemDrop: FloorTileItemDirty
@@ -1687,6 +1694,7 @@
   heatCapacity: 10000
   weather: true
 
+
 - type: tile
   id: FloorGrass
   name: tiles-planet-grass-floor
@@ -1699,13 +1707,6 @@
   - 1.0
   - 1.0
   # Corvax-Goob-GrassResprite-end
-  baseTurf: FloorDirt
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepGrass
-  itemDrop: FloorTileItemGrass
-  heatCapacity: 10000
-  weather: true
 
 - type: tile
   id: FloorGrassJungle

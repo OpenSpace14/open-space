@@ -14,7 +14,7 @@
   id: Tajaran
   name: species-name-tajaran
   roundStart: true
-  sponsorOnly: true # CorvaxGoob-Sponsors
+  sponsorOnly: false # CorvaxGoob-Sponsors
   prototype: MobTajaran
   sprites: MobTajaranSprites
   markingLimits: MobTajaranMarkingLimits

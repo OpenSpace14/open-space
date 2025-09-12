@@ -1,0 +1,1658 @@
+- type: ttsVoice
+  id: FatherGrigori
+  name: tts-father-grigori
+  sex: Male
+  speaker: father_grigori
+  roundStart: true
+
+- type: ttsVoice
+  id: Kleiner
+  name: tts-kleiner
+  sex: Male
+  speaker: kleiner
+  roundStart: true
+
+- type: ttsVoice
+  id: Papich
+  name: tts-papich
+  sex: Male
+  speaker: papich
+  roundStart: true
+
+- type: ttsVoice
+  id: Bebey
+  name: tts-bebey
+  sex: Male
+  speaker: bebey
+  roundStart: true
+
+- type: ttsVoice
+  id: Puchkow
+  name: tts-puchkow
+  sex: Male
+  speaker: puchkow
+  roundStart: true
+
+- type: ttsVoice
+  id: Moriarti
+  name: tts-moriarti
+  sex: Male
+  speaker: moriarti
+  roundStart: true
+
+- type: ttsVoice
+  id: Charlotte
+  name: tts-charlotte
+  sex: Female
+  speaker: charlotte
+  roundStart: true
+
+- type: ttsVoice
+  id: Planya
+  name: tts-planya
+  sex: Female
+  speaker: planya
+  roundStart: true
+
+- type: ttsVoice
+  id: Mana
+  name: tts-mana
+  sex: Female
+  speaker: mana
+  roundStart: true
+
+- type: ttsVoice
+  id: Amina
+  name: tts-amina
+  sex: Female
+  speaker: amina
+  roundStart: true
+
+- type: ttsVoice
+  id: Biden
+  name: tts-biden
+  sex: Male
+  speaker: biden
+  roundStart: true
+
+- type: ttsVoice
+  id: Obama
+  name: tts-obama
+  sex: Male
+  speaker: obama
+  roundStart: true
+
+- type: ttsVoice
+  id: Trump
+  name: tts-trump
+  sex: Male
+  speaker: trump
+  roundStart: true
+
+- type: ttsVoice
+  id: Dbkn2
+  name: tts-dbkn2
+  sex: Male
+  speaker: dbkn2
+  roundStart: true
+
+- type: ttsVoice
+  id: Xrenoid
+  name: tts-xrenoid
+  sex: Male
+  speaker: xrenoid
+  roundStart: true
+
+- type: ttsVoice
+  id: Playboyztv
+  name: tts-playboyztv
+  sex: Male
+  speaker: playboyztv
+  roundStart: true
+
+- type: ttsVoice
+  id: Briman
+  name: tts-briman
+  sex: Male
+  speaker: briman
+  roundStart: true
+
+- type: ttsVoice
+  id: Mossman
+  name: tts-mossman
+  sex: Female
+  speaker: mossman
+  roundStart: true
+
+- type: ttsVoice
+  id: Vance
+  name: tts-vance
+  sex: Male
+  speaker: vance
+  roundStart: true
+
+- type: ttsVoice
+  id: Alyx
+  name: tts-alyx
+  sex: Female
+  speaker: alyx
+  roundStart: true
+
+- type: ttsVoice
+  id: GMan
+  name: tts-gman
+  sex: Male
+  speaker: gman
+  roundStart: true
+
+- type: ttsVoice
+  id: Barni
+  name: tts-barni
+  sex: Male
+  speaker: barni
+  roundStart: true
+
+- type: ttsVoice
+  id: Neco
+  name: tts-neco
+  sex: Female
+  speaker: neco
+  roundStart: true
+
+- type: ttsVoice
+  id: NecoArc2
+  name: tts-neco-arc-2
+  sex: Female
+  speaker: neco_arc_2
+  roundStart: true
+
+- type: ttsVoice
+  id: AngryNecoArc
+  name: tts-angry-neco-arc
+  sex: Female
+  speaker: angry_neco_arc
+  roundStart: true
+
+- type: ttsVoice
+  id: Villager
+  name: tts-villager
+  sex: Male
+  speaker: villager
+  roundStart: true
+
+- type: ttsVoice
+  id: Squidward
+  name: tts-squidward
+  sex: Male
+  speaker: squidward
+  roundStart: true
+
+- type: ttsVoice
+  id: Sentrybot
+  name: tts-sentrybot
+  sex: Male
+  speaker: sentrybot
+  roundStart: true
+
+- type: ttsVoice
+  id: MoiraBrown
+  name: tts-moira-brown
+  sex: Female
+  speaker: moira_brown
+  roundStart: true
+
+- type: ttsVoice
+  id: RobertMaccready
+  name: tts-robert-maccready
+  sex: Male
+  speaker: robert_maccready
+  roundStart: true
+
+- type: ttsVoice
+  id: Threedog
+  name: tts-threedog
+  sex: Male
+  speaker: threedog
+  roundStart: true
+
+- type: ttsVoice
+  id: ThreedogRadio
+  name: tts-threedog-radio
+  sex: Male
+  speaker: threedog_radio
+  roundStart: true
+
+- type: ttsVoice
+  id: MisterHandyFL3
+  name: tts-mister-handy-fl3
+  sex: Male
+  speaker: mister_handy_fl3
+  roundStart: true
+
+- type: ttsVoice
+  id: MisterGutsyFL3
+  name: tts-mister-gutsy-fl3
+  sex: Male
+  speaker: mister_gutsy_fl3
+  roundStart: true
+
+- type: ttsVoice
+  id: JerichoFL3
+  name: tts-jericho-fl3
+  sex: Male
+  speaker: jericho_fl3
+  roundStart: true
+
+- type: ttsVoice
+  id: ElderLyonsFL3
+  name: tts-elder-lyons-fl3
+  sex: Male
+  speaker: elder_lyons_fl3
+  roundStart: true
+
+- type: ttsVoice
+  id: SarahLyonsFL3
+  name: tts-sarah-lyons-fl3
+  sex: Female
+  speaker: sarah_lyons_fl3
+  roundStart: true
+
+- type: ttsVoice
+  id: ColinMoriartyFL3
+  name: tts-colin-moriarty-fl3
+  sex: Male
+  speaker: colin_moriarty_fl3
+  roundStart: true
+
+- type: ttsVoice
+  id: JohnHenryEdenFL3
+  name: tts-john-henry-eden-fl3
+  sex: Male
+  speaker: john_henry_eden_fl3
+  roundStart: true
+
+- type: ttsVoice
+  id: SuperMutantFL3
+  name: tts-super-mutant-fl3
+  sex: Male
+  speaker: super_mutant_fl3
+  roundStart: true
+
+- type: ttsVoice
+  id: Polina
+  name: tts-polina
+  sex: Female
+  speaker: polina
+  roundStart: true
+
+- type: ttsVoice
+  id: Romka
+  name: tts-romka
+  sex: Male
+  speaker: romka
+  roundStart: true
+
+- type: ttsVoice
+  id: BorisPetrovFatherTB
+  name: tts-boris-petrov-father-tb
+  sex: Male
+  speaker: boris_petrov_father_tb
+  roundStart: true
+
+- type: ttsVoice
+  id: KarinaPetrovaTB
+  name: tts-karina-petrova-tb
+  sex: Female
+  speaker: karina_petrova_tb
+  roundStart: true
+
+- type: ttsVoice
+  id: KateSmirnovaTB
+  name: tts-kate-smirnova-tb
+  sex: Female
+  speaker: kate_smirnova_tb
+  roundStart: true
+
+- type: ttsVoice
+  id: SemenBaburinTB
+  name: tts-semen-baburin-tb
+  sex: Male
+  speaker: semen_baburin_tb
+  roundStart: true
+
+- type: ttsVoice
+  id: TihonovTB
+  name: tts-tihonov-tb
+  sex: Male
+  speaker: tihonov_tb
+  roundStart: true
+
+- type: ttsVoice
+  id: Cicero
+  name: tts-cicero
+  sex: Male
+  speaker: cicero
+  roundStart: true
+
+- type: ttsVoice
+  id: Sheogorath
+  name: tts-sheogorath
+  sex: Male
+  speaker: sheogorath
+  roundStart: true
+
+- type: ttsVoice
+  id: Kodlakwhitemane
+  name: tts-kodlakwhitemane
+  sex: Male
+  speaker: kodlakwhitemane
+  roundStart: true
+
+- type: ttsVoice
+  id: Khajiit
+  name: tts-khajiit
+  sex: Male
+  speaker: khajiit
+  roundStart: true
+
+- type: ttsVoice
+  id: Elenwen
+  name: tts-elenwen
+  sex: Female
+  speaker: elenwen
+  roundStart: true
+
+- type: ttsVoice
+  id: Emperor
+  name: tts-emperor
+  sex: Male
+  speaker: emperor
+  roundStart: true
+
+- type: ttsVoice
+  id: Guard
+  name: tts-guard
+  sex: Male
+  speaker: guard
+  roundStart: true
+
+- type: ttsVoice
+  id: Hagraven
+  name: tts-hagraven
+  sex: Male
+  speaker: hagraven
+  roundStart: true
+
+- type: ttsVoice
+  id: HermaeusMora
+  name: tts-hermaeus-mora
+  sex: Male
+  speaker: hermaeus_mora
+  roundStart: true
+
+- type: ttsVoice
+  id: Nord
+  name: tts-nord
+  sex: Male
+  speaker: nord
+  roundStart: true
+
+- type: ttsVoice
+  id: Ulfric
+  name: tts-ulfric
+  sex: Male
+  speaker: ulfric
+  roundStart: true
+
+- type: ttsVoice
+  id: Astrid
+  name: tts-astrid
+  sex: Female
+  speaker: astrid
+  roundStart: true
+
+- type: ttsVoice
+  id: Maven
+  name: tts-maven
+  sex: Female
+  speaker: maven
+  roundStart: true
+
+- type: ttsVoice
+  id: Nazir
+  name: tts-nazir
+  sex: Male
+  speaker: nazir
+  roundStart: true
+
+- type: ttsVoice
+  id: FemaleCommander
+  name: tts-female-commander
+  sex: Female
+  speaker: female_commander
+  roundStart: true
+
+- type: ttsVoice
+  id: LordHarkon
+  name: tts-lord-harkon
+  sex: Male
+  speaker: lord_harkon
+  roundStart: true
+
+- type: ttsVoice
+  id: Serana
+  name: tts-serana
+  sex: Female
+  speaker: serana
+  roundStart: true
+
+- type: ttsVoice
+  id: Glados
+  name: tts-glados
+  sex: Female
+  speaker: glados
+  roundStart: true
+
+- type: ttsVoice
+  id: AdventureCore
+  name: tts-adventure-core
+  sex: Male
+  speaker: adventure_core
+  roundStart: true
+
+- type: ttsVoice
+  id: FactCore
+  name: tts-fact-core
+  sex: Male
+  speaker: fact_core
+  roundStart: true
+
+- type: ttsVoice
+  id: SpaceCore
+  name: tts-space-core
+  sex: Male
+  speaker: space_core
+  roundStart: true
+
+- type: ttsVoice
+  id: TurretFloor
+  name: tts-turret-floor
+  sex: Female
+  speaker: turret_floor
+  roundStart: true
+
+- type: ttsVoice
+  id: Geralt
+  name: tts-geralt
+  sex: Male
+  speaker: geralt
+  roundStart: true
+
+- type: ttsVoice
+  id: Cirilla
+  name: tts-cirilla
+  sex: Female
+  speaker: cirilla
+  roundStart: true
+
+- type: ttsVoice
+  id: Cerys
+  name: tts-cerys
+  sex: Female
+  speaker: cerys
+  roundStart: true
+
+- type: ttsVoice
+  id: Lambert
+  name: tts-lambert
+  sex: Male
+  speaker: lambert
+  roundStart: true
+
+- type: ttsVoice
+  id: Triss
+  name: tts-triss
+  sex: Female
+  speaker: triss
+  roundStart: true
+
+- type: ttsVoice
+  id: KovirNobleman
+  name: tts-kovir-nobleman
+  sex: Male
+  speaker: kovir_nobleman
+  roundStart: true
+
+- type: ttsVoice
+  id: ZoltanChivay
+  name: tts-zoltan-chivay
+  sex: Male
+  speaker: zoltan_chivay
+  roundStart: true
+
+- type: ttsVoice
+  id: Vesemir
+  name: tts-vesemir
+  sex: Male
+  speaker: vesemir
+  roundStart: true
+
+- type: ttsVoice
+  id: GuillaumeDeLaunfal
+  name: tts-guillaume-de-launfal
+  sex: Male
+  speaker: guillaume_de_launfal
+  roundStart: true
+
+- type: ttsVoice
+  id: PhilippaEilhart
+  name: tts-philippa-eilhart
+  sex: Female
+  speaker: philippa_eilhart
+  roundStart: true
+
+- type: ttsVoice
+  id: EwaldBorsodi
+  name: tts-ewald-borsodi
+  sex: Male
+  speaker: ewald_borsodi
+  roundStart: true
+
+- type: ttsVoice
+  id: Dandelion
+  name: tts-dandelion
+  sex: Male
+  speaker: dandelion
+  roundStart: true
+
+- type: ttsVoice
+  id: Shani
+  name: tts-shani
+  sex: Female
+  speaker: shani
+  roundStart: true
+
+- type: ttsVoice
+  id: Azir
+  name: tts-azir
+  sex: Male
+  speaker: azir
+  roundStart: true
+
+- type: ttsVoice
+  id: Ekko
+  name: tts-ekko
+  sex: Male
+  speaker: ekko
+  roundStart: true
+
+- type: ttsVoice
+  id: Twitch
+  name: tts-twitch
+  sex: Male
+  speaker: twitch
+  roundStart: true
+
+- type: ttsVoice
+  id: Ziggs
+  name: tts-ziggs
+  sex: Male
+  speaker: ziggs
+  roundStart: true
+
+- type: ttsVoice
+  id: Caitlyn
+  name: tts-caitlyn
+  sex: Female
+  speaker: caitlyn
+  roundStart: true
+
+- type: ttsVoice
+  id: Arthas
+  name: tts-arthas
+  sex: Male
+  speaker: arthas
+  roundStart: true
+
+- type: ttsVoice
+  id: Illidan
+  name: tts-illidan
+  sex: Male
+  speaker: illidan
+  roundStart: true
+
+- type: ttsVoice
+  id: Rexxar
+  name: tts-rexxar
+  sex: Male
+  speaker: rexxar
+  roundStart: true
+
+- type: ttsVoice
+  id: Voljin
+  name: tts-voljin
+  sex: Male
+  speaker: voljin
+  roundStart: true
+
+- type: ttsVoice
+  id: Bandit
+  name: tts-bandit
+  sex: Male
+  speaker: bandit
+  roundStart: true
+
+- type: ttsVoice
+  id: Forester
+  name: tts-forester
+  sex: Male
+  speaker: forester
+  roundStart: true
+
+- type: ttsVoice
+  id: Sidorovich
+  name: tts-sidorovich
+  sex: Male
+  speaker: sidorovich
+  roundStart: true
+
+- type: ttsVoice
+  id: Strelok
+  name: tts-strelok
+  sex: Male
+  speaker: strelok
+  roundStart: true
+
+- type: ttsVoice
+  id: Tracer
+  name: tts-tracer
+  sex: Female
+  speaker: tracer
+  roundStart: true
+
+- type: ttsVoice
+  id: Soldier
+  name: tts-soldier
+  sex: Male
+  speaker: soldier
+  roundStart: true
+
+- type: ttsVoice
+  id: Engineer
+  name: tts-engineer
+  sex: Male
+  speaker: engineer
+  roundStart: true
+
+- type: ttsVoice
+  id: Heavy
+  name: tts-heavy
+  sex: Male
+  speaker: heavy
+  roundStart: true
+
+- type: ttsVoice
+  id: Medic
+  name: tts-medic
+  sex: Male
+  speaker: medic
+  roundStart: true
+
+- type: ttsVoice
+  id: Demoman
+  name: tts-demoman
+  sex: Male
+  speaker: demoman
+  roundStart: true
+
+- type: ttsVoice
+  id: Sniper
+  name: tts-sniper
+  sex: Male
+  speaker: sniper
+  roundStart: true
+
+- type: ttsVoice
+  id: Spy
+  name: tts-spy
+  sex: Male
+  speaker: spy
+  roundStart: true
+
+- type: ttsVoice
+  id: Punisher
+  name: tts-punisher
+  sex: Male
+  speaker: punisher
+  roundStart: true
+
+- type: ttsVoice
+  id: Johnny
+  name: tts-johnny
+  sex: Male
+  speaker: johnny
+  roundStart: true
+
+- type: ttsVoice
+  id: Panam
+  name: tts-panam
+  sex: Female
+  speaker: panam
+  roundStart: true
+
+- type: ttsVoice
+  id: VFemale
+  name: tts-v-female
+  sex: Female
+  speaker: v_female
+  roundStart: true
+
+- type: ttsVoice
+  id: Judy
+  name: tts-judy
+  sex: Female
+  speaker: judy
+  roundStart: true
+
+- type: ttsVoice
+  id: Mitch
+  name: tts-mitch
+  sex: Male
+  speaker: mitch
+  roundStart: true
+
+- type: ttsVoice
+  id: Skippy
+  name: tts-skippy
+  sex: Male
+  speaker: skippy
+  roundStart: true
+
+- type: ttsVoice
+  id: Jackie
+  name: tts-jackie
+  sex: Male
+  speaker: jackie
+  roundStart: true
+
+- type: ttsVoice
+  id: Maiko
+  name: tts-maiko
+  sex: Female
+  speaker: maiko
+  roundStart: true
+
+- type: ttsVoice
+  id: Brendan
+  name: tts-brendan
+  sex: Male
+  speaker: brendan
+  roundStart: true
+
+- type: ttsVoice
+  id: NancyHartley
+  name: tts-nancy-hartley
+  sex: Female
+  speaker: nancy_hartley
+  roundStart: true
+
+- type: ttsVoice
+  id: OswaldForrest
+  name: tts-oswald-forrest
+  sex: Male
+  speaker: oswald_forrest
+  roundStart: true
+
+- type: ttsVoice
+  id: Steve
+  name: tts-steve
+  sex: Male
+  speaker: steve
+  roundStart: true
+
+- type: ttsVoice
+  id: Dornan
+  name: tts-dornan
+  sex: Male
+  speaker: dornan
+  roundStart: true
+
+- type: ttsVoice
+  id: OfficerEnclave
+  name: tts-officer-enclave
+  sex: Male
+  speaker: officer_enclave
+  roundStart: true
+
+- type: ttsVoice
+  id: Richardson
+  name: tts-richardson
+  sex: Male
+  speaker: richardson
+  roundStart: true
+
+- type: ttsVoice
+  id: Butch
+  name: tts-butch
+  sex: Male
+  speaker: butch
+  roundStart: true
+
+- type: ttsVoice
+  id: Marcus
+  name: tts-marcus
+  sex: Male
+  speaker: marcus
+  roundStart: true
+
+- type: ttsVoice
+  id: Sulik
+  name: tts-sulik
+  sex: Male
+  speaker: sulik
+  roundStart: true
+
+- type: ttsVoice
+  id: Myron
+  name: tts-myron
+  sex: Male
+  speaker: myron
+  roundStart: true
+
+- type: ttsVoice
+  id: GoodThalya
+  name: tts-good-thalya
+  sex: Female
+  speaker: good_thalya
+  roundStart: true
+
+- type: ttsVoice
+  id: EvilThalya
+  name: tts-evil-thalya
+  sex: Female
+  speaker: evil_thalya
+  roundStart: true
+
+- type: ttsVoice
+  id: NarratorD3
+  name: tts-narrator-d3
+  sex: Male
+  speaker: narrator_d3
+  roundStart: true
+
+- type: ttsVoice
+  id: Dude
+  name: tts-dude
+  sex: Male
+  speaker: dude
+  roundStart: true
+
+- type: ttsVoice
+  id: Anduin
+  name: tts-anduin
+  sex: Male
+  speaker: anduin
+  roundStart: true
+
+- type: ttsVoice
+  id: Brukan
+  name: tts-brukan
+  sex: Male
+  speaker: brukan
+  roundStart: true
+
+- type: ttsVoice
+  id: Garrosh
+  name: tts-garrosh
+  sex: Male
+  speaker: garrosh
+  roundStart: true
+
+- type: ttsVoice
+  id: Jaina
+  name: tts-jaina
+  sex: Female
+  speaker: jaina
+  roundStart: true
+
+- type: ttsVoice
+  id: UtherHS
+  name: tts-uther-hs
+  sex: Male
+  speaker: uther_hs
+  roundStart: true
+
+- type: ttsVoice
+  id: Adjutant
+  name: tts-adjutant
+  sex: Female
+  speaker: adjutant
+  roundStart: true
+
+- type: ttsVoice
+  id: Hanson
+  name: tts-hanson
+  sex: Female
+  speaker: hanson
+  roundStart: true
+
+- type: ttsVoice
+  id: Bralik
+  name: tts-bralik
+  sex: Male
+  speaker: bralik
+  roundStart: true
+
+- type: ttsVoice
+  id: Horner
+  name: tts-horner
+  sex: Male
+  speaker: horner
+  roundStart: true
+
+- type: ttsVoice
+  id: Tosh
+  name: tts-tosh
+  sex: Male
+  speaker: tosh
+  roundStart: true
+
+- type: ttsVoice
+  id: Tychus
+  name: tts-tychus
+  sex: Male
+  speaker: tychus
+  roundStart: true
+
+- type: ttsVoice
+  id: Amitkakkar
+  name: tts-amitkakkar
+  sex: Male
+  speaker: amitkakkar
+  roundStart: true
+
+- type: ttsVoice
+  id: Eleazarfig
+  name: tts-eleazarfig
+  sex: Male
+  speaker: eleazarfig
+  roundStart: true
+
+- type: ttsVoice
+  id: Ernielark
+  name: tts-ernielark
+  sex: Male
+  speaker: ernielark
+  roundStart: true
+
+- type: ttsVoice
+  id: Ignatiaflootravel
+  name: tts-ignatiaflootravel
+  sex: Female
+  speaker: ignatiaflootravel
+  roundStart: true
+
+- type: ttsVoice
+  id: Lodgok
+  name: tts-lodgok
+  sex: Male
+  speaker: lodgok
+  roundStart: true
+
+- type: ttsVoice
+  id: Phineasblack
+  name: tts-phineasblack
+  sex: Male
+  speaker: phineasblack
+  roundStart: true
+
+- type: ttsVoice
+  id: Ranrak
+  name: tts-ranrak
+  sex: Male
+  speaker: ranrak
+  roundStart: true
+
+- type: ttsVoice
+  id: Victorrookwood
+  name: tts-victorrookwood
+  sex: Male
+  speaker: victorrookwood
+  roundStart: true
+
+- type: ttsVoice
+  id: Zenobianoke
+  name: tts-zenobianoke
+  sex: Female
+  speaker: zenobianoke
+  roundStart: true
+
+- type: ttsVoice
+  id: Gladwinmoon
+  name: tts-gladwinmoon
+  sex: Male
+  speaker: gladwinmoon
+  roundStart: true
+
+- type: ttsVoice
+  id: Matildaweasley
+  name: tts-matildaweasley
+  sex: Female
+  speaker: matildaweasley
+  roundStart: true
+
+- type: ttsVoice
+  id: Natsaionai
+  name: tts-natsaionai
+  sex: Female
+  speaker: natsaionai
+  roundStart: true
+
+- type: ttsVoice
+  id: Ominisgaunt
+  name: tts-ominisgaunt
+  sex: Male
+  speaker: ominisgaunt
+  roundStart: true
+
+- type: ttsVoice
+  id: Poppysweeting
+  name: tts-poppysweeting
+  sex: Female
+  speaker: poppysweeting
+  roundStart: true
+
+- type: ttsVoice
+  id: GenericGoblinC
+  name: tts-generic-goblin-c
+  sex: Male
+  speaker: generic_goblin_c
+  roundStart: true
+
+- type: ttsVoice
+  id: DinahHecat
+  name: tts-dinah-hecat
+  sex: Female
+  speaker: dinah_hecat
+  roundStart: true
+
+- type: ttsVoice
+  id: AesopSharp
+  name: tts-aesop-sharp
+  sex: Male
+  speaker: aesop_sharp
+  roundStart: true
+
+- type: ttsVoice
+  id: AbrahamRonen
+  name: tts-abraham-ronen
+  sex: Male
+  speaker: abraham_ronen
+  roundStart: true
+
+- type: ttsVoice
+  id: SamanthaDale
+  name: tts-samantha-dale
+  sex: Female
+  speaker: samantha_dale
+  roundStart: true
+
+- type: ttsVoice
+  id: SironaRyan
+  name: tts-sirona-ryan
+  sex: Female
+  speaker: sirona_ryan
+  roundStart: true
+
+- type: ttsVoice
+  id: SophroniaFranklin
+  name: tts-sophronia-franklin
+  sex: Female
+  speaker: sophronia_franklin
+  roundStart: true
+
+- type: ttsVoice
+  id: EverettClopton
+  name: tts-everett-clopton
+  sex: Male
+  speaker: everett_clopton
+  roundStart: true
+
+- type: ttsVoice
+  id: GenericGoblinB
+  name: tts-generic-goblin-b
+  sex: Male
+  speaker: generic_goblin_b
+  roundStart: true
+
+- type: ttsVoice
+  id: SanctuaryHouseElf
+  name: tts-sanctuary-house-elf
+  sex: Male
+  speaker: sanctuary_house_elf
+  roundStart: true
+
+- type: ttsVoice
+  id: AbaddonDota2
+  name: tts-abaddon-dota-2
+  sex: Male
+  speaker: abaddon_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: AlchemistDota2
+  name: tts-alchemist-dota-2
+  sex: Male
+  speaker: alchemist_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: AntiMageDota2
+  name: tts-anti-mage-dota-2
+  sex: Male
+  speaker: anti-mage_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: ArcWardenDota2
+  name: tts-arc-warden-dota-2
+  sex: Male
+  speaker: arc_warden_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: BatriderDota2
+  name: tts-batrider-dota-2
+  sex: Male
+  speaker: batrider_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: BloodseekerDota2
+  name: tts-bloodseeker-dota-2
+  sex: Male
+  speaker: bloodseeker_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: BountyHunterDota2
+  name: tts-bounty-hunter-dota-2
+  sex: Male
+  speaker: bounty_hunter_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: BristlebackDota2
+  name: tts-bristleback-dota-2
+  sex: Male
+  speaker: bristleback_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: BroodmotherDota2
+  name: tts-broodmother-dota-2
+  sex: Female
+  speaker: broodmother_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: CentaurWarrunnerDota2
+  name: tts-centaur-warrunner-dota-2
+  sex: Male
+  speaker: centaur_warrunner_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: ClinkzDota2
+  name: tts-clinkz-dota-2
+  sex: Male
+  speaker: clinkz_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: ClockwerkDota2
+  name: tts-clockwerk-dota-2
+  sex: Male
+  speaker: clockwerk_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: CrystalMaidenDota2
+  name: tts-crystal-maiden-dota-2
+  sex: Female
+  speaker: crystal_maiden_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: DazzleDota2
+  name: tts-dazzle-dota-2
+  sex: Male
+  speaker: dazzle_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: DisruptorDota2
+  name: tts-disruptor-dota-2
+  sex: Male
+  speaker: disruptor_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: DoomDota2
+  name: tts-doom-dota-2
+  sex: Male
+  speaker: doom_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: DragonKnightDota2
+  name: tts-dragon-knight-dota-2
+  sex: Male
+  speaker: dragon_knight_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: DragonKnightDragonDota2
+  name: tts-dragon-knight-dragon-dota-2
+  sex: Male
+  speaker: dragon_knight_dragon_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: DrowRangerDota2
+  name: tts-drow-ranger-dota-2
+  sex: Female
+  speaker: drow_ranger_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: EarthshakerDota2
+  name: tts-earthshaker-dota-2
+  sex: Male
+  speaker: earthshaker_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: EmberSpiritDota2
+  name: tts-ember-spirit-dota-2
+  sex: Male
+  speaker: ember_spirit_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: EnigmaDota2
+  name: tts-enigma-dota-2
+  sex: Male
+  speaker: enigma_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: GyrocopterDota2
+  name: tts-gyrocopter-dota-2
+  sex: Male
+  speaker: gyrocopter_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: HuskarDota2
+  name: tts-huskar-dota-2
+  sex: Male
+  speaker: huskar_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: InvokerDota2
+  name: tts-invoker-dota-2
+  sex: Male
+  speaker: invoker_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: JuggernautDota2
+  name: tts-juggernaut-dota-2
+  sex: Male
+  speaker: juggernaut_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: KeeperOfTheLightDota2
+  name: tts-keeper-of-the-light-dota-2
+  sex: Male
+  speaker: keeper_of_the_light_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: KunkkaDota2
+  name: tts-kunkka-dota-2
+  sex: Male
+  speaker: kunkka_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: LegionCommanderDemonDota2
+  name: tts-legion-commander-demon-dota-2
+  sex: Female
+  speaker: legion_commander_demon_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: LegionCommanderDota2
+  name: tts-legion-commander-dota-2
+  sex: Female
+  speaker: legion_commander_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: LichDota2
+  name: tts-lich-dota-2
+  sex: Male
+  speaker: lich_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: LinaDota2
+  name: tts-lina-dota-2
+  sex: Female
+  speaker: lina_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: LunaDota2
+  name: tts-luna-dota-2
+  sex: Female
+  speaker: luna_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: LycanDota2
+  name: tts-lycan-dota-2
+  sex: Male
+  speaker: lycan_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: LycanWolfDota2
+  name: tts-lycan-wolf-dota-2
+  sex: Male
+  speaker: lycan_wolf_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: MeepoDota2
+  name: tts-meepo-dota-2
+  sex: Male
+  speaker: meepo_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: MiranaDota2
+  name: tts-mirana-dota-2
+  sex: Female
+  speaker: mirana_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: MonkeyKingCrownDota2
+  name: tts-monkey-king-crown-dota-2
+  sex: Male
+  speaker: monkey_king_crown_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: MonkeyKingDota2
+  name: tts-monkey-king-dota-2
+  sex: Male
+  speaker: monkey_king_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: NecrophosDota2
+  name: tts-necrophos-dota-2
+  sex: Male
+  speaker: necrophos_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: NyxAssassinDota2
+  name: tts-nyx-assassin-dota-2
+  sex: Male
+  speaker: nyx_assassin_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: OmniknightDota2
+  name: tts-omniknight-dota-2
+  sex: Male
+  speaker: omniknight_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: OutworldDestroyerDota2
+  name: tts-outworld-destroyer-dota-2
+  sex: Male
+  speaker: outworld_destroyer_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: PhantomAssassinArcanaDota2
+  name: tts-phantom-assassin-arcana-dota-2
+  sex: Female
+  speaker: phantom_assassin_arcana_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: PhantomAssassinDota2
+  name: tts-phantom-assassin-dota-2
+  sex: Female
+  speaker: phantom_assassin_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: PhantomLancerDota2
+  name: tts-phantom-lancer-dota-2
+  sex: Male
+  speaker: phantom_lancer_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: PudgeDota2
+  name: tts-pudge-dota-2
+  sex: Male
+  speaker: pudge_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: QueenOfPainDota2
+  name: tts-queen-of-pain-dota-2
+  sex: Female
+  speaker: queen_of_pain_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: RazorDota2
+  name: tts-razor-dota-2
+  sex: Male
+  speaker: razor_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: RikiDota2
+  name: tts-riki-dota-2
+  sex: Male
+  speaker: riki_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: RubickDota2
+  name: tts-rubick-dota-2
+  sex: Male
+  speaker: rubick_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: SandKingDota2
+  name: tts-sand-king-dota-2
+  sex: Male
+  speaker: sand_king_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: ShadowFiendDota2
+  name: tts-shadow-fiend-dota-2
+  sex: Male
+  speaker: shadow_fiend_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: ShadowShamanDota2
+  name: tts-shadow-shaman-dota-2
+  sex: Male
+  speaker: shadow_shaman_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: SkywrathMageDota2
+  name: tts-skywrath-mage-dota-2
+  sex: Male
+  speaker: skywrath_mage_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: SlardarDota2
+  name: tts-slardar-dota-2
+  sex: Male
+  speaker: slardar_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: SlarkDota2
+  name: tts-slark-dota-2
+  sex: Male
+  speaker: slark_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: SpiritBreakerDota2
+  name: tts-spirit-breaker-dota-2
+  sex: Male
+  speaker: spirit_breaker_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: StormSpiritDota2
+  name: tts-storm-spirit-dota-2
+  sex: Male
+  speaker: storm_spirit_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: SvenDota2
+  name: tts-sven-dota-2
+  sex: Male
+  speaker: sven_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: TemplarAssassinDota2
+  name: tts-templar-assassin-dota-2
+  sex: Female
+  speaker: templar_assassin_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: TidehunterDota2
+  name: tts-tidehunter-dota-2
+  sex: Male
+  speaker: tidehunter_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: TreantProtectorDota2
+  name: tts-treant-protector-dota-2
+  sex: Male
+  speaker: treant_protector_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: UnderlordDota2
+  name: tts-underlord-dota-2
+  sex: Male
+  speaker: underlord_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: UrsaDota2
+  name: tts-ursa-dota-2
+  sex: Male
+  speaker: ursa_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: WindrangerDota2
+  name: tts-windranger-dota-2
+  sex: Female
+  speaker: windranger_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: WinterWyvernDota2
+  name: tts-winter-wyvern-dota-2
+  sex: Female
+  speaker: winter_wyvern_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: WitchDoctorDota2
+  name: tts-witch-doctor-dota-2
+  sex: Male
+  speaker: witch_doctor_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: WraithKingDota2
+  name: tts-wraith-king-dota-2
+  sex: Male
+  speaker: wraith_king_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: ZeusDota2
+  name: tts-zeus-dota-2
+  sex: Male
+  speaker: zeus_dota_2
+  roundStart: true
+
+- type: ttsVoice
+  id: Mita
+  name: tts-mita
+  sex: Female
+  speaker: mita
+  roundStart: true
+
+- type: ttsVoice
+  id: Mitadream
+  name: tts-mitadream
+  sex: Female
+  speaker: mitadream
+  roundStart: true
+
+- type: ttsVoice
+  id: Mitaghost
+  name: tts-mitaghost
+  sex: Female
+  speaker: mitaghost
+  roundStart: true
+
+- type: ttsVoice
+  id: Mitakind
+  name: tts-mitakind
+  sex: Female
+  speaker: mitakind
+  roundStart: true
+
+- type: ttsVoice
+  id: Mitashorthairs
+  name: tts-mitashorthairs
+  sex: Female
+  speaker: mitashorthairs
+  roundStart: true

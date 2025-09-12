@@ -15,7 +15,7 @@ ui-options-value-percent = { TOSTRING($value, "P0") }
 
 # Misc/General menu
 
-ui-options-discordrich = Включить Discord Rich Presence
+ui-options-discordrich = Включить Discord Rich Presence 
 ui-options-general-ui-style = Стиль UI
 ui-options-general-discord = Discord
 ui-options-general-cursor = Курсор
@@ -25,18 +25,18 @@ ui-options-general-accessibility = Доступность
 
 ## Audio menu
 
-ui-options-master-volume = Основная громкость:
-ui-options-midi-volume = Громкость MIDI (Муз. инструменты):
-ui-options-ambient-music-volume = Громкость музыки окружения:
-ui-options-ambience-volume = Громкость окружения:
-ui-options-lobby-volume = Громкость лобби и окончания раунда:
-ui-options-interface-volume = Громкость интерфейса:
-ui-options-ambience-max-sounds = Кол-во одновременных звуков окружения:
-ui-options-lobby-music = Музыка в лобби
-ui-options-restart-sounds = Звуки перезапуска раунда
-ui-options-event-music = Музыка событий
-ui-options-admin-sounds = Музыка админов
-ui-options-bwoink-sound = Звук уведомления Ахелпа
+ui-options-master-volume = 󰜟 Основная громкость:
+ui-options-midi-volume =  Громкость MIDI (Муз. инструменты):
+ui-options-ambient-music-volume = 󱝟 Громкость музыки окружения:
+ui-options-ambience-volume = 󰌳 Громкость окружения:
+ui-options-lobby-volume = 󰃂 Громкость лобби и окончания раунда:
+ui-options-interface-volume = 󰒛 Громкость интерфейса:
+ui-options-ambience-max-sounds = 󰲸 Кол-во одновременных звуков окружения:
+ui-options-lobby-music = Музыка в лобби 󱍙
+ui-options-restart-sounds = Звуки перезапуска раунда 󱫜
+ui-options-event-music = Музыка событий 󰽶
+ui-options-admin-sounds = Музыка админов 
+ui-options-bwoink-sound = Звук уведомления Ахелпа 󱧢
 ui-options-volume-label = Громкость
 ui-options-display-label = Дисплей
 ui-options-quality-label = Качество
@@ -45,24 +45,24 @@ ui-options-interface-label = Интерфейс
 
 ## Graphics menu
 
-ui-options-show-held-item = Показать удерживаемый элемент рядом с курсором
+ui-options-show-held-item = Показать удерживаемый элемент рядом с курсором 󰆽
 ui-options-auto-fill-highlights = Автозаполнение выделений чата от информации о персонаже
 ui-options-highlights-color = Цвет выделений:
 ui-options-highlights-color-example = Это выделенный текст!
-ui-options-show-combat-mode-indicators = Показать индикатор боевого режима рядом с курсором
-ui-options-opaque-storage-window = Непрозрачность окна хранилища
+ui-options-show-combat-mode-indicators = Показать индикатор боевого режима рядом с курсором 󰇀
+ui-options-opaque-storage-window = Непрозрачность окна хранилища 󰣌
 ui-options-show-ooc-patron-color = Цветной ник в OOC для патронов с Patreon
-ui-options-show-looc-on-head = Показывать LOOC-чат над головами персонажей
-ui-options-fancy-speech = Показывать имена в облачках с текстом
-ui-options-fancy-name-background = Добавить фон облачкам с текстом
-ui-options-vsync = Вертикальная синхронизация
-ui-options-fullscreen = Полный экран
-ui-options-lighting-label = Качество освещения:
+ui-options-show-looc-on-head = Показывать LOOC-чат над головами персонажей 󱋑
+ui-options-fancy-speech = Показывать имена в облачках с текстом 󱈤
+ui-options-fancy-name-background = Добавить фон облачкам с текстом 󰻞
+ui-options-vsync = Вертикальная синхронизация 󱘍
+ui-options-fullscreen = Полный экран 
+ui-options-lighting-label = 󱦇 Качество освещения:
 ui-options-lighting-very-low = Очень низкое
 ui-options-lighting-low = Низкое
 ui-options-lighting-medium = Среднее
 ui-options-lighting-high = Высокое
-ui-options-scale-label = Масштаб UI:
+ui-options-scale-label = 󰊓 Масштаб UI:
 ui-options-scale-auto = Автоматическое ({ TOSTRING($scale, "P0") })
 ui-options-scale-75 = 75%
 ui-options-scale-100 = 100%
@@ -70,7 +70,7 @@ ui-options-scale-125 = 125%
 ui-options-scale-150 = 150%
 ui-options-scale-175 = 175%
 ui-options-scale-200 = 200%
-ui-options-hud-theme = Тема HUD:
+ui-options-hud-theme = 󰔎 Тема HUD:
 ui-options-hud-theme-default = По умолчанию
 ui-options-hud-theme-plasmafire = Плазма
 ui-options-hud-theme-slimecore = Слаймкор
@@ -80,8 +80,8 @@ ui-options-hud-theme-minimalist = Минимализм
 ui-options-hud-theme-ashen = Пепел
 ui-options-hud-layout-default = Стандартный
 ui-options-hud-layout-separated = Разделённый
-ui-options-vp-stretch = Растянуть изображение для соответствия окну игры
-ui-options-vp-scale = Фиксированный масштаб окна игры:
+ui-options-vp-stretch = Растянуть изображение для соответствия окну игры 󰊔
+ui-options-vp-scale = 󰼫 Фиксированный масштаб окна игры:
 ui-options-vp-scale-value = x{ $scale }
 ui-options-vp-integer-scaling = Использовать целочисленное масштабирование (может вызывать появление чёрных полос/обрезания)
 ui-options-vp-integer-scaling-tooltip =
@@ -94,12 +94,12 @@ ui-options-vp-vertical-fit-tooltip =
     Когда функция включена, основное окно просмотра не будет учитывать горизонтальную ось
     при подгонке под ваш экран. Если ваш экран меньше, чем окно просмотра,
     то это приведёт к его обрезанию по горизонтальной оси.
-ui-options-vp-low-res = Изображение низкого разрешения
-ui-options-parallax-low-quality = Низкокачественный параллакс (фон)
+ui-options-vp-low-res = Изображение низкого разрешения 
+ui-options-parallax-low-quality = Низкокачественный параллакс 󰨌
 ui-options-ambient-occlusion = Отображать окружающее затенение
-ui-options-fps-counter = Показать счётчик FPS
-ui-options-vp-width = Ширина окна игры:
-ui-options-hud-layout = Тип HUD:
+ui-options-fps-counter = Показать счётчик FPS 󰍗
+ui-options-vp-width = 󰻵 Ширина окна игры:
+ui-options-hud-layout =  Тип HUD:
 
 ## Controls menu
 
@@ -156,7 +156,7 @@ ui-options-function-swap-hands-reverse = Поменять руки (другое
 ui-options-function-move-stored-item = Переместить хранящийся объект
 ui-options-function-rotate-stored-item = Повернуть хранящийся объект
 ui-options-function-save-item-location = Сохранить расположение объекта
-ui-options-static-storage-ui = Закрепить интерфейс хранилища на хотбаре
+ui-options-static-storage-ui = Закрепить интерфейс хранилища на хотбаре 󰪽
 ui-options-function-smart-equip-backpack = Умная экипировка в рюкзак
 ui-options-function-smart-equip-belt = Умная экипировка на пояс
 ui-options-function-open-backpack = Открыть рюкзак
