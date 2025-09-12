@@ -25,7 +25,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <!-- CorvaxGoob-Coins-start
         <Button Access="Public" Name="PatronPerksButton" Text="{Loc 'rmc-ui-patron-perks'}" StyleClasses="Caution" Visible="False" /> 
         CorvaxGoob-Coins-end -->
-        <changelog:ChangelogButton Access="Public" Name="ChangelogButton"/>
+        <changelog:ChangelogButton Access="Public" Name="ChangelogButton" Text="{Loc 'ui-escape-change'}" />
         <ui:VoteCallMenuButton />
         <PanelContainer StyleClasses="LowDivider" Margin="0 2.5 0 2.5" />
         <Button Access="Public" Name="RulesButton" Text="{Loc 'ui-escape-rules'}" />

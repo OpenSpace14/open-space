@@ -13,18 +13,12 @@
 	{
 	  "name": "bolted_unlit"
 	},
-	{
-	  "name": "bolted_open_unlit"
-	},
     {
       "name": "closed"
     },
 	{
 	  "name": "closed_unlit"
 	},
-    {
-      "name": "open_unlit"
-    },
     {
       "name": "closing",
       "delays": [
@@ -52,6 +46,14 @@
       ]
     },
     {
+      "name": "open_unlit",
+      "delays": [
+        [
+          1
+        ]
+      ]
+    },
+    {
       "name": "deny_unlit",
       "delays": [
         [
@@ -67,8 +69,8 @@
 	{
 	  "name": "open",
 	  "delays": [
-	    [
-		  1
+	    [ 
+		  1 
 		]
 	  ]
 	},
@@ -110,9 +112,6 @@
           0.2
         ]
       ]
-    },
-    {
-      "name": "panel_closed"
     },
     {
       "name": "panel_open",
@@ -171,9 +170,6 @@
           0.4
         ]
       ]
-    },
-    {
-      "name": "emergency_open_unlit"
     }
   ]
 }

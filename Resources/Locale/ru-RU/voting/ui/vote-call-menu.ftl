@@ -7,7 +7,7 @@ ui-vote-votekick-type-raiding = Набег
 ui-vote-votekick-type-cheating = Использование читов
 ui-vote-votekick-type-spamming = Спам
 # Window title of the vote create menu
-ui-vote-create-title = Голосование
+ui-vote-create-title = Голосование 󰨟
 # Submit button in the vote create button
 ui-vote-create-button = Запустить
 # Follow button in the vote create menu
