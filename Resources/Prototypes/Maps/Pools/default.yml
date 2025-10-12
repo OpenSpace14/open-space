@@ -57,9 +57,9 @@
   - Bagel
   - Box
   - Cluster
-  #- Core
+  - Core
   - Fland
- # - Gate Goobstation - My name is Walter Hartwell White, I live at 2308 Negra alloya line albequrque new mexico.
+  - Gate Goobstation - My name is Walter Hartwell White, I live at 2308 Negra alloya line albequrque new mexico.
   - Loop
   - Marathon
   - Meta
@@ -69,7 +69,11 @@
   - Saltern
   - Packed
   - Reach
+<<<<<<< HEAD
   #- Train # Goobstation - all my friends hate train
+=======
+  - Train # Goobstation - all my friends hate train
+>>>>>>> 1998a55b1e (Фикс пула карт и карт (#5))
   - FlandHighPop
   - OasisHighPop
   - Barratry # Goobstation - Re-add barratry

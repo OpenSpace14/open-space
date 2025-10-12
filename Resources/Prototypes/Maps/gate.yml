@@ -81,7 +81,7 @@
   id: Gate
   mapName: 'Gate Station'
   mapPath: /Maps/_Goobstation/gate.yml
-  minPlayers: 55
+  minPlayers: 10
   stations:
     Gate:
       stationProto: StandardNanotrasenStation
