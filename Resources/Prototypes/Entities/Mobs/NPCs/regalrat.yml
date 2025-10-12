@@ -345,7 +345,7 @@
     animation: WeaponArcFist
     damage:
       types:
-        Blunt: 66 #oof ouch owie my bones
+        Blunt: 30 #Фикс урона//Mirage
   - type: SlowOnDamage
     speedModifierThresholds:
       200: 0.7
