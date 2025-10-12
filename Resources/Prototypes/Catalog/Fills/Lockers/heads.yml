@@ -538,7 +538,7 @@
     - id: WantedListCartridge
     - id: DrinkHosFlask
     - id: ClothingBeltSheathHeadOfSecurityFilled # Goobstation - security revamp
-    - id: SecondSkinSecurity # Goobstation
+    - id: BSOManual
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable

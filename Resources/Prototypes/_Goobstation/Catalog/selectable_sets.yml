@@ -392,7 +392,7 @@
     sprite: _Goobstation/Objects/Misc/martial_arts.rsi
     state: dragon
   content:
-    - BSOManual
+    - CQCManual
 
 - type: selectableSet
   id: BSOChesterSet
