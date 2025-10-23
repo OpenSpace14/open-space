@@ -141,6 +141,8 @@ using Content.Server.Administration.Managers;
 using Content.Server.Afk;
 using Content.Server.Chat.Managers;
 using Content.Server.Connection;
+using Content.Server._NC.Discord;
+using Content.Server._NC.Sponsors;
 using Content.Server.Database;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
@@ -168,6 +170,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server._CorvaxGoob.TTS;
+using Content.Server.JoinQueue;
+using Robust.Shared.Network;
 
 namespace Content.Server.Entry
 {
@@ -184,6 +188,7 @@ namespace Content.Server.Entry
         private IServerDbManager? _dbManager;
         private IWatchlistWebhookManager _watchlistWebhookManager = default!;
         private IConnectionManager? _connectionManager;
+        [Dependency] private readonly DiscordAuthManager _discordAuthManager = default!;
 
         /// <inheritdoc />
         public override void Init()
@@ -205,8 +210,10 @@ namespace Content.Server.Entry
             factory.DoAutoRegistrations();
             factory.IgnoreMissingComponents("Visuals");
 
-            factory.RegisterIgnore(IgnoredComponents.List);
+            //factory.RegisterIgnore(IgnoredComponents.List);
 
+			factory.RegisterIgnore(IgnoredComponents.List);
+			prototypes.RegisterIgnore("guideEntry");
             prototypes.RegisterIgnore("parallax");
 
             ServerContentIoC.Register();
@@ -246,6 +253,9 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<TTSManager>().Initialize(); // CorvaxGoob-TTS
                 IoCManager.Resolve<ServerInfoManager>().Initialize();
                 IoCManager.Resolve<ServerApi>().Initialize();
+                IoCManager.Resolve<DiscordAuthManager>().Initialize();
+                IoCManager.Resolve<SponsorsManager>().Initialize();
+                // IoCManager.Resolve<JoinQueueManager>().Initialize();
 
                 _voteManager.Initialize();
                 _updateManager.Initialize();

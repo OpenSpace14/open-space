@@ -42,6 +42,9 @@ using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Linq;
+using Content.Shared.Administration;
+using Robust.Server.GameObjects;
 
 namespace Content.Server.GameTicking
 {
@@ -49,6 +52,7 @@ namespace Content.Server.GameTicking
     public sealed partial class GameTicker
     {
         [Dependency] private readonly IPlayerManager _playerManager = default!;
+        [Dependency] private readonly ActorSystem _actor = default!;
 
         private void InitializePlayer()
         {
@@ -73,7 +77,7 @@ namespace Content.Server.GameTicking
             {
                 case SessionStatus.Connected:
                 {
-                    _userDb.ClientConnected(session); // Surely moving this here won't break anything? :clueless:
+                    _userDb.ClientConnected(session);
                     AddPlayerToDb(args.Session.UserId.UserId);
 
                     // Always make sure the client has player data.
@@ -84,33 +88,35 @@ namespace Content.Server.GameTicking
                         session.Data.ContentDataUncast = data;
                     }
 
+                    // ЗАКОММЕНТИРОВАНО: автоматическое подключение игрока
                     // CorvaxGoob-Queue-Start
-                    if (!IoCManager.Instance!.TryResolveType<IServerJoinQueueManager>(out _))
-                        Timer.Spawn(0, () => _playerManager.JoinGame(args.Session));
+                    // if (!IoCManager.Instance!.TryResolveType<IServerJoinQueueManager>(out _))
+                    //     Timer.Spawn(0, () => _playerManager.JoinGame(args.Session));
                     // CorvaxGoob-Queue-End
 
-                    var record = await _db.GetPlayerRecordByUserId(args.Session.UserId);
-                    var firstConnection = record != null &&
-                                          Math.Abs((record.FirstSeenTime - record.LastSeenTime).TotalMinutes) < 1;
+                    // var record = await _dbManager.GetPlayerRecordByUserId(args.Session.UserId);
+                    // var firstConnection = record != null &&
+                    //                       Math.Abs((record.FirstSeenTime - record.LastSeenTime).TotalMinutes) < 1;
+                    var firstConnection = false; // Simplified for now
 
                     _chatManager.SendAdminAnnouncement(firstConnection
-                        ? Loc.GetString("player-first-join-message", ("name", args.Session.Name))
-                        : Loc.GetString("player-join-message", ("name", args.Session.Name)));
+                    ? Loc.GetString("player-first-join-message", ("name", args.Session.Name))
+                    : Loc.GetString("player-join-message", ("name", args.Session.Name)));
 
                     RaiseNetworkEvent(GetConnectionStatusMsg(), session.Channel);
 
                     if (firstConnection && _cfg.GetCVar(CCVars.AdminNewPlayerJoinSound))
                         _audio.PlayGlobal(new SoundPathSpecifier("/Audio/Effects/newplayerping.ogg"),
-                            Filter.Empty().AddPlayers(_adminManager.ActiveAdmins), false,
-                            audioParams: new AudioParams { Volume = -5f });
+                                          Filter.Empty().AddPlayers(_adminManager.ActiveAdmins), false,
+                                          audioParams: new AudioParams { Volume = -5f });
 
-                    if (LobbyEnabled && _roundStartCountdownHasNotStartedYetDueToNoPlayers)
-                    {
-                        _roundStartCountdownHasNotStartedYetDueToNoPlayers = false;
-                        _roundStartTime = _gameTiming.CurTime + LobbyDuration;
-                    }
+                        if (LobbyEnabled && _roundStartCountdownHasNotStartedYetDueToNoPlayers)
+                        {
+                            _roundStartCountdownHasNotStartedYetDueToNoPlayers = false;
+                            _roundStartTime = _gameTiming.CurTime + LobbyDuration;
+                        }
 
-                    break;
+                        break;
                 }
 
                 case SessionStatus.InGame:
@@ -159,7 +165,7 @@ namespace Content.Server.GameTicking
                         _pvsOverride.RemoveSessionOverride(mindId.Value, session);
                     }
 
-                    if (_playerGameStatuses.ContainsKey(session.UserId)) // Goobstation - Queue
+                    if (_playerGameStatuses.ContainsKey(session.UserId))
                         _userDb.ClientDisconnected(session);
                     break;
                 }
@@ -253,7 +259,7 @@ namespace Content.Server.GameTicking
 
     public sealed class PlayerJoinedLobbyEvent : EntityEventArgs
     {
-        public readonly ICommonSession PlayerSession;
+        public ICommonSession PlayerSession;
 
         public PlayerJoinedLobbyEvent(ICommonSession playerSession)
         {

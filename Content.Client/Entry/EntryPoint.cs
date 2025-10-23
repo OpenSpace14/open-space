@@ -160,6 +160,9 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Replays;
 using Robust.Shared.Timing;
 using Content.Client._White.ItemSlotRenderer;
+using Content.Client._NC.DiscordAuth;
+using Content.Client.JoinQueue;
+using Robust.Shared.Timing;
 
 namespace Content.Client.Entry
 {
@@ -197,7 +200,8 @@ namespace Content.Client.Entry
         [Dependency] private readonly DebugMonitorManager _debugMonitorManager = default!;
         [Dependency] private readonly TitleWindowManager _titleWindowManager = default!;
         [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
-        [Dependency] private readonly ClientsidePlaytimeTrackingManager _clientsidePlaytimeManager = default!;
+        [Dependency] private readonly JoinQueueManager _joinQueue = default!;
+        [Dependency] private readonly DiscordAuthManager _discordAuthManager = default!;
 
         public override void Init()
         {
@@ -238,6 +242,7 @@ namespace Content.Client.Entry
             _prototypeManager.RegisterIgnore("playerConnectionWhitelist");
             _prototypeManager.RegisterIgnore("spaceBiome");
             _prototypeManager.RegisterIgnore("worldgenConfig");
+			_prototypeManager.RegisterIgnore("gcQueue");
             _prototypeManager.RegisterIgnore("gameRule");
             _prototypeManager.RegisterIgnore("worldSpell");
             _prototypeManager.RegisterIgnore("entitySpell");
@@ -246,6 +251,7 @@ namespace Content.Client.Entry
             _prototypeManager.RegisterIgnore("wireLayout");
             _prototypeManager.RegisterIgnore("alertLevels");
             _prototypeManager.RegisterIgnore("nukeopsRole");
+			_prototypeManager.RegisterIgnore("ghostRoleRaffleDecider");
             _prototypeManager.RegisterIgnore("stationGoal"); // CorvaxGoob-StationGoal
             _prototypeManager.RegisterIgnore("announcer"); // CorvaxGoob-CustomAnnouncers
             _prototypeManager.RegisterIgnore("ghostRoleRaffleDecider");
@@ -264,7 +270,7 @@ namespace Content.Client.Entry
             _extendedDisconnectInformation.Initialize();
             _jobRequirements.Initialize();
             _playbackMan.Initialize();
-            _clientsidePlaytimeManager.Initialize();
+			_discordAuthManager.Initialize();
 
             //AUTOSCALING default Setup!
             _configManager.SetCVar("interface.resolutionAutoScaleUpperCutoffX", 1080);
@@ -302,6 +308,7 @@ namespace Content.Client.Entry
             _userInterfaceManager.SetActiveTheme(_configManager.GetCVar(CVars.InterfaceTheme));
             _documentParsingManager.Initialize();
             _titleWindowManager.Initialize();
+            _joinQueue.Initialize();
 
             _baseClient.RunLevelChanged += (_, args) =>
             {
@@ -333,7 +340,7 @@ namespace Content.Client.Entry
                     _resourceManager,
                     ReplayConstants.ReplayZipFolder.ToRootedPath());
 
-                _playbackMan.LastLoad = (null, ReplayConstants.ReplayZipFolder.ToRootedPath());
+                //_playbackMan.LastLoad = (null, ReplayConstants.ReplayZipFolder.ToRootedPath());
                 _replayLoad.LoadAndStartReplay(reader);
             }
             else if (_gameController.LaunchState.FromLauncher)

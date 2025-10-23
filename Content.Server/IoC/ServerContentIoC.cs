@@ -172,6 +172,7 @@ using Content.Server.Administration.Notes;
 using Content.Server.Afk;
 using Content.Server.Chat.Managers;
 using Content.Server.Connection;
+using Content.Server.JoinQueue;
 using Content.Server.Database;
 using Content.Server.Discord;
 using Content.Server.Discord.WebhookMessages;
@@ -196,6 +197,9 @@ using Content.Shared.Chat;
 using Content.Shared.Kitchen;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
+using Content.Server._NC.Discord;
+using Content.Server._NC.Sponsors;
+using Robust.Shared.Network;
 
 namespace Content.Server.IoC
 {
@@ -234,6 +238,9 @@ namespace Content.Server.IoC
             IoCManager.Register<DiscordWebhook>();
             IoCManager.Register<VoteWebhooks>();
             IoCManager.Register<ServerDbEntryManager>();
+            IoCManager.Register<DiscordAuthManager>();
+            IoCManager.Register<SponsorsManager>();
+            IoCManager.Register<JoinQueueManager>();
             IoCManager.Register<ISharedPlaytimeManager, PlayTimeTrackingManager>();
             IoCManager.Register<ServerApi>();
             IoCManager.Register<JobWhitelistManager>();

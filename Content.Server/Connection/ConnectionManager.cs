@@ -442,10 +442,8 @@ namespace Content.Server.Connection
             // CorvaxGoob-Queue-Start
 
             if ((softPlayerCount >= _cfg.GetCVar(CCVars.SoftMaxPlayers) && !adminBypass) && !wasInGame && !isQueueEnabled)
-            // CorvaxGoob-Queue-End
-            {
                 return (ConnectionDenyReason.Full, Loc.GetString("soft-player-cap-full"), null);
-            }
+            // CorvaxGoob-Queue-End
 
             // Checks for whitelist IF it's enabled AND the user isn't an admin. Admins are always allowed.
             if (_cfg.GetCVar(CCVars.WhitelistEnabled) && adminData is null)
@@ -536,5 +534,13 @@ namespace Content.Server.Connection
                    wasInGame;
         }
         // CorvaxGoob-Queue-End
+
+        public async Task<bool> HasPrivilegedJoin(NetUserId userId)
+        {
+            var wasInGame = EntitySystem.TryGet<GameTicker>(out var ticker) &&
+                            ticker.PlayerGameStatuses.TryGetValue(userId, out var status) &&
+                            status == PlayerGameStatus.JoinedGame;
+            return wasInGame;
+        }
     }
 }
