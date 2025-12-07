@@ -290,25 +290,67 @@
     path: /Audio/_Goobstation/Music/Abductor.ogg
 
 - type: jukebox
-  id: blackswarm
-  name: Bobik-music - Black Swarm
+  id: C418
+  name: C418
   path:
-    path: /Audio/_Goobstation/Music/Black_Swarm.ogg
+    path: /Audio/_OS/Music/C418.ogg
 
 - type: jukebox
-  id: asgore
-  name: KennyTheLyr1c1st - Asgore Runs Over Dess
+  id: sys
+  name: SOD-36
   path:
-    path: /Audio/_Goobstation/Music/Asgore_runs_over_dess_short.ogg
+    path: /Audio/_OS/Music/36.ogg
 
 - type: jukebox
-  id: the_final_battle
-  name: Bobik-music - The Final Battle
+  id: pl
+  name: Pretty Please
   path:
-    path: /Audio/_Goobstation/Music/Colonial_Marines_The_Final_Battle.ogg
+    path: /Audio/_OS/Music/pl.ogg
 
 - type: jukebox
-  id: graytide
-  name: Mrjajkes - The Greytide Song
+  id: ap
+  name: Серега Пират - Апельсин
   path:
-    path: /Audio/_Goobstation/Music/the_gray_tide_song.ogg
+    path: /Audio/_OS/Music/ap.ogg
+
+- type: jukebox
+  id: ddw
+  name: Intervallo III BattleTheme A1
+  path:
+    path: /Audio/_OS/Music/Intervallo_III_Battle_Theme_A1.ogg
+
+- type: jukebox
+  id: ddww
+  name: Intervallo V2 Battle
+  path:
+    path: /Audio/_OS/Music/Intervallo_V_2_Battle.ogg
+
+- type: jukebox
+  id: Hero.ogg
+  name: Hero
+  path:
+    path: /Audio/_OS/Music/Hero.ogg
+
+- type: jukebox
+  id: TIAN
+  name: TIAN_TIAN
+  path:
+    path: /Audio/_OS/Music/TIAN_TIAN.ogg
+
+- type: jukebox
+  id: Compass
+  name: Compass
+  path:
+    path: /Audio/_OS/Music/Compass.ogg
+
+- type: jukebox
+  id: Patches
+  name: Patches of Violet
+  path:
+    path: /Audio/_OS/Music/Patches.ogg
+
+- type: jukebox
+  id: BTW
+  name: Between Two Worlds
+  path:
+    path: /Audio/_OS/Music/Between_Two_Worlds.ogg
