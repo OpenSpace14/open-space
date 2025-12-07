@@ -18,11 +18,11 @@
   id: CorporateJudoMoves
   combos:
   - JudoThrow
+  - JudoWheelThrow
   - JudoArmbar
   - JudoDiscombobulate # Due to supercode this needs to be below Armbar, otherwise it takes priority
-  - JudoWheelThrow
   - JudoEyePoke # Same here, must be below WheelThrow
-  #- JudoGoldenBlast
+  - JudoGoldenBlast
 
 - type: combo
   id: JudoDiscombobulate
@@ -32,6 +32,7 @@
   - Disarm
   - Grab
   event: !type:JudoDiscombobulatePerformedEvent
+  staminaDamage: 5
 
 - type: combo
   id: JudoEyePoke
@@ -51,8 +52,8 @@
   - Grab
   - Disarm
   event: !type:JudoThrowPerformedEvent
-  paralyzeTime: 4
-  staminaDamage: 5
+  paralyzeTime: 7
+  staminaDamage: 50
   dropHeldItemsBehavior: NoDrop
   canDoWhileProne: false
 
@@ -66,7 +67,7 @@
   - Grab
   event: !type:JudoArmbarPerformedEvent
   paralyzeTime: 5
-  staminaDamage: 10
+  staminaDamage: 25
   dropHeldItemsBehavior: AlwaysDrop
 
 - type: combo
@@ -75,28 +76,20 @@
   martialArtsForm: CorporateJudo
   attacks:
   - Grab
-  - Disarm
   - Harm
+  - Disarm
   event: !type:JudoWheelThrowPerformedEvent
-  staminaDamage: 120
+  staminaDamage: 100
 
 # Conflicts with armbar + hugs don't seem to count?, to be implemented later
-#- type: combo
-#  id: JudoGoldenBlast
-#  name: Golden Blast
-#  martialArtsForm: CorporateJudo
-#  attacks:
-#  - Hug
-#  - Disarm
-#  - Hug
-#  - Grab
-#  - Disarm
-#  - Disarm
-#  - Grab
-#  - Hug
-#  - Disarm
-#  - Disarm
-#  - Grab
-#  - Hug
-#  event: !type:JudoGoldenBlastPerformedEvent
-#  paralyzeTime: 30
+- type: combo
+  id: JudoGoldenBlast
+  name: Golden Blast
+  martialArtsForm: CorporateJudo
+  attacks:
+  - Harm
+  - Grab
+  - Harm
+  - Grab
+  event: !type:JudoGoldenBlastPerformedEvent
+  paralyzeTime: 12

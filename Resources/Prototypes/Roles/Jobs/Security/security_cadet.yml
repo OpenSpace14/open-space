@@ -106,17 +106,11 @@
       department: Security
       time: 18000 #5 hrs
       inverted: true # stop playing intern if you're good at security!
-    - !type:SpeciesRequirement # CorvaxGoob-Species
-      inverted: true
-      species:
-      - Abductor
   startingGear: SecurityCadetGear
   icon: "JobIconSecurityCadet"
   supervisors: job-supervisors-security
   canBeAntag: false
   #goobcoins: 30 #Goob content Corvax-Goob-coins
-  skills: # CorvaxGoob-Skills
-  - Shooting
   access:
   - Security
   - Brig
@@ -130,6 +124,9 @@
   - !type:AddComponentSpecial # goobstation
     components:
       - type: SecurityStaff
+      - type: Skills # CorvaxGoob-Skills
+        skills:
+        - Shooting
 
 - type: startingGear
   id: SecurityCadetGear
@@ -146,6 +143,7 @@
     back:
     - Flash
     - MagazinePistol
+    - WeaponPistolMk58
 
 - type: chameleonOutfit
   id: SecurityCadetChameleonOutfit

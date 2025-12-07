@@ -22,6 +22,7 @@
   - CQCRestrain
   - CQCKick
   - CQCSlam
+  - JudoGoldenBlast
 
 - type: combo
   id: CQCSlam
@@ -78,3 +79,15 @@
   event: !type:CqcConsecutivePerformedEvent
   extraDamage: 10
   staminaDamage: 70
+
+- type: combo
+  id: JudoGoldenBlast
+  name: Golden Blast
+  martialArtsForm: CorporateJudo
+  attacks:
+  - Harm
+  - Grab
+  - Harm
+  - Grab
+  event: !type:JudoGoldenBlastPerformedEvent
+  paralyzeTime: 20
