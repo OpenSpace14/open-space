@@ -1,3 +1,3 @@
 # Rules
 
-ui-rules-header-corvax = Правила сервера Corvax
+ui-rules-header-corvax = Правила сервера

@@ -1,18 +1,4 @@
 - type: ttsVoice
-  id: FatherGrigori
-  name: tts-father-grigori
-  sex: Male
-  speaker: father_grigori
-  roundStart: true
-
-- type: ttsVoice
-  id: Kleiner
-  name: tts-kleiner
-  sex: Male
-  speaker: kleiner
-  roundStart: true
-
-- type: ttsVoice
   id: Papich
   name: tts-papich
   sex: Male
@@ -115,6 +101,20 @@
   name: tts-briman
   sex: Male
   speaker: briman
+  roundStart: true
+
+- type: ttsVoice
+  id: FatherGrigori
+  name: tts-father-grigori
+  sex: Male
+  speaker: father_grigori
+  roundStart: true
+
+- type: ttsVoice
+  id: Kleiner
+  name: tts-kleiner
+  sex: Male
+  speaker: kleiner
   roundStart: true
 
 - type: ttsVoice
