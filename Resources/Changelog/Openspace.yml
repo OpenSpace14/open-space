@@ -133,3 +133,9 @@ Entries:
       message: rsi bruh fixes
   id: 23
   time: '2025-12-08T07:57:31Z'
+- author: cryals
+  changes:
+    - type: Fix
+      message: Shutters meta fix
+  id: 24
+  time: '2025-12-08T13:50:17Z'
