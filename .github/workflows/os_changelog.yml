@@ -1,0 +1,141 @@
+name: OS Changelog Update
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+    # Пропускаем job если коммит содержит [AUTO]
+    if: "!contains(github.event.head_commit.message, '[AUTO]')"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install js-yaml
+
+      - name: Update changelog
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const yaml = require('js-yaml');
+            
+            // Получаем информацию о последнем коммите
+            const { data: commit } = await github.rest.repos.getCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.sha
+            });
+            
+            const commitMessage = commit.commit.message;
+            const commitAuthor = commit.author?.login || commit.commit.author.name;
+            const commitDate = commit.commit.author.date;
+            
+            console.log('Commit message:', commitMessage);
+            console.log('Commit author:', commitAuthor);
+            console.log('Commit date:', commitDate);
+            
+            // Проверяем, не является ли это AUTO коммитом (дополнительная проверка)
+            if (commitMessage.includes('[AUTO]')) {
+              console.log('Skipping AUTO commit');
+              return;
+            }
+            
+            // Парсим тип изменения из заголовка коммита
+            const typeRegex = /\[([^\]]+)\]/;
+            const match = commitMessage.match(typeRegex);
+            
+            let changeType = 'Tweak'; // По умолчанию
+            let message = commitMessage.split('\n')[0]; // Берем только первую строку
+            
+            if (match) {
+              const typeString = match[1].toUpperCase();
+              
+              // Удаляем [TYPE] из сообщения
+              message = message.replace(typeRegex, '').trim();
+              
+              // Определяем тип изменения
+              if (typeString.includes('ADD')) {
+                changeType = 'Add';
+              } else if (typeString.includes('FIX')) {
+                changeType = 'Fix';
+              } else if (typeString.includes('REMOVE') || typeString.includes('RMV')) {
+                changeType = 'Remove';
+              } else if (typeString.includes('TWEAK') || typeString.includes('UPD') || typeString.includes('UPDATE')) {
+                changeType = 'Tweak';
+              }
+            }
+            
+            console.log('Change type:', changeType);
+            console.log('Message:', message);
+            
+            // Читаем существующий changelog
+            const changelogPath = 'Resources/Changelog/Openspace.yml';
+            let changelogData;
+            
+            try {
+              const changelogContent = fs.readFileSync(changelogPath, 'utf8');
+              changelogData = yaml.load(changelogContent);
+            } catch (error) {
+              console.log('Creating new changelog file');
+              changelogData = {
+                Name: 'OSlog',
+                Order: -1,
+                Entries: []
+              };
+            }
+            
+            // Находим максимальный ID
+            const maxId = changelogData.Entries.length > 0 
+              ? Math.max(...changelogData.Entries.map(e => e.id)) 
+              : 0;
+            
+            // Создаем новую запись
+            const newEntry = {
+              author: commitAuthor,
+              changes: [
+                {
+                  type: changeType,
+                  message: message
+                }
+              ],
+              id: maxId + 1,
+              time: commitDate
+            };
+            
+            // Добавляем запись в конец
+            changelogData.Entries.push(newEntry);
+            
+            // Записываем обратно в файл
+            const updatedYaml = yaml.dump(changelogData, {
+              indent: 2,
+              lineWidth: -1,
+              noRefs: true
+            });
+            
+            // Форматируем YAML файл
+            const formattedYaml = `Name: ${changelogData.Name}\nOrder: ${changelogData.Order}\nEntries:\n${yaml.dump(changelogData.Entries, { indent: 2, lineWidth: -1, noRefs: true })}`;
+            
+            fs.writeFileSync(changelogPath, formattedYaml, 'utf8');
+            
+            console.log('Changelog updated successfully');
+
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add Resources/Changelog/Openspace.yml
+          git diff --staged --quiet || (git commit -m "[AUTO] Update OS Changelog" && git push)
