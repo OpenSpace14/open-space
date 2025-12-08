@@ -121,3 +121,9 @@ Entries:
       message: attributions license
   id: 21
   time: '2025-12-08T07:11:11Z'
+- author: cryals
+  changes:
+    - type: Tweak
+      message: README.md
+  id: 22
+  time: '2025-12-08T07:19:10Z'
