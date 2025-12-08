@@ -159,6 +159,12 @@
             "name":"xenoborg-tool-module"
         },
         {
+            "name":"surgery-module"
+        },
+        {
+            "name":"adv-surgery-module"
+        },
+        {
             "name": "select-type"
         }
     ]

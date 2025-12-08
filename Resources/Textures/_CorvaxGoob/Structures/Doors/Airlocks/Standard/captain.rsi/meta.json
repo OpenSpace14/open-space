@@ -148,6 +148,19 @@
       ]
     },
     {
+      "name": "panel_closed",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
       "name": "sparks_broken",
       "delays": [
         [
@@ -189,6 +202,12 @@
     },
     {
       "name": "welded"
+    },
+    {
+      "name": "emergency_open_unlit"
+    },
+    {
+      "name": "bolted_open_unlit"
     },
     {
       "name": "emergency_unlit",
