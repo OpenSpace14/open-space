@@ -26,14 +26,6 @@
             ]
         },
         {
-            "name":"emergency_open_unlit",
-            "directions":4
-        },
-        {
-            "name":"bolted_open_unlit",
-            "directions":4
-        },
-        {
             "name":"closed",
             "directions":4
         },

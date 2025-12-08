@@ -47,12 +47,6 @@
 			"name": "door_overcharge_on"
 		},
 		{
-			"name": "borg_control"
-		},
-		{
-			"name": "camera_jump"
-		},
-		{
 			"name": "door_overcharge_off"
 		}
 	]

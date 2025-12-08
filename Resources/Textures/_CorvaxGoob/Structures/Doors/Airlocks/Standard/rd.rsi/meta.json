@@ -191,25 +191,6 @@
       "name": "welded"
     },
     {
-      "name": "emergency_open_unlit"
-    },
-    {
-      "name": "bolted_open_unlit"
-    },
-    {
-      "name": "panel_closed",
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
-    },
-    {
       "name": "emergency_unlit",
       "delays": [
         [
