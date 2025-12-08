@@ -1,4 +1,4 @@
-﻿Name: OSlog
+Name: OSlog
 Order: -1
 Entries:
 - author: cryals
@@ -109,3 +109,9 @@ Entries:
       message: OS Logo
   id: 19
   time: '2025-12-08T01:56:05.0000000+03:00'
+- author: cryals
+  changes:
+    - type: Fix
+      message: attributions & changelog action
+  id: 20
+  time: '2025-12-08T07:06:15Z'
