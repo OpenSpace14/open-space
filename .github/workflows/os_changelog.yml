@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     # Пропускаем job если коммит содержит [AUTO]
     if: "!contains(github.event.head_commit.message, '[AUTO]')"
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -119,13 +121,6 @@ jobs:
             // Добавляем запись в конец
             changelogData.Entries.push(newEntry);
             
-            // Записываем обратно в файл
-            const updatedYaml = yaml.dump(changelogData, {
-              indent: 2,
-              lineWidth: -1,
-              noRefs: true
-            });
-            
             // Форматируем YAML файл
             const formattedYaml = `Name: ${changelogData.Name}\nOrder: ${changelogData.Order}\nEntries:\n${yaml.dump(changelogData.Entries, { indent: 2, lineWidth: -1, noRefs: true })}`;
             
@@ -136,6 +131,11 @@ jobs:
       - name: Commit and push if changed
         run: |
           git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add Resources/Changelog/Openspace.yml
-          git diff --staged --quiet || (git commit -m "[AUTO] Update OS Changelog" && git push)
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "[AUTO] Update OS Changelog"
+            git push
+          fi
