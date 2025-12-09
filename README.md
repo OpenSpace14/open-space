@@ -25,12 +25,18 @@
 - `[UPDATE]` - Обновления (альтернатива TWEAK)
 - `[REMOVE]` или `[RMV]` - Удаление контента
 
+**Теги для игнорирования:**
+- `[AUTO]` - Автогенерируемые коммиты (не добавляются в changelog)
+- `[IGNORE]` - Полное игнорирование коммита
+- `[MAPS]` - Изменения карт (игнорируются)
+
 **Примеры:**
 ```
 [ADD] New weapon sprites
 [FIX] Map loading crash
 [TWEAK] Balance changes for security
 [REMOVE] Outdated textures
+[IGNORE] Temporary debug changes
 ```
 
 Если тег не указан или не распознан, изменение будет автоматически помечено как `Tweak`.
@@ -42,6 +48,13 @@
 3. Скомпилируйте проект.
 
 [Более подробная инструкция по запуску проекта.](https://docs.spacestation14.com/en/general-development/setup.html)
+
+## Серверы
+
+- **Основной сервер**: `openspace.ss14.su:1212`
+- **Тестовый сервер**: `test.openspace.ss14.su:1212`
+
+Подключение через лаунчер SS14 или напрямую по IP.
 
 ## Лицензия
 
