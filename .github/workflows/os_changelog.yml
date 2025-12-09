@@ -9,8 +9,7 @@ on:
 jobs:
   update-changelog:
     runs-on: ubuntu-latest
-    # Пропускаем job если коммит содержит [AUTO]
-    if: "!contains(github.event.head_commit.message, '[AUTO]')"
+    if: "!contains(github.event.head_commit.message, '[AUTO]') && !contains(toLowerCase(github.event.head_commit.message), '[maps]') && !contains(github.event.head_commit.message, '[IGNORE]')"
     permissions:
       contents: write
     steps:
@@ -35,7 +34,6 @@ jobs:
             const fs = require('fs');
             const yaml = require('js-yaml');
             
-            // Получаем информацию о последнем коммите
             const { data: commit } = await github.rest.repos.getCommit({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -50,26 +48,22 @@ jobs:
             console.log('Commit author:', commitAuthor);
             console.log('Commit date:', commitDate);
             
-            // Проверяем, не является ли это AUTO коммитом (дополнительная проверка)
-            if (commitMessage.includes('[AUTO]')) {
-              console.log('Skipping AUTO commit');
+            if (commitMessage.includes('[AUTO]') || commitMessage.toLowerCase().includes('[maps]') || commitMessage.includes('[IGNORE]')) {
+              console.log('Skipping AUTO, Maps or IGNORE commit');
               return;
             }
             
-            // Парсим тип изменения из заголовка коммита
             const typeRegex = /\[([^\]]+)\]/;
             const match = commitMessage.match(typeRegex);
             
-            let changeType = 'Tweak'; // По умолчанию
-            let message = commitMessage.split('\n')[0]; // Берем только первую строку
+            let changeType = 'Tweak';
+            let message = commitMessage.split('\n')[0];
             
             if (match) {
               const typeString = match[1].toUpperCase();
               
-              // Удаляем [TYPE] из сообщения
               message = message.replace(typeRegex, '').trim();
               
-              // Определяем тип изменения
               if (typeString.includes('ADD')) {
                 changeType = 'Add';
               } else if (typeString.includes('FIX')) {
@@ -84,7 +78,6 @@ jobs:
             console.log('Change type:', changeType);
             console.log('Message:', message);
             
-            // Читаем существующий changelog
             const changelogPath = 'Resources/Changelog/Openspace.yml';
             let changelogData;
             
@@ -100,12 +93,10 @@ jobs:
               };
             }
             
-            // Находим максимальный ID
             const maxId = changelogData.Entries.length > 0 
               ? Math.max(...changelogData.Entries.map(e => e.id)) 
               : 0;
             
-            // Создаем новую запись
             const newEntry = {
               author: commitAuthor,
               changes: [
@@ -118,10 +109,8 @@ jobs:
               time: commitDate
             };
             
-            // Добавляем запись в конец
             changelogData.Entries.push(newEntry);
             
-            // Форматируем YAML файл
             const formattedYaml = `Name: ${changelogData.Name}\nOrder: ${changelogData.Order}\nEntries:\n${yaml.dump(changelogData.Entries, { indent: 2, lineWidth: -1, noRefs: true })}`;
             
             fs.writeFileSync(changelogPath, formattedYaml, 'utf8');
