@@ -34,11 +34,19 @@
                 <BoxContainer Orientation="Vertical" SeparationOverride="10" Margin="8 4">
                     <PanelContainer StyleClasses="AngleRect" HorizontalExpand="True">
                         <BoxContainer Orientation="Vertical" Margin="8 6" HorizontalExpand="True">
-                            <Label Text="{Loc 'patron-support-window-premium-name'}" 
+                            <Label Text="{Loc 'patron-support-window-premium-name'}"
                                    StyleClasses="LabelHeading" />
                             <cc:HSeparator />
                             <Control MinSize="0 2" />
-                            <RichTextLabel Text="{Loc 'patron-support-window-premium-perk1'}" 
+                            <RichTextLabel Text="{Loc 'patron-support-window-premium-perk1'}"
+                                           HorizontalExpand="True" />
+                            <RichTextLabel Text="{Loc 'patron-support-window-premium-perk2'}"
+                                           HorizontalExpand="True" />
+                            <RichTextLabel Text="{Loc 'patron-support-window-premium-perk3'}"
+                                           HorizontalExpand="True" />
+                            <RichTextLabel Text="{Loc 'patron-support-window-premium-perk4'}"
+                                           HorizontalExpand="True" />
+                            <RichTextLabel Text="{Loc 'patron-support-window-premium-perk5'}"
                                            HorizontalExpand="True" />
                         </BoxContainer>
                     </PanelContainer>
@@ -49,11 +57,13 @@
         <Control MinSize="0 4" />
 
         <ui:StripeBack>
-            <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" Margin="6 4">
-                <Button Name="PatreonButton" 
-                        Access="Public" 
-                        Text="{Loc 'patron-support-window-button'}" 
-                        StyleClasses="ButtonBig" 
+            <BoxContainer Orientation="Horizontal"
+                          HorizontalAlignment="Center"
+                          Margin="6 4">
+                <Button Name="PatreonButton"
+                        Access="Public"
+                        Text="{Loc 'patron-support-window-button'}"
+                        StyleClasses="ButtonBig"
                         MinWidth="260" />
             </BoxContainer>
         </ui:StripeBack>
