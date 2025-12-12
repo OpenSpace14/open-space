@@ -9,7 +9,7 @@ on:
 jobs:
   update-changelog:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[AUTO]') && !contains(toLowerCase(github.event.head_commit.message), '[maps]') && !contains(github.event.head_commit.message, '[IGNORE]')"
+    if: "!contains(github.event.head_commit.message, '[AUTO]') && !contains(github.event.head_commit.message, '[MAPS]') && !contains(github.event.head_commit.message, '[maps]') && !contains(github.event.head_commit.message, '[IGNORE]')"
     permissions:
       contents: write
     steps:
