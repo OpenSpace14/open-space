@@ -187,3 +187,9 @@ Entries:
       message: Rotational spawners - inherit rotation from spawner entity (CGS)
   id: 32
   time: '2025-12-11T19:55:39Z'
+- author: RomiGur
+  changes:
+    - type: Tweak
+      message: Re-translate ksen0morph localization 1 part - pr2 (CGS)
+  id: 33
+  time: '2025-12-12T01:02:27Z'
