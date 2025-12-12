@@ -145,3 +145,27 @@ Entries:
       message: OS Changelog Update
   id: 25
   time: '2025-12-12T18:03:53Z'
+- author: cryals
+  changes:
+    - type: Fix
+      message: os changelog action
+  id: 26
+  time: '2025-12-09T13:45:35Z'
+- author: cryals
+  changes:
+    - type: Update
+      message: PatronSupportWindow.xaml meow
+  id: 27
+  time: '2025-12-10T20:00:54Z'
+- author: cryals
+  changes:
+    - type: Tweak
+      message: Update README.md
+  id: 28
+  time: '2025-12-10T20:36:20Z'
+- author: SDPowerStrok3
+  changes:
+    - type: Add
+      message: Holy Plushie to CentComm map and head slot support (CGS)
+  id: 29
+  time: '2025-12-12T21:00:19Z'
