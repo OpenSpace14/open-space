@@ -175,3 +175,9 @@ Entries:
       message: Label markup escaping (CGS)
   id: 30
   time: '2025-12-08T19:23:43Z'
+- author: RichardBlonski
+  changes:
+    - type: Fix
+      message: Text sanitization - prevent markup injection (CGS)
+  id: 31
+  time: '2025-12-09T08:48:56Z'
