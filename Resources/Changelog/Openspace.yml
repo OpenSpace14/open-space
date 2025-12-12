@@ -193,3 +193,9 @@ Entries:
       message: Re-translate ksen0morph localization 1 part - pr2 (CGS)
   id: 33
   time: '2025-12-12T01:02:27Z'
+- author: Ko4ergaPunk
+  changes:
+    - type: Tweak
+      message: Re-translate ksen0morph localization 1 part - pr3 (CGS)
+  id: 34
+  time: '2025-12-12T01:02:38Z'
