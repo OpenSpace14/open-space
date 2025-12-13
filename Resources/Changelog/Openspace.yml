@@ -175,51 +175,81 @@ Entries:
       message: Label markup escaping (CGS)
   id: 30
   time: '2025-12-08T19:23:43Z'
+- author: Aviu00
+  changes:
+    - type: Tweak
+      message: Mime powers prediction support (CGS)
+  id: 31
+  time: '2025-12-12T12:00:00Z'
 - author: RichardBlonski
   changes:
     - type: Fix
       message: Text sanitization - prevent markup injection (CGS)
-  id: 31
+  id: 32
   time: '2025-12-09T08:48:56Z'
 - author: jailedfish
   changes:
     - type: Tweak
       message: Rotational spawners - inherit rotation from spawner entity (CGS)
-  id: 32
+  id: 33
   time: '2025-12-11T19:55:39Z'
 - author: RomiGur
   changes:
     - type: Tweak
       message: Re-translate ksen0morph localization 1 part - pr2 (CGS)
-  id: 33
+  id: 34
   time: '2025-12-12T01:02:27Z'
 - author: Ko4ergaPunk
   changes:
     - type: Tweak
       message: Re-translate ksen0morph localization 1 part - pr3 (CGS)
-  id: 34
+  id: 35
   time: '2025-12-12T01:02:38Z'
+- author: Ko4ergaPunk
+  changes:
+    - type: Tweak
+      message: Re-translate ksen0morph localization 1 part - pr4 (CGS)
+  id: 36
+  time: '2025-12-12T01:02:50Z'
 - author: RomiGur
   changes:
     - type: Fix
       message: Fix locale Lootbug (CGS)
-  id: 35
+  id: 37
   time: '2025-12-12T01:30:16Z'
 - author: JrInventor05Next
   changes:
     - type: Tweak
       message: FTL, CS, XAML, YML locale tweaks (CGS)
-  id: 36
+  id: 38
   time: '2025-12-12T01:46:47Z'
 - author: oldschoolotaku
   changes:
     - type: Fix
       message: Reinforcement kobold speaking monkey language fix (CGS)
-  id: 37
+  id: 39
   time: '2025-12-12T06:00:36Z'
+- author: oldschoolotaku
+  changes:
+    - type: Fix
+      message: Fixed icons to be anonymized when using syndi radio (CGS)
+  id: 40
+  time: '2025-12-12T06:01:19Z'
 - author: KillanGenifer
   changes:
     - type: Add
       message: Selectable gases for gas miners (CGS)
-  id: 38
+  id: 41
   time: '2025-12-12T11:26:18Z'
+- author: RomiGur
+  changes:
+    - type: Tweak
+      message: Energy bola in assault belt (CGS)
+  id: 42
+  time: '2025-12-12T11:26:30Z'
+- author: KillanGenifer
+  changes:
+    - type: Fix
+      message: Retargetable mobs - targeting component fix (CGS)
+  id: 43
+  time: '2025-12-13T06:45:52Z'
