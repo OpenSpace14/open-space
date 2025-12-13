@@ -199,3 +199,9 @@ Entries:
       message: Re-translate ksen0morph localization 1 part - pr3 (CGS)
   id: 34
   time: '2025-12-12T01:02:38Z'
+- author: RomiGur
+  changes:
+    - type: Fix
+      message: Fix locale Lootbug (CGS)
+  id: 35
+  time: '2025-12-12T01:30:16Z'
