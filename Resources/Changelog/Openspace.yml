@@ -211,3 +211,9 @@ Entries:
       message: FTL, CS, XAML, YML locale tweaks (CGS)
   id: 36
   time: '2025-12-12T01:46:47Z'
+- author: oldschoolotaku
+  changes:
+    - type: Fix
+      message: Reinforcement kobold speaking monkey language fix (CGS)
+  id: 37
+  time: '2025-12-12T06:00:36Z'
