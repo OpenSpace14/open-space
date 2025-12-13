@@ -205,3 +205,9 @@ Entries:
       message: Fix locale Lootbug (CGS)
   id: 35
   time: '2025-12-12T01:30:16Z'
+- author: JrInventor05Next
+  changes:
+    - type: Tweak
+      message: FTL, CS, XAML, YML locale tweaks (CGS)
+  id: 36
+  time: '2025-12-12T01:46:47Z'
