@@ -4,7 +4,7 @@ import configparser
 from pathlib import Path
 
 API_URL = "https://ntts.fdev.team/api/v1/tts/speakers"
-BEARER_TOKEN = "24d25cc0789d68692ebfdf1bd24b1733baadc89f"
+BEARER_TOKEN = "24d25cc0789d68692ebfdf1bd24b1733baadc89f" # https://discord.gg/TjGAMFwWt6 (/me)
 
 def fetch_speakers():
     """Получает список спикеров из API"""
