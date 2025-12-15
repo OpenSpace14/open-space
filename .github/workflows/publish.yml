@@ -96,7 +96,7 @@ jobs:
       run: Tools/publish_multi_request.py
       env:
         PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
-        GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
+        ROBUST_CDN_URL: ${{ vars.ROBUST_CDN_URL }}
         FORK_ID: ${{ vars.FORK_ID }}
 
     #    - name: Publish changelog (Discord)
