@@ -22,7 +22,7 @@ RELEASE_DIR = "release"
 # CONFIGURATION PARAMETERS
 # Forks should change these to publish to their own infrastructure.
 #
-ROBUST_CDN_URL = os.environ.get("ROBUST_CDN_URL", "https://cdn.ss14.art/")
+ROBUST_CDN_URL = os.environ.get("ROBUST_CDN_URL", "https://cdn.ss14.art").rstrip('/') + '/'
 
 def main():
     parser = argparse.ArgumentParser()
@@ -37,6 +37,8 @@ def main():
     }
 
     print(f"Starting publish on Robust.Cdn for version {VERSION}")
+    print(f"CDN URL: {ROBUST_CDN_URL}")
+    print(f"Fork ID: {fork_id}")
 
     data = {
         "version": VERSION,
